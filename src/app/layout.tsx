@@ -20,6 +20,10 @@ export const metadata: Metadata = {
   description:
     "Besmak India delivers high-quality industrial components, valves, pumps, and custom parts for B2B needs.",
   keywords: ["Industrial", "Manufacturing", "Valves", "Pumps", "Besmak India"],
+  manifest: "/manifest.json",
+  themeColor: "#1e3a8a",
+  viewport:
+    "minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, viewport-fit=cover",
 };
 
 export default function RootLayout({
