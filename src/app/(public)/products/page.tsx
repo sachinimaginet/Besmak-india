@@ -1,19 +1,27 @@
 import Link from "next/link";
-import { DUMMY_PRODUCTS } from "@/lib/dummy-data";
+import prisma from "@/lib/prisma";
 import { Search } from "lucide-react";
 
-export default function ProductsPage({
+export const dynamic = "force-dynamic"; // Ensure real-time data
+
+export default async function ProductsPage({
   searchParams,
 }: {
   searchParams: { q?: string };
 }) {
   const query = searchParams.q?.toLowerCase() || "";
 
-  const filteredProducts = DUMMY_PRODUCTS.filter(
-    (product) =>
-      product.name.toLowerCase().includes(query) ||
-      product.category.name.toLowerCase().includes(query),
-  );
+  const filteredProducts = await prisma.product.findMany({
+    where: {
+      OR: [
+        { name: { contains: query } },
+        { category: { name: { contains: query } } },
+      ],
+    },
+    include: {
+      category: true,
+    },
+  });
 
   return (
     <div className="container mx-auto px-4 py-8">

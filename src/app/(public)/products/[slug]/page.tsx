@@ -1,14 +1,20 @@
-import { DUMMY_PRODUCTS } from "@/lib/dummy-data";
+import prisma from "@/lib/prisma";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
+import { JsonValue } from "@prisma/client/runtime/library";
 
-export default function ProductDetailPage({
+export const dynamic = "force-dynamic";
+
+export default async function ProductDetailPage({
   params,
 }: {
   params: { slug: string };
 }) {
-  const product = DUMMY_PRODUCTS.find((p) => p.slug === params.slug);
+  const product = await prisma.product.findUnique({
+    where: { slug: params.slug },
+    include: { category: true },
+  });
 
   if (!product) {
     notFound();
@@ -54,7 +60,9 @@ export default function ProductDetailPage({
             </h3>
             <dl className="grid grid-cols-1 gap-x-4 gap-y-4 sm:grid-cols-2">
               {product.specifications &&
-                Object.entries(product.specifications).map(([key, value]) => (
+                Object.entries(
+                  product.specifications as Record<string, any>,
+                ).map(([key, value]) => (
                   <div key={key} className="sm:col-span-1">
                     <dt className="text-sm font-medium text-gray-500">{key}</dt>
                     <dd className="mt-1 text-sm font-semibold text-gray-900">
