@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Menu } from "lucide-react";
 
 export function Header() {
@@ -6,7 +7,12 @@ export function Header() {
     <header className="bg-white shadow-sm sticky top-0 z-50">
       <div className="container mx-auto px-4 h-16 flex items-center justify-between">
         <Link href="/" className="text-2xl font-bold text-blue-600">
-          Besmak India
+          <Image
+            src="/images/Besmak-Logo.png"
+            alt="Logo"
+            width={100}
+            height={100}
+          />
         </Link>
 
         <nav className="hidden md:flex space-x-8">
