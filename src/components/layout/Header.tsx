@@ -15,12 +15,24 @@ export function Header() {
           />
         </Link>
 
-        <nav className="hidden md:flex space-x-8">
+        <nav className="hidden md:flex items-center space-x-8">
           <Link
             href="/"
             className="text-gray-600 hover:text-blue-600 font-medium"
           >
             Home
+          </Link>
+          <Link
+            href="/about-us"
+            className="text-gray-600 hover:text-blue-600 font-medium"
+          >
+            About
+          </Link>
+          <Link
+            href="/divisions"
+            className="text-gray-600 hover:text-blue-600 font-medium"
+          >
+            Divisions
           </Link>
           <Link
             href="/products"
@@ -29,14 +41,14 @@ export function Header() {
             Products
           </Link>
           <Link
-            href="/about-us"
+            href="/events"
             className="text-gray-600 hover:text-blue-600 font-medium"
           >
-            About Us
+            Events
           </Link>
           <Link
             href="/contact"
-            className="text-gray-600 hover:text-blue-600 font-medium"
+            className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 font-medium transition-colors"
           >
             Contact
           </Link>
