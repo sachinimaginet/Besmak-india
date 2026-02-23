@@ -1,6 +1,6 @@
-import mysql from 'mysql2/promise';
+import { createPool } from 'mysql2/promise';
 
-let pool: mysql.Pool | undefined;
+let pool: any;
 
 const getPool = () => {
   if (pool) return pool;
@@ -11,7 +11,7 @@ const getPool = () => {
   const forcedSSL = url.includes('sslmode=require') || url.includes('ssl=true');
   const disabledSSL = url.includes('sslmode=disable') || url.includes('ssl=false');
   
-  pool = mysql.createPool({
+  pool = createPool({
     uri: url,
     waitForConnections: true,
     connectionLimit: 10,
