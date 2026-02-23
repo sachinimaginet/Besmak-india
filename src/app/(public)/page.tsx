@@ -2,6 +2,8 @@ import Hero from "@/components/sections/home/Hero";
 import About from "@/components/sections/home/About";
 import FeaturedProducts from "@/components/sections/home/FeaturedProducts";
 
+export const dynamic = "force-dynamic";
+
 export default function Home() {
   return (
     <div className="flex flex-col min-h-screen">
