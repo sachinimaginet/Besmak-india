@@ -43,10 +43,5 @@ next-env.d.ts
 /src/generated/prisma
 
 # images
-*.png
-*.jpg
-*.jpeg
-*.gif
-*.svg
-*.webp
+
 
