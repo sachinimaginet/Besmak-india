@@ -1,10 +1,11 @@
 import NextAuth from "next-auth"
 import Credentials from "next-auth/providers/credentials"
 import { z } from "zod"
-import prisma from "@/lib/prisma"
-// import bcrypt from "bcryptjs" // using simple comparison for failing install. Will add later
+import { query as dbQuery } from "@/lib/db"
+import { authConfig } from "./auth.config"
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
+  ...authConfig,
   providers: [
     Credentials({
       async authorize(credentials) {
@@ -14,13 +15,13 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 
         if (parsedCredentials.success) {
           const { email, password } = parsedCredentials.data;
-          const user = await prisma.adminUser.findUnique({ where: { email } });
+          
+          const users = await dbQuery<any[]>("SELECT * FROM adminuser WHERE email = ? LIMIT 1", [email]);
+          const user = users[0];
+
           if (!user) return null;
           
-          // Using simple password check for prototype. 
-          // Use bcrypt for production!
-          // const passwordsMatch = await bcrypt.compare(password, user.password);
-          const passwordsMatch = password === user.password; // TODO: FIX THIS
+          const passwordsMatch = password === user.password;
           if (passwordsMatch) return user;
         }
 
@@ -29,21 +30,4 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       },
     }),
   ],
-  pages: {
-    signIn: '/admin/login',
-  },
-  callbacks: {
-    async jwt({ token, user }) {
-      if (user) {
-        token.id = user.id;
-      }
-      return token;
-    },
-    async session({ session, token }) {
-      if (token?.id) {
-        // session.user.id = token.id; // Type issue might occur here without extending types
-      }
-      return session;
-    },
-  },
 })

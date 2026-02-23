@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { z } from 'zod';
-import prisma from '@/lib/prisma';
+import { query as dbQuery } from '@/lib/db';
 
 const enquirySchema = z.object({
   name: z.string().min(1, "Name is required"),
@@ -23,23 +23,16 @@ export async function POST(req: Request) {
 
     const { name, email, message, productId } = result.data;
 
-    // In a real app, this would save to DB.
-    // Since Prisma might not be generated yet, we wrap in try-catch or check existence
     try {
-        if (prisma.enquiry) {
-            const newEnquiry = await prisma.enquiry.create({
-                data: {
-                    name,
-                    email,
-                    message,
-                    productId: productId || undefined,
-                },
-            });
-            return NextResponse.json({ success: true, data: newEnquiry }, { status: 201 });
-        } else {
-             console.warn("Prisma Client not fully initialized, mocking success");
-             return NextResponse.json({ success: true, message: "Mocked success (DB not ready)" }, { status: 201 });
-        }
+        const id = crypto.randomUUID();
+        const now = new Date();
+        
+        await dbQuery(
+            "INSERT INTO enquiry (id, name, email, message, productId, status, createdAt, updatedAt) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+            [id, name, email, message, productId || null, "PENDING", now, now]
+        );
+        
+        return NextResponse.json({ success: true, message: "Enquiry saved successfully" }, { status: 201 });
     } catch (dbError) {
         console.error("Database error:", dbError);
         return NextResponse.json({ error: "Failed to save enquiry" }, { status: 500 });
