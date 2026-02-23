@@ -1,8 +1,7 @@
-import prisma from "@/lib/prisma";
+import { query as dbQuery } from "@/lib/db";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
-import { JsonValue } from "@prisma/client/runtime/library";
 
 export const dynamic = "force-dynamic";
 
@@ -11,14 +10,32 @@ export default async function ProductDetailPage({
 }: {
   params: { slug: string };
 }) {
-  const product = await prisma.product.findUnique({
-    where: { slug: params.slug },
-    include: { category: true },
-  });
+  const sql = `
+    SELECT p.*, c.name as categoryName 
+    FROM product p 
+    JOIN category c ON p.categoryId = c.id 
+    WHERE p.slug = ? 
+    LIMIT 1
+  `;
 
-  if (!product) {
+  const results = await dbQuery(sql, [params.slug]);
+  const rawProduct = results[0];
+
+  if (!rawProduct) {
     notFound();
   }
+
+  // Parse JSON fields manually since we're using raw driver
+  const product = {
+    ...rawProduct,
+    category: {
+      name: rawProduct.categoryName,
+    },
+    specifications: rawProduct.specifications
+      ? JSON.parse(rawProduct.specifications)
+      : null,
+    images: rawProduct.images ? JSON.parse(rawProduct.images) : null,
+  };
 
   return (
     <div className="container mx-auto px-4 py-8">

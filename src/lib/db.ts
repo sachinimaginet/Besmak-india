@@ -1,0 +1,41 @@
+import mysql from 'mysql2/promise';
+
+let pool: mysql.Pool | undefined;
+
+const getPool = () => {
+  if (pool) return pool;
+
+  const url = process.env.DATABASE_URL || '';
+  
+  const isLocal = url.includes('localhost') || url.includes('127.0.0.1');
+  const forcedSSL = url.includes('sslmode=require') || url.includes('ssl=true');
+  const disabledSSL = url.includes('sslmode=disable') || url.includes('ssl=false');
+  
+  pool = mysql.createPool({
+    uri: url,
+    waitForConnections: true,
+    connectionLimit: 10,
+    maxIdle: 10,
+    idleTimeout: 60000,
+    queueLimit: 0,
+    enableKeepAlive: true,
+    keepAliveInitialDelay: 0,
+    // Use SSL if explicitly requested OR (if remote and not explicitly disabled)
+    ssl: forcedSSL || (!isLocal && !disabledSSL) ? { rejectUnauthorized: false } : undefined
+  });
+
+  return pool;
+};
+
+export const query = async <T = any>(sql: string, params?: any[]): Promise<T> => {
+  const connectionPool = getPool();
+  try {
+    const [results] = await connectionPool.execute(sql, params || []);
+    return results as T;
+  } catch (error) {
+    console.error('[DB Error] Query failed:', { sql, error });
+    throw error;
+  }
+};
+
+export default { query };

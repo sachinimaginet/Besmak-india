@@ -1,4 +1,4 @@
-import prisma from "@/lib/prisma";
+import { query as dbQuery } from "@/lib/db";
 import ProductHeader from "@/components/sections/products/ProductHeader";
 import ProductGrid from "@/components/sections/products/ProductGrid";
 
@@ -11,17 +11,21 @@ export default async function ProductsPage({
 }) {
   const query = searchParams.q?.toLowerCase() || "";
 
-  const filteredProducts = await prisma.product.findMany({
-    where: {
-      OR: [
-        { name: { contains: query } },
-        { category: { name: { contains: query } } },
-      ],
+  const sql = `
+    SELECT p.*, c.name as categoryName 
+    FROM product p 
+    JOIN category c ON p.categoryId = c.id 
+    WHERE p.name LIKE ? OR c.name LIKE ?
+  `;
+
+  const products = await dbQuery(sql, [`%${query}%`, `%${query}%`]);
+
+  const filteredProducts = products.map((p: any) => ({
+    ...p,
+    category: {
+      name: p.categoryName,
     },
-    include: {
-      category: true,
-    },
-  });
+  }));
 
   return (
     <div className="container mx-auto px-4 py-8">
