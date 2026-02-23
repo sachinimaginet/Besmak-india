@@ -1,20 +1,7 @@
 import { PrismaClient } from '@prisma/client'
 
 const prismaClientSingleton = () => {
-  try {
-    return new PrismaClient()
-  } catch (error) {
-    console.warn("Prisma Client failed to initialize. Using fallback mock.", error)
-    return new Proxy({}, {
-      get: (target, prop) => {
-        if (prop === 'then') return undefined;
-        return () => {
-          console.error(`Database operation '${String(prop)}' failed: Prisma not generated.`);
-          return Promise.resolve(null);
-        }
-      }
-    }) as unknown as PrismaClient
-  }
+  return new PrismaClient()
 }
 
 declare global {
