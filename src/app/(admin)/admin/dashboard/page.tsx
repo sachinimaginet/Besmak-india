@@ -1,13 +1,23 @@
-import { DUMMY_PRODUCTS } from "@/lib/dummy-data";
+import { query as dbQuery } from "@/lib/db";
 
-export default function DashboardPage() {
-  // Mock stats
-  const totalProducts = DUMMY_PRODUCTS.length;
-  const totalEnquiries = 12; // Mock
+export default async function DashboardPage() {
+  // Fetch real stats
+  const [productsCount, enquiriesCount, mediaCount] = await Promise.all([
+    dbQuery<any[]>("SELECT COUNT(*) as count FROM products"),
+    dbQuery<any[]>("SELECT COUNT(*) as count FROM enquiries"),
+    dbQuery<any[]>("SELECT COUNT(*) as count FROM media"),
+  ]);
+
+  const stats = {
+    totalProducts: productsCount[0]?.count || 0,
+    totalEnquiries: enquiriesCount[0]?.count || 0,
+    totalMedia: mediaCount[0]?.count || 0,
+  };
+
   const recentActivity = [
-    "New enquiry from John Doe",
-    "Product 'Valve X100' updated",
-    "New product 'Gear G300' added",
+    "System migration to MySQL completed",
+    "Prisma dependencies removed",
+    "Media management system initialized",
   ];
 
   return (
@@ -22,7 +32,7 @@ export default function DashboardPage() {
             Total Products
           </h3>
           <p className="text-3xl font-bold text-gray-900 mt-2">
-            {totalProducts}
+            {stats.totalProducts}
           </p>
         </div>
         <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
@@ -30,14 +40,16 @@ export default function DashboardPage() {
             Total Enquiries
           </h3>
           <p className="text-3xl font-bold text-gray-900 mt-2">
-            {totalEnquiries}
+            {stats.totalEnquiries}
           </p>
         </div>
         <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
           <h3 className="text-gray-500 font-medium text-sm uppercase">
-            Pending Orders
+            Media Files
           </h3>
-          <p className="text-3xl font-bold text-gray-900 mt-2">5</p>
+          <p className="text-3xl font-bold text-gray-900 mt-2">
+            {stats.totalMedia}
+          </p>
         </div>
       </div>
 

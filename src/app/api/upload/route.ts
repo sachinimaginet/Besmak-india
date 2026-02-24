@@ -21,6 +21,22 @@ export async function POST(req: Request) {
       access: 'public',
     });
 
+    // Save metadata to database
+    try {
+      const { query: dbQuery } = await import('@/lib/db');
+      const id = crypto.randomUUID();
+      const now = new Date();
+      
+      await dbQuery(
+        "INSERT INTO media (id, url, filename, contentType, size, createdAt, updatedAt) VALUES (?, ?, ?, ?, ?, ?, ?)",
+        [id, blob.url, filename, blob.contentType, null, now, now]
+      );
+    } catch (dbError) {
+      console.error('Database error saving media metadata:', dbError);
+      // We don't fail the request because the file is already in the blob storage,
+      // but we should log it. In a more robust system, we might want to delete the blob if DB fails.
+    }
+
     return NextResponse.json(blob);
   } catch (error) {
     console.error('Upload error:', error);

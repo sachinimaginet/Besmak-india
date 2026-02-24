@@ -28,7 +28,7 @@ export async function POST(req: Request) {
         const now = new Date();
         
         await dbQuery(
-            "INSERT INTO enquiry (id, name, email, message, productId, status, createdAt, updatedAt) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+            "INSERT INTO enquiries (id, name, email, message, productId, status, createdAt, updatedAt) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
             [id, name, email, message, productId || null, "PENDING", now, now]
         );
         

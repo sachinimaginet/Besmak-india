@@ -3,6 +3,7 @@ import Credentials from "next-auth/providers/credentials"
 import { z } from "zod"
 import { query as dbQuery } from "@/lib/db"
 import { authConfig } from "./auth.config"
+import bcrypt from "bcryptjs"
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   ...authConfig,
@@ -21,7 +22,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 
           if (!user) return null;
           
-          const passwordsMatch = password === user.password;
+          const passwordsMatch = await bcrypt.compare(password, user.password);
           if (passwordsMatch) return user;
         }
 
