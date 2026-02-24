@@ -30,7 +30,7 @@ const getPool = () => {
 export const query = async <T = any>(sql: string, params?: any[]): Promise<T> => {
   const connectionPool = getPool();
   try {
-    const [results] = await connectionPool.execute(sql, params || []);
+    const [results] = await connectionPool.query(sql, params || []);
     return results as T;
   } catch (error) {
     console.error('[DB Error] Query failed:', { sql, error });

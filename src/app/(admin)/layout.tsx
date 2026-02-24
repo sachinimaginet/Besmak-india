@@ -5,6 +5,7 @@ import {
   MessageSquare,
   LogOut,
   Settings,
+  Image as ImageIcon,
 } from "lucide-react";
 import { signOut } from "@/auth"; // Use server action or client side signOut?
 // For server component layout, we need a client component for logout or form action.
@@ -42,6 +43,13 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
           >
             <MessageSquare className="h-5 w-5 mr-3" />
             Enquiries
+          </Link>
+          <Link
+            href="/admin/media"
+            className="flex items-center p-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-lg transition-colors"
+          >
+            <ImageIcon className="h-5 w-5 mr-3" />
+            Media
           </Link>
           <Link
             href="/admin/settings"

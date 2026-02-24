@@ -3,7 +3,7 @@ import { NextResponse } from 'next/server';
 import { query as dbQuery } from '@/lib/db';
 import { auth } from '@/auth';
 
-// GET all media
+// GET media with pagination
 export async function GET(req: Request) {
   try {
     const session = await auth();
@@ -11,8 +11,27 @@ export async function GET(req: Request) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    const media = await dbQuery<any[]>("SELECT * FROM media ORDER BY createdAt DESC");
-    return NextResponse.json(media);
+    const { searchParams } = new URL(req.url);
+    const page = parseInt(searchParams.get('page') || '1');
+    const limit = parseInt(searchParams.get('limit') || '15');
+    const offset = (page - 1) * limit;
+
+    // Fetch total count
+    const countResult = await dbQuery<any[]>("SELECT COUNT(*) as count FROM media");
+    const total = countResult[0]?.count || 0;
+
+    // Fetch paginated media
+    const media = await dbQuery<any[]>(
+      "SELECT * FROM media ORDER BY createdAt DESC LIMIT ? OFFSET ?",
+      [limit, offset]
+    );
+
+    return NextResponse.json({
+      media,
+      total,
+      page,
+      totalPages: Math.ceil(total / limit)
+    });
   } catch (error) {
     console.error('Error fetching media:', error);
     return NextResponse.json({ error: "Failed to fetch media" }, { status: 500 });
