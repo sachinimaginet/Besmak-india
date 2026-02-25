@@ -7,13 +7,25 @@ import {
   Settings,
   Image as ImageIcon,
 } from "lucide-react";
-import { signOut } from "@/auth"; // Use server action or client side signOut?
-// For server component layout, we need a client component for logout or form action.
-// Let's make the sidebar a client component or use a form for logout.
+import { signOut, auth } from "@/auth";
 
 import { ReactNode } from "react";
 
-export default function AdminLayout({ children }: { children: ReactNode }) {
+export default async function AdminLayout({
+  children,
+}: {
+  children: ReactNode;
+}) {
+  const session = await auth();
+
+  if (!session) {
+    return (
+      <div className="min-h-screen bg-gray-100">
+        <main>{children}</main>
+      </div>
+    );
+  }
+
   return (
     <div className="flex h-screen bg-gray-100">
       {/* Sidebar */}
