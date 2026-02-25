@@ -2,17 +2,76 @@
 
 import { useState } from "react";
 import * as XLSX from "xlsx";
+import {
+  Download,
+  Upload,
+  Loader2,
+  CheckCircle2,
+  AlertCircle,
+} from "lucide-react";
 
 export default function BulkUpload() {
-  const [uploading, setUploading] = useState(false);
-  const [message, setMessage] = useState("");
+  const [working, setWorking] = useState(false);
+  const [status, setStatus] = useState<{
+    type: "success" | "error" | "info";
+    message: string;
+  } | null>(null);
+
+  const exportProducts = async () => {
+    try {
+      setWorking(true);
+      setStatus({ type: "info", message: "Fetching product data..." });
+
+      const res = await fetch("/api/product");
+      if (!res.ok) throw new Error("Failed to fetch products for export");
+
+      const products = await res.json();
+
+      // Prepare data for Excel - ensure all columns exist
+      const excelData = products.map((p: any) => ({
+        id: p.id,
+        name: p.name,
+        slug: p.slug,
+        description: p.description || "",
+        categoryId: p.categoryId || "",
+        categoryName: p.categoryName || "",
+        categorySpecification: p.categorySpecification || "",
+        images:
+          typeof p.images === "string"
+            ? p.images
+            : JSON.stringify(p.images || []),
+        specifications:
+          typeof p.specifications === "string"
+            ? p.specifications
+            : JSON.stringify(p.specifications || {}),
+        createdAt: p.createdAt,
+        updatedAt: p.updatedAt,
+      }));
+
+      const worksheet = XLSX.utils.json_to_sheet(excelData);
+      const workbook = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(workbook, worksheet, "Products");
+
+      XLSX.writeFile(
+        workbook,
+        `products_export_${new Date().toISOString().split("T")[0]}.xlsx`,
+      );
+
+      setStatus({ type: "success", message: "Export completed successfully!" });
+    } catch (err) {
+      console.error(err);
+      setStatus({ type: "error", message: (err as Error).message });
+    } finally {
+      setWorking(false);
+    }
+  };
 
   const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
 
-    setUploading(true);
-    setMessage("Processing...");
+    setWorking(true);
+    setStatus({ type: "info", message: "Uploading and processing file..." });
 
     const reader = new FileReader();
     reader.onload = async (evt) => {
@@ -23,40 +82,115 @@ export default function BulkUpload() {
         const ws = wb.Sheets[wsname];
         const data = XLSX.utils.sheet_to_json(ws);
 
-        console.log("Parsed Excel Data:", data);
+        if (data.length === 0) {
+          throw new Error("The Excel file is empty.");
+        }
 
-        // Here you would call a Server Action or API to save 'data' to DB
-        // await bulkCreateProducts(data);
+        const res = await fetch("/api/bulk-products", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ products: data }),
+        });
 
-        setMessage(
-          `Successfully parsed ${data.length} rows. (DB saving disabled in demo)`,
-        );
+        const result = await res.json();
+
+        if (!res.ok) throw new Error(result.error || "Bulk upload failed");
+
+        setStatus({
+          type: "success",
+          message: result.message,
+        });
+
+        // Refresh page to show new data after a delay
+        setTimeout(() => window.location.reload(), 2000);
       } catch (err) {
         console.error(err);
-        setMessage("Error parsing file.");
+        setStatus({ type: "error", message: (err as Error).message });
       } finally {
-        setUploading(false);
+        setWorking(false);
+        // Reset file input
+        e.target.value = "";
       }
     };
     reader.readAsBinaryString(file);
   };
 
   return (
-    <div className="p-4 border rounded-lg bg-gray-50">
-      <h3 className="font-bold mb-2">Bulk Upload Products</h3>
-      <input
-        type="file"
-        accept=".xlsx, .xls"
-        onChange={handleFileUpload}
-        disabled={uploading}
-        className="block w-full text-sm text-gray-500
-          file:mr-4 file:py-2 file:px-4
-          file:rounded-full file:border-0
-          file:text-sm file:font-semibold
-          file:bg-blue-50 file:text-blue-700
-          hover:file:bg-blue-100"
-      />
-      {message && <p className="mt-2 text-sm text-gray-700">{message}</p>}
+    <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+      <h3 className="text-lg font-bold text-gray-800 mb-4 flex items-center gap-2">
+        <Upload className="h-5 w-5 text-blue-600" />
+        Bulk Operations
+      </h3>
+
+      <div className="space-y-4">
+        {/* Export Button */}
+        <div>
+          <button
+            onClick={exportProducts}
+            disabled={working}
+            className="w-full flex items-center justify-center gap-2 px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-lg text-gray-700 hover:bg-gray-100 transition-colors font-medium disabled:opacity-50"
+          >
+            <Download className="h-4 w-4" />
+            Export Products to Excel
+          </button>
+        </div>
+
+        <div className="relative">
+          <div
+            className="absolute inset-0 flex items-center"
+            aria-hidden="true"
+          >
+            <div className="w-full border-t border-gray-100"></div>
+          </div>
+          <div className="relative flex justify-center text-xs uppercase">
+            <span className="bg-white px-2 text-gray-400">
+              or upload new data
+            </span>
+          </div>
+        </div>
+
+        {/* Import Input */}
+        <div className="border-2 border-dashed border-gray-100 rounded-xl p-4 hover:bg-gray-50 transition-colors">
+          <label className="cursor-pointer">
+            <div className="flex flex-col items-center justify-center py-2 text-gray-500">
+              <Upload className="h-8 w-8 mb-2 opacity-20" />
+              <p className="text-sm font-medium">Click to upload Excel file</p>
+              <p className="text-xs mt-1 text-gray-400">
+                .xlsx or .xls files only
+              </p>
+            </div>
+            <input
+              type="file"
+              accept=".xlsx, .xls"
+              onChange={handleFileUpload}
+              disabled={working}
+              className="hidden"
+            />
+          </label>
+        </div>
+
+        {/* Status Message */}
+        {status && (
+          <div
+            className={`flex items-start gap-3 p-3 rounded-lg text-sm ${
+              status.type === "success"
+                ? "bg-green-50 text-green-700 border border-green-100"
+                : status.type === "error"
+                  ? "bg-red-50 text-red-700 border border-red-100"
+                  : "bg-blue-50 text-blue-700 border border-blue-100"
+            }`}
+          >
+            {working ? (
+              <Loader2 className="h-4 w-4 mt-0.5 animate-spin" />
+            ) : status.type === "success" ? (
+              <CheckCircle2 className="h-4 w-4 mt-0.5 text-green-600" />
+            ) : (
+              <AlertCircle className="h-4 w-4 mt-0.5 text-red-600" />
+            )}
+            <span>{status.message}</span>
+          </div>
+        )}
+      </div>
     </div>
   );
 }

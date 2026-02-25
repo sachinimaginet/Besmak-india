@@ -15,9 +15,9 @@ async function initDb() {
 
   const tables = [
     {
-      name: "categories",
+      name: "category",
       sql: `
-        CREATE TABLE IF NOT EXISTS categories (
+        CREATE TABLE IF NOT EXISTS category (
           id VARCHAR(255) PRIMARY KEY,
           name VARCHAR(255) NOT NULL,
           slug VARCHAR(255) NOT NULL UNIQUE,
@@ -27,19 +27,20 @@ async function initDb() {
       `,
     },
     {
-      name: "products",
+      name: "product",
       sql: `
-        CREATE TABLE IF NOT EXISTS products (
+        CREATE TABLE IF NOT EXISTS product (
           id VARCHAR(255) PRIMARY KEY,
           name VARCHAR(255) NOT NULL,
           slug VARCHAR(255) NOT NULL UNIQUE,
           description TEXT,
           categoryId VARCHAR(255),
+          categorySpecification VARCHAR(255),
           images JSON,
           specifications JSON,
           createdAt DATETIME NOT NULL,
           updatedAt DATETIME NOT NULL,
-          FOREIGN KEY (categoryId) REFERENCES categories(id) ON DELETE SET NULL
+          FOREIGN KEY (categoryId) REFERENCES category(id) ON DELETE SET NULL
         ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
       `,
     },

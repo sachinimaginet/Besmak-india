@@ -38,7 +38,7 @@ export default async function AdminProductsPage() {
                       Name
                     </th>
                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Category
+                      Cat. Spec
                     </th>
                     <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
                       Actions
@@ -49,7 +49,7 @@ export default async function AdminProductsPage() {
                   {products.length === 0 ? (
                     <tr>
                       <td
-                        colSpan={3}
+                        colSpan={4}
                         className="px-6 py-10 text-center text-gray-500"
                       >
                         No products found in the database.
@@ -72,6 +72,11 @@ export default async function AdminProductsPage() {
                         <td className="px-6 py-4 whitespace-nowrap">
                           <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">
                             {product.categoryName || "Uncategorized"}
+                          </span>
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap">
+                          <span className="text-sm text-gray-600">
+                            {product.categorySpecification || "-"}
                           </span>
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
@@ -108,31 +113,29 @@ export default async function AdminProductsPage() {
               Instructions
             </h3>
             <p className="text-sm text-gray-600 mb-4">
-              Upload an Excel file (.xlsx) with the following columns:
+              The best way to manage bulk data is to <strong>Export</strong> the
+              current list first, edit it, and then <strong>Upload</strong> it
+              back.
             </p>
             <ul className="text-sm text-gray-600 space-y-2 list-none">
               <li className="flex items-center">
                 <div className="h-1.5 w-1.5 bg-blue-400 rounded-full mr-2"></div>
                 <span>
-                  <strong>Name:</strong> Product Title
+                  <strong>ID:</strong> Leave empty for new products
                 </span>
               </li>
               <li className="flex items-center">
                 <div className="h-1.5 w-1.5 bg-blue-400 rounded-full mr-2"></div>
                 <span>
-                  <strong>Category:</strong> Category ID or Name
+                  <strong>JSON Fields:</strong> Images and Specs must be valid
+                  JSON strings
                 </span>
               </li>
               <li className="flex items-center">
                 <div className="h-1.5 w-1.5 bg-blue-400 rounded-full mr-2"></div>
                 <span>
-                  <strong>Description:</strong> detailed text
-                </span>
-              </li>
-              <li className="flex items-center">
-                <div className="h-1.5 w-1.5 bg-blue-400 rounded-full mr-2"></div>
-                <span>
-                  <strong>Specifications:</strong> JSON format data
+                  <strong>Upsert:</strong> Matching IDs will update existing
+                  records
                 </span>
               </li>
             </ul>

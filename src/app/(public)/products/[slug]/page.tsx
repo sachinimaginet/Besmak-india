@@ -2,6 +2,7 @@ import { query as dbQuery } from "@/lib/db";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
+import ProductImageGallery from "@/components/products/ProductImageGallery";
 
 export const dynamic = "force-dynamic";
 
@@ -34,8 +35,10 @@ export default async function ProductDetailPage({
     specifications: rawProduct.specifications
       ? JSON.parse(rawProduct.specifications)
       : null,
-    images: rawProduct.images ? JSON.parse(rawProduct.images) : null,
+    images: rawProduct.images ? JSON.parse(rawProduct.images) : [],
   };
+
+  const hasImages = Array.isArray(product.images) && product.images.length > 0;
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -51,18 +54,24 @@ export default async function ProductDetailPage({
 
       <div className="grid md:grid-cols-2 gap-12 bg-white rounded-xl shadow-sm p-6 md:p-8">
         {/* Images */}
-        <div className="bg-gray-100 rounded-lg h-96 flex items-center justify-center overflow-hidden">
-          <span className="text-gray-400 text-lg">
-            Product Image Placeholder
-          </span>
-        </div>
+        <ProductImageGallery
+          images={product.images}
+          productName={product.name}
+        />
 
         {/* Info */}
         <div className="flex flex-col h-full">
           <div>
-            <span className="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full font-bold uppercase tracking-wider mb-4">
-              {product.category.name}
-            </span>
+            <div className="flex items-center gap-3 mb-4">
+              <span className="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full font-bold uppercase tracking-wider">
+                {product.category.name}
+              </span>
+              {product.categorySpecification && (
+                <span className="text-xs font-medium text-gray-500">
+                  Category: {product.categorySpecification}
+                </span>
+              )}
+            </div>
             <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
               {product.name}
             </h1>

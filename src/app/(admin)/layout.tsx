@@ -6,6 +6,7 @@ import {
   LogOut,
   Settings,
   Image as ImageIcon,
+  Layers,
 } from "lucide-react";
 import { signOut, auth } from "@/auth";
 
@@ -48,6 +49,13 @@ export default async function AdminLayout({
           >
             <Package className="h-5 w-5 mr-3" />
             Products
+          </Link>
+          <Link
+            href="/admin/categories"
+            className="flex items-center p-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-lg transition-colors"
+          >
+            <Layers className="h-5 w-5 mr-3" />
+            Categories
           </Link>
           <Link
             href="/admin/enquiries"

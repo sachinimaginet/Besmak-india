@@ -9,14 +9,14 @@ export async function GET(req: Request) {
     const id = searchParams.get('id');
 
     if (id) {
-      const results = await dbQuery<any[]>("SELECT * FROM product WHERE id = ? LIMIT 1", [id]);
+      const results = await dbQuery<any[]>("SELECT p.*, c.name as categoryName FROM product p LEFT JOIN category c ON p.categoryId = c.id WHERE p.id = ? LIMIT 1", [id]);
       if (results.length === 0) {
         return NextResponse.json({ error: "Product not found" }, { status: 404 });
       }
       return NextResponse.json(results[0]);
     }
 
-    const products = await dbQuery<any[]>("SELECT * FROM product ORDER BY createdAt DESC");
+    const products = await dbQuery<any[]>("SELECT p.*, c.name as categoryName FROM product p LEFT JOIN category c ON p.categoryId = c.id ORDER BY p.createdAt DESC");
     return NextResponse.json(products);
   } catch (error) {
     console.error('Error fetching product:', error);
@@ -33,7 +33,7 @@ export async function POST(req: Request) {
     }
 
     const data = await req.json();
-    const { id, name, slug, description, categoryId, images, specifications } = data;
+    const { id, name, slug, description, categoryId, categorySpecification, images, specifications } = data;
 
     if (!name || !slug) {
       return NextResponse.json({ error: "Name and Slug are required" }, { status: 400 });
@@ -41,13 +41,14 @@ export async function POST(req: Request) {
 
     const now = new Date();
     await dbQuery(
-      "INSERT INTO product (id, name, slug, description, categoryId, images, specifications, createdAt, updatedAt) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
+      "INSERT INTO product (id, name, slug, description, categoryId, categorySpecification, images, specifications, createdAt, updatedAt) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
       [
         id || Math.random().toString(36).substr(2, 9),
         name,
         slug,
         description || "",
         categoryId || null,
+        categorySpecification || null,
         images ? JSON.stringify(images) : "[]",
         specifications ? JSON.stringify(specifications) : "{}",
         now,
@@ -71,7 +72,7 @@ export async function PUT(req: Request) {
     }
 
     const data = await req.json();
-    const { id, name, slug, description, categoryId, images, specifications } = data;
+    const { id, name, slug, description, categoryId, categorySpecification, images, specifications } = data;
 
     if (!id || !name || !slug) {
       return NextResponse.json({ error: "ID, Name, and Slug are required" }, { status: 400 });
@@ -79,12 +80,13 @@ export async function PUT(req: Request) {
 
     const now = new Date();
     await dbQuery(
-      "UPDATE product SET name = ?, slug = ?, description = ?, categoryId = ?, images = ?, specifications = ?, updatedAt = ? WHERE id = ?",
+      "UPDATE product SET name = ?, slug = ?, description = ?, categoryId = ?, categorySpecification = ?, images = ?, specifications = ?, updatedAt = ? WHERE id = ?",
       [
         name,
         slug,
         description || "",
         categoryId || null,
+        categorySpecification || null,
         images ? JSON.stringify(images) : "[]",
         specifications ? JSON.stringify(specifications) : "{}",
         now,
