@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { Loader2, Save, X, Image as ImageIcon } from "lucide-react";
 import MediaPickerModal from "./MediaPickerModal";
 import Image from "next/image";
+import { toast } from "sonner";
 
 interface Category {
   id: string;
@@ -82,16 +83,25 @@ export default function ProductForm({
       });
 
       if (!res.ok) {
+        const errorData = await res.json();
         throw new Error(
-          isEdit ? "Failed to update product" : "Failed to create product",
+          errorData.error ||
+            (isEdit ? "Failed to update product" : "Failed to create product"),
         );
       }
 
+      toast.success(
+        isEdit
+          ? "Product updated successfully!"
+          : "Product created successfully!",
+      );
       router.push("/admin/products");
       router.refresh();
-    } catch (error) {
+    } catch (error: any) {
       console.error("Form error:", error);
-      alert("Error saving product. Please check the logs.");
+      toast.error(
+        error.message || "An unexpected error occurred. Please try again.",
+      );
     } finally {
       setLoading(false);
     }

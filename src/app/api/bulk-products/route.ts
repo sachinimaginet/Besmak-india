@@ -52,11 +52,6 @@ export async function POST(req: Request) {
         categoryId = categoryMap.get(categoryName.toLowerCase()) || null;
       }
       
-      // Fallback: If categoryId is still null, use the first available category
-      if (!categoryId && categories.length > 0) {
-        categoryId = categories[0].id;
-      }
-
       // 3. Handle JSON fields
       const finalImages = typeof images === 'string' ? images : JSON.stringify(images || []);
       const finalSpecs = typeof specifications === 'string' ? specifications : JSON.stringify(specifications || {});
