@@ -31,6 +31,8 @@ export const viewport: Viewport = {
   viewportFit: "cover",
 };
 
+import { Toaster } from "sonner";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -40,6 +42,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${inter.variable} ${robotoMono.variable} antialiased`}>
         {children}
+        <Toaster richColors position="top-right" />
       </body>
     </html>
   );
