@@ -16,6 +16,10 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "Invalid data format. Expected an array of products." }, { status: 400 });
     }
 
+    // --- OVERWRITE MODE ---
+    // Clear all existing products before importing new ones
+    await dbQuery("DELETE FROM product");
+
     // Fetch all categories for name-to-id mapping
     const categories = await dbQuery<any[]>("SELECT id, name FROM category");
     const categoryMap = new Map(categories.map(c => [c.name.toLowerCase(), c.id]));
@@ -23,6 +27,64 @@ export async function POST(req: Request) {
     const now = new Date();
     let createdCount = 0;
     let updatedCount = 0;
+    const usedSlugsInBatch = new Set<string>();
+
+    async function generateUniqueSlug(baseName: string, originalSlug?: string) {
+      // 1. Initial slug from trimmed name or provided slug
+      let baseSlug = (originalSlug || baseName)
+        .trim()
+        .toLowerCase()
+        .replace(/[^\w\s-]/g, "")
+        .replace(/\s+/g, "-")
+        .replace(/-+/g, "-") // Collapse multiple dashes
+        .replace(/^-+|-+$/g, ""); // Trim leading/trailing dashes
+
+      let slug = baseSlug;
+      let counter = 1;
+
+      // Check collision with database and current batch
+      while (true) {
+        const existsInDb = await dbQuery<any[]>("SELECT id FROM product WHERE slug = ?", [slug]);
+        if (existsInDb.length === 0 && !usedSlugsInBatch.has(slug)) {
+          break;
+        }
+        slug = `${baseSlug}-${counter}`;
+        counter++;
+      }
+
+      usedSlugsInBatch.add(slug);
+      return slug;
+    }
+
+    function safeJsonStringify(input: any, defaultValue: string = "{}") {
+      try {
+        if (!input) return defaultValue;
+        
+        let obj = input;
+        if (typeof input === 'string') {
+          // If it's already a string, try to parse it to see if it's valid JSON
+          try {
+            obj = JSON.parse(input);
+          } catch {
+            // If it's not valid JSON (e.g. raw string with tabs), we keep it as a string
+            // and it will be properly escaped by JSON.stringify below
+            obj = input;
+          }
+        }
+
+        // Handle the case where the input might be a string that contains literal tabs/newlines
+        // occurring outside of a standard JSON structure.
+        const stringified = JSON.stringify(obj);
+        
+        // MySQL JSON_VALID check is strict about raw control characters.
+        // Even inside a JSON string, a literal tab must be \t.
+        // JSON.stringify already handles this, but let's be extra safe if 'obj' was a raw string.
+        return stringified;
+      } catch (error) {
+        console.error('JSON stringify error:', error);
+        return defaultValue;
+      }
+    }
 
     for (const product of products) {
       let { 
@@ -40,12 +102,7 @@ export async function POST(req: Request) {
       if (!name) continue; // Skip invalid rows without name
 
       // 1. Dynamic Slug Generation
-      if (!slug) {
-        slug = name
-          .toLowerCase()
-          .replace(/[^\w\s-]/g, "")
-          .replace(/\s+/g, "-");
-      }
+      slug = await generateUniqueSlug(name, slug);
 
       // 2. Dynamic Category Mapping
       if (!categoryId && categoryName) {
@@ -53,8 +110,8 @@ export async function POST(req: Request) {
       }
       
       // 3. Handle JSON fields
-      const finalImages = typeof images === 'string' ? images : JSON.stringify(images || []);
-      const finalSpecs = typeof specifications === 'string' ? specifications : JSON.stringify(specifications || {});
+      const finalImages = safeJsonStringify(images, "[]");
+      const finalSpecs = safeJsonStringify(specifications, "{}");
 
       if (id) {
         // Check if exists

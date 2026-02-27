@@ -128,7 +128,7 @@ export default function ProductForm({
               onChange={(e) =>
                 setFormData({ ...formData, name: e.target.value })
               }
-              className="w-full border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 p-2.5 border"
+              className="w-full border-gray-400 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 p-2.5 border text-gray-900"
               placeholder="e.g. High Pressure Centrifugal Pump"
             />
           </div>
@@ -145,7 +145,7 @@ export default function ProductForm({
               onChange={(e) =>
                 setFormData({ ...formData, slug: e.target.value })
               }
-              className="w-full border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 p-2.5 border bg-gray-50"
+              className="w-full border-gray-400 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 p-2.5 border bg-gray-50 text-gray-900"
               placeholder="high-pressure-pump"
             />
           </div>
@@ -160,7 +160,7 @@ export default function ProductForm({
               onChange={(e) =>
                 setFormData({ ...formData, categoryId: e.target.value })
               }
-              className="w-full border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 p-2.5 border"
+              className="w-full border-gray-400 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 p-2.5 border text-gray-900"
             >
               <option value="">Select Category</option>
               {categories.map((cat) => (
@@ -185,7 +185,7 @@ export default function ProductForm({
                   categorySpecification: e.target.value,
                 })
               }
-              className="w-full border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 p-2.5 border"
+              className="w-full border-gray-400 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 p-2.5 border text-gray-900"
               placeholder="e.g. CAT-001 or 12345"
             />
           </div>
@@ -201,7 +201,7 @@ export default function ProductForm({
               onChange={(e) =>
                 setFormData({ ...formData, description: e.target.value })
               }
-              className="w-full border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 p-2.5 border"
+              className="w-full border-gray-400 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 p-2.5 border text-gray-900"
               placeholder="Enter product description..."
             />
           </div>
@@ -308,7 +308,7 @@ export default function ProductForm({
                           });
                         }
                       }}
-                      className="w-full border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 p-2 border text-sm font-medium"
+                      className="w-full border-gray-400 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 p-2 border text-sm font-medium text-gray-900"
                       placeholder="Property Name (e.g. Weight)"
                     />
                   </div>
@@ -325,7 +325,7 @@ export default function ProductForm({
                           },
                         });
                       }}
-                      className="w-full border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 p-2 border text-sm"
+                      className="w-full border-gray-400 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 p-2 border text-sm text-gray-900"
                       placeholder="Value (e.g. 50kg)"
                     />
                   </div>
