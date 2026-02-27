@@ -8,7 +8,9 @@ import {
   Loader2,
   CheckCircle2,
   AlertCircle,
+  Lock,
 } from "lucide-react";
+import PasswordModal from "./PasswordModal";
 
 export default function BulkUpload() {
   const [working, setWorking] = useState(false);
@@ -16,6 +18,18 @@ export default function BulkUpload() {
     type: "success" | "error" | "info";
     message: string;
   } | null>(null);
+
+  // Security Verification State
+  const [isPasswordModalOpen, setIsPasswordModalOpen] = useState(false);
+  const [pendingAction, setPendingAction] = useState<{
+    type: "export" | "upload";
+    data?: any;
+  } | null>(null);
+
+  const triggerExport = () => {
+    setPendingAction({ type: "export" });
+    setIsPasswordModalOpen(true);
+  };
 
   const exportProducts = async () => {
     try {
@@ -66,10 +80,17 @@ export default function BulkUpload() {
     }
   };
 
-  const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileUploadRequest = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
 
+    setPendingAction({ type: "upload", data: file });
+    setIsPasswordModalOpen(true);
+    // Reset input so the same file can be selected again if needed
+    e.target.value = "";
+  };
+
+  const handleFileUpload = async (file: File) => {
     setWorking(true);
     setStatus({ type: "info", message: "Uploading and processing file..." });
 
@@ -108,11 +129,20 @@ export default function BulkUpload() {
         setStatus({ type: "error", message: (err as Error).message });
       } finally {
         setWorking(false);
-        // Reset file input
-        e.target.value = "";
       }
     };
     reader.readAsBinaryString(file);
+  };
+
+  const handlePasswordSuccess = () => {
+    if (!pendingAction) return;
+
+    if (pendingAction.type === "export") {
+      exportProducts();
+    } else if (pendingAction.type === "upload" && pendingAction.data) {
+      handleFileUpload(pendingAction.data);
+    }
+    setPendingAction(null);
   };
 
   return (
@@ -126,9 +156,9 @@ export default function BulkUpload() {
         {/* Export Button */}
         <div>
           <button
-            onClick={exportProducts}
+            onClick={triggerExport}
             disabled={working}
-            className="w-full flex items-center justify-center gap-2 px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-lg text-gray-700 hover:bg-gray-100 transition-colors font-medium disabled:opacity-50"
+            className="w-full flex items-center justify-center gap-2 px-4 py-2.5 bg-gray-50 border border-gray-400 rounded-lg text-gray-700 hover:bg-gray-100 transition-colors font-medium disabled:opacity-50"
           >
             <Download className="h-4 w-4" />
             Export Products to Excel
@@ -136,17 +166,21 @@ export default function BulkUpload() {
         </div>
 
         <div className="relative">
-          <div
-            className="absolute inset-0 flex items-center"
-            aria-hidden="true"
-          >
-            <div className="w-full border-t border-gray-100"></div>
-          </div>
-          <div className="relative flex justify-center text-xs uppercase">
-            <span className="bg-white px-2 text-gray-400">
-              or upload new data
+          <div className="relative flex justify-center text-xs uppercase text-gray-400">
+            <span className="bg-white px-2 italic">
+              Careful: Uploading will clear existing catalog
             </span>
           </div>
+        </div>
+
+        {/* Warning Message */}
+        <div className="bg-amber-50 border border-amber-200 rounded-lg p-3 flex items-start gap-3">
+          <AlertCircle className="h-5 w-5 text-amber-600 shrink-0 mt-0.5" />
+          <p className="text-xs text-amber-800 leading-relaxed">
+            <strong>Overwrite Mode:</strong> Uploading a file will delete{" "}
+            <span className="font-bold underline">all current products</span>.
+            Ensure your file contains the full catalog.
+          </p>
         </div>
 
         {/* Import Input */}
@@ -162,7 +196,7 @@ export default function BulkUpload() {
             <input
               type="file"
               accept=".xlsx, .xls"
-              onChange={handleFileUpload}
+              onChange={handleFileUploadRequest}
               disabled={working}
               className="hidden"
             />
@@ -191,6 +225,24 @@ export default function BulkUpload() {
           </div>
         )}
       </div>
+      <PasswordModal
+        isOpen={isPasswordModalOpen}
+        onClose={() => {
+          setIsPasswordModalOpen(false);
+          setPendingAction(null);
+        }}
+        onSuccess={handlePasswordSuccess}
+        title={
+          pendingAction?.type === "export"
+            ? "Confirm Export"
+            : "Confirm Overwrite"
+        }
+        description={
+          pendingAction?.type === "export"
+            ? "Re-verify your password to export the product catalog to Excel."
+            : "ATTENTION: This will delete ALL current products and replace them with your new file. Re-verify your password to proceed."
+        }
+      />
     </div>
   );
 }
