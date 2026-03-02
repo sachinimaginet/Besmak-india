@@ -5,52 +5,96 @@ import { Menu } from "lucide-react";
 export function Header() {
   return (
     <header className="bg-white shadow-sm sticky top-0 z-50">
-      <div className="container mx-auto px-4 h-16 flex items-center justify-between">
-        <Link href="/" className="text-2xl font-bold text-blue-600">
+      <div className="container mx-auto px-4 h-20 flex items-center justify-between">
+        <Link href="/" className="flex items-center">
           <Image
             src="/images/Besmak-Logo.png"
-            alt="Logo"
-            width={100}
-            height={100}
+            alt="Besmak Logo"
+            width={320}
+            height={120}
+            className="h-20 w-auto object-contain"
+            priority
           />
         </Link>
 
-        <nav className="hidden md:flex items-center space-x-8">
-          <Link
-            href="/"
-            className="text-gray-600 hover:text-blue-600 font-medium"
-          >
-            Home
-          </Link>
-          <Link
-            href="/about-us"
-            className="text-gray-600 hover:text-blue-600 font-medium"
-          >
-            About
-          </Link>
-          <Link
-            href="/divisions"
-            className="text-gray-600 hover:text-blue-600 font-medium"
-          >
-            Divisions
-          </Link>
-          <Link
-            href="/products"
-            className="text-gray-600 hover:text-blue-600 font-medium"
-          >
+        <nav className="hidden md:flex items-center space-x-6">
+          <button className="text-gray-600 hover:text-primary font-medium flex items-center gap-1 group">
+            Discover Us
+            <svg
+              className="w-4 h-4 transition-transform group-hover:rotate-180"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M19 9l-7 7-7-7"
+              />
+            </svg>
+          </button>
+
+          <button className="text-gray-600 hover:text-primary font-medium flex items-center gap-1 group">
             Products
-          </Link>
+            <svg
+              className="w-4 h-4 transition-transform group-hover:rotate-180"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M19 9l-7 7-7-7"
+              />
+            </svg>
+          </button>
+
+          <button className="text-gray-600 hover:text-primary font-medium flex items-center gap-1 group">
+            Infrastructure
+            <svg
+              className="w-4 h-4 transition-transform group-hover:rotate-180"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M19 9l-7 7-7-7"
+              />
+            </svg>
+          </button>
+
           <Link
             href="/events"
-            className="text-gray-600 hover:text-blue-600 font-medium"
+            className="text-gray-600 hover:text-primary font-medium"
           >
             Events
           </Link>
+
+          <Link
+            href="/csr"
+            className="text-gray-600 hover:text-primary font-medium"
+          >
+            CSR
+          </Link>
+
           <Link
             href="/contact"
-            className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 font-medium transition-colors"
+            className="text-gray-600 hover:text-primary font-medium"
           >
-            Contact
+            Contact Us
+          </Link>
+
+          <Link
+            href="/e-catalog"
+            className="px-4 py-2 bg-primary text-white rounded-md hover:bg-primary/90 font-medium transition-colors shadow-sm"
+          >
+            e-Catalog
           </Link>
         </nav>
 

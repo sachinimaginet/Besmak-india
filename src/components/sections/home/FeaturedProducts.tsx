@@ -1,11 +1,19 @@
 import Link from "next/link";
 
-export default function FeaturedProducts() {
+interface FeaturedProductsProps {
+  content?: {
+    title?: string;
+  };
+}
+
+export default function FeaturedProducts({ content }: FeaturedProductsProps) {
+  const { title = "Featured Products" } = content || {};
+
   return (
     <section className="py-16 bg-gray-50">
       <div className="container mx-auto px-4">
         <h2 className="text-3xl font-bold text-center text-gray-800 mb-12">
-          Featured Products
+          {title}
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {[1, 2, 3].map((item) => (
@@ -25,7 +33,7 @@ export default function FeaturedProducts() {
                 </p>
                 <Link
                   href={`/products/product-slug-${item}`}
-                  className="text-blue-600 font-medium hover:underline"
+                  className="text-primary font-medium hover:underline"
                 >
                   View Details
                 </Link>
@@ -36,7 +44,7 @@ export default function FeaturedProducts() {
         <div className="text-center mt-12">
           <Link
             href="/products"
-            className="inline-block border-2 border-blue-600 text-blue-600 px-8 py-3 rounded-full font-bold hover:bg-blue-50 transition-colors"
+            className="inline-block border-2 border-primary text-primary px-8 py-3 rounded-full font-bold hover:bg-primary/5 transition-colors"
           >
             Browse All Products
           </Link>

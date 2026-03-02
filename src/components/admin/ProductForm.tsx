@@ -128,7 +128,7 @@ export default function ProductForm({
               onChange={(e) =>
                 setFormData({ ...formData, name: e.target.value })
               }
-              className="w-full border-gray-400 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 p-2.5 border text-gray-900"
+              className="w-full border-gray-400 rounded-lg shadow-sm focus:ring-primary focus:border-primary p-2.5 border text-gray-900"
               placeholder="e.g. High Pressure Centrifugal Pump"
             />
           </div>
@@ -201,7 +201,7 @@ export default function ProductForm({
               onChange={(e) =>
                 setFormData({ ...formData, description: e.target.value })
               }
-              className="w-full border-gray-400 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 p-2.5 border text-gray-900"
+              className="w-full border-gray-400 rounded-lg shadow-sm focus:ring-primary focus:border-primary p-2.5 border text-gray-900"
               placeholder="Enter product description..."
             />
           </div>
@@ -215,7 +215,7 @@ export default function ProductForm({
           <button
             type="button"
             onClick={() => setIsMediaPickerOpen(true)}
-            className="text-sm bg-blue-50 text-blue-600 px-3 py-1.5 rounded-lg hover:bg-blue-100 transition-colors font-medium border border-blue-100 flex items-center gap-2"
+            className="text-sm bg-primary/5 text-primary px-3 py-1.5 rounded-lg hover:bg-primary/10 transition-colors font-medium border border-primary/10 flex items-center gap-2"
           >
             <ImageIcon className="h-4 w-4" />
             Manage Images
@@ -276,7 +276,7 @@ export default function ProductForm({
                 },
               });
             }}
-            className="text-sm bg-blue-50 text-blue-600 px-3 py-1.5 rounded-lg hover:bg-blue-100 transition-colors font-medium border border-blue-100"
+            className="text-sm bg-primary/5 text-primary px-3 py-1.5 rounded-lg hover:bg-primary/10 transition-colors font-medium border border-primary/10"
           >
             + Add Specification
           </button>
@@ -308,7 +308,7 @@ export default function ProductForm({
                           });
                         }
                       }}
-                      className="w-full border-gray-400 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 p-2 border text-sm font-medium text-gray-900"
+                      className="w-full border-gray-400 rounded-lg shadow-sm focus:ring-primary focus:border-primary p-2 border text-sm font-medium text-gray-900"
                       placeholder="Property Name (e.g. Weight)"
                     />
                   </div>
@@ -325,7 +325,7 @@ export default function ProductForm({
                           },
                         });
                       }}
-                      className="w-full border-gray-400 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 p-2 border text-sm text-gray-900"
+                      className="w-full border-gray-400 rounded-lg shadow-sm focus:ring-primary focus:border-primary p-2 border text-sm text-gray-900"
                       placeholder="Value (e.g. 50kg)"
                     />
                   </div>
@@ -359,7 +359,7 @@ export default function ProductForm({
         <button
           type="submit"
           disabled={loading}
-          className="px-6 py-2.5 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors flex items-center disabled:opacity-50 disabled:cursor-not-allowed"
+          className="px-6 py-2.5 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors flex items-center disabled:opacity-50 disabled:cursor-not-allowed"
         >
           {loading ? (
             <Loader2 className="h-4 w-4 mr-2 animate-spin" />
