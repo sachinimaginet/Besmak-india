@@ -33,7 +33,6 @@ export const viewport: Viewport = {
 
 import { Toaster } from "sonner";
 import NextAuthProvider from "@/components/providers/NextAuthProvider";
-
 export default function RootLayout({
   children,
 }: Readonly<{
