@@ -97,7 +97,7 @@ export default function ProductFilters({ filterGroups }: ProductFiltersProps) {
     <div className="space-y-4">
       <div className="flex items-center justify-between border-b border-gray-100 pb-3">
         <h3 className="font-extrabold text-gray-900 text-sm flex items-center gap-2">
-          <div className="bg-blue-600 p-1 rounded-md">
+          <div className="bg-primary p-1 rounded-md">
             <Filter className="h-3.5 w-3.5 text-white" />
           </div>
           Refine Search
@@ -115,17 +115,17 @@ export default function ProductFilters({ filterGroups }: ProductFiltersProps) {
               key={group.id}
               className={`rounded-lg border transition-all duration-300 ${
                 isActive
-                  ? "border-blue-200 bg-blue-50/20"
+                  ? "border-primary/20 bg-primary/5"
                   : "border-gray-50 bg-gray-50/20"
               }`}
             >
               <button
                 onClick={() => toggleGroup(group.id)}
-                className="w-full flex items-center justify-between p-3 text-xs font-bold text-gray-800 hover:text-blue-600 transition-colors"
+                className="w-full flex items-center justify-between p-3 text-xs font-bold text-gray-800 hover:text-primary transition-colors"
               >
                 <div className="flex items-center gap-2">
                   <span
-                    className={`${isActive ? "text-blue-600" : "text-gray-400"}`}
+                    className={`${isActive ? "text-primary" : "text-gray-400"}`}
                   >
                     {getIcon(group.id)}
                   </span>
@@ -136,7 +136,7 @@ export default function ProductFilters({ filterGroups }: ProductFiltersProps) {
                   transition={{ duration: 0.2 }}
                 >
                   <ChevronDown
-                    className={`h-3.5 w-3.5 ${isActive ? "text-blue-500" : "text-gray-400"}`}
+                    className={`h-3.5 w-3.5 ${isActive ? "text-primary" : "text-gray-400"}`}
                   />
                 </motion.div>
               </button>
@@ -154,8 +154,8 @@ export default function ProductFilters({ filterGroups }: ProductFiltersProps) {
                       <select
                         value={activeValue}
                         onChange={(e) => updateFilter(group.id, e.target.value)}
-                        className={`w-full bg-white border rounded-md py-1.5 px-2 text-xs text-gray-900 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all shadow-sm font-medium ${
-                          isActive ? "border-blue-400" : "border-gray-200"
+                        className={`w-full bg-white border rounded-md py-1.5 px-2 text-xs text-gray-900 focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all shadow-sm font-medium ${
+                          isActive ? "border-primary/40" : "border-gray-200"
                         }`}
                       >
                         <option value="">Select {group.label}</option>
@@ -185,13 +185,13 @@ export default function ProductFilters({ filterGroups }: ProductFiltersProps) {
           className="w-full flex items-center justify-between bg-white border border-gray-200 p-3 rounded-xl shadow-sm hover:shadow-md transition-all active:scale-[0.98]"
         >
           <div className="flex items-center gap-2">
-            <div className="bg-blue-600 p-1.5 rounded-lg">
+            <div className="bg-primary p-1.5 rounded-lg">
               <Filter className="h-4 w-4 text-white" />
             </div>
             <span className="font-bold text-gray-900 text-sm">Filters</span>
           </div>
           {activeFiltersCount > 0 && (
-            <span className="bg-blue-600 text-white text-[10px] font-black h-5 w-5 rounded-full flex items-center justify-center">
+            <span className="bg-primary text-white text-[10px] font-black h-5 w-5 rounded-full flex items-center justify-center">
               {activeFiltersCount}
             </span>
           )}
@@ -199,7 +199,7 @@ export default function ProductFilters({ filterGroups }: ProductFiltersProps) {
       </div>
 
       {/* Desktop Sidebar */}
-      <aside className="hidden lg:block w-64 shrink-0 bg-white border border-gray-200 rounded-2xl p-4 shadow-sm sticky top-24 h-fit">
+      <aside className="hidden lg:block w-64 shrink-0 bg-white border border-gray-200 rounded-2xl p-4 shadow-sm sticky top-20 h-fit">
         <FilterContent />
       </aside>
 
@@ -236,7 +236,7 @@ export default function ProductFilters({ filterGroups }: ProductFiltersProps) {
               <div className="absolute bottom-0 left-0 right-0 p-6 bg-white border-t border-gray-100">
                 <button
                   onClick={() => setIsMobileOpen(false)}
-                  className="w-full bg-blue-600 text-white py-3 rounded-xl font-bold shadow-lg shadow-blue-100 active:scale-[0.98] transition-all"
+                  className="w-full bg-primary text-white py-3 rounded-xl font-bold shadow-lg shadow-primary/10 active:scale-[0.98] transition-all"
                 >
                   Show Results
                 </button>

@@ -111,10 +111,10 @@ export default function ProductGrid({ products }: ProductGridProps) {
               )}
             </div>
             <div className="p-5">
-              <span className="text-[10px] font-bold text-blue-600 uppercase tracking-widest bg-blue-50 px-2 py-0.5 rounded-full">
+              <span className="text-[10px] font-bold text-primary uppercase tracking-widest bg-primary/5 px-2 py-0.5 rounded-full">
                 {product.category.name}
               </span>
-              <h3 className="mt-3 text-lg font-bold text-gray-900 group-hover:text-blue-600 transition-colors line-clamp-1">
+              <h3 className="mt-3 text-lg font-bold text-gray-900 group-hover:text-primary transition-colors line-clamp-1">
                 {product.name}
               </h3>
               <p className="mt-2 text-sm text-gray-500 line-clamp-2 leading-relaxed">
@@ -122,7 +122,7 @@ export default function ProductGrid({ products }: ProductGridProps) {
                   specsSummary ||
                   "Premium quality industrial component from Besmak India."}
               </p>
-              <div className="mt-4 pt-4 border-t border-gray-50 flex items-center text-blue-600 text-sm font-semibold">
+              <div className="mt-4 pt-4 border-t border-gray-50 flex items-center text-primary text-sm font-semibold">
                 View Details
                 <svg
                   className="ml-2 h-4 w-4 transform group-hover:translate-x-1 transition-transform"

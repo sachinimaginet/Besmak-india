@@ -58,6 +58,13 @@ export default async function AdminLayout({
             Categories
           </Link>
           <Link
+            href="/admin/pages"
+            className="flex items-center p-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-lg transition-colors"
+          >
+            <Settings className="h-5 w-5 mr-3" />
+            Pages
+          </Link>
+          <Link
             href="/admin/enquiries"
             className="flex items-center p-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-lg transition-colors"
           >

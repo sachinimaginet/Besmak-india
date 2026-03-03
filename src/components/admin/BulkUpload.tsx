@@ -148,7 +148,7 @@ export default function BulkUpload() {
   return (
     <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
       <h3 className="text-lg font-bold text-gray-800 mb-4 flex items-center gap-2">
-        <Upload className="h-5 w-5 text-blue-600" />
+        <Upload className="h-5 w-5 text-primary" />
         Bulk Operations
       </h3>
 
@@ -211,7 +211,7 @@ export default function BulkUpload() {
                 ? "bg-green-50 text-green-700 border border-green-100"
                 : status.type === "error"
                   ? "bg-red-50 text-red-700 border border-red-100"
-                  : "bg-blue-50 text-blue-700 border border-blue-100"
+                  : "bg-primary/5 text-primary border border-primary/10"
             }`}
           >
             {working ? (

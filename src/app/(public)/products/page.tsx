@@ -5,8 +5,14 @@ import Pagination from "@/components/ui/Pagination";
 import ProductFilters from "@/components/sections/products/ProductFilters";
 import Link from "next/link";
 import { X } from "lucide-react";
+import { Metadata } from "next";
+import { getPageMetadata } from "@/lib/metadata";
 
 export const dynamic = "force-dynamic";
+
+export async function generateMetadata(): Promise<Metadata> {
+  return getPageMetadata("products");
+}
 
 export default async function ProductsPage({
   searchParams,

@@ -3,22 +3,26 @@ import Link from "next/link";
 
 export default async function DashboardPage() {
   // Fetch real stats
-  const [productsCount, enquiriesCount, mediaCount] = await Promise.all([
-    dbQuery<any[]>("SELECT COUNT(*) as count FROM product"),
-    dbQuery<any[]>("SELECT COUNT(*) as count FROM enquiry"),
-    dbQuery<any[]>("SELECT COUNT(*) as count FROM media"),
-  ]);
+  const [productsCount, enquiriesCount, mediaCount, pagesCount] =
+    await Promise.all([
+      dbQuery<any[]>("SELECT COUNT(*) as count FROM product"),
+      dbQuery<any[]>("SELECT COUNT(*) as count FROM enquiry"),
+      dbQuery<any[]>("SELECT COUNT(*) as count FROM media"),
+      dbQuery<any[]>("SELECT COUNT(*) as count FROM pages"),
+    ]);
 
   const stats = {
     totalProducts: productsCount[0]?.count || 0,
     totalEnquiries: enquiriesCount[0]?.count || 0,
     totalMedia: mediaCount[0]?.count || 0,
+    totalPages: pagesCount[0]?.count || 0,
   };
 
   const recentActivity = [
     "System migration to MySQL completed",
     "Prisma dependencies removed",
     "Media management system initialized",
+    "Dynamic page management module enabled",
   ];
 
   return (
@@ -27,7 +31,7 @@ export default async function DashboardPage() {
         Dashboard Overview
       </h1>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
         <Link
           href="/admin/products"
           className="bg-white p-6 rounded-lg shadow-sm border border-gray-200 hover:border-blue-300 hover:shadow-md transition-all group"
@@ -38,6 +42,20 @@ export default async function DashboardPage() {
           <p className="text-3xl font-bold text-gray-900 mt-2">
             {stats.totalProducts}
           </p>
+        </Link>
+        <Link
+          href="/admin/pages"
+          className="bg-white p-6 rounded-lg shadow-sm border border-blue-100 hover:border-blue-400 hover:shadow-md transition-all group ring-1 ring-blue-50"
+        >
+          <h3 className="text-blue-600 font-bold text-sm uppercase">
+            Total Pages
+          </h3>
+          <p className="text-4xl font-black text-blue-900 mt-2">
+            {stats.totalPages}
+          </p>
+          <div className="mt-4 text-xs text-blue-500 font-semibold flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+            Manage Content & SEO →
+          </div>
         </Link>
         <Link
           href="/admin/enquiries"

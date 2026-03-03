@@ -24,7 +24,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#1e3a8a",
+  themeColor: "#284B8C",
   width: "device-width",
   initialScale: 1,
   minimumScale: 1,
@@ -32,6 +32,7 @@ export const viewport: Viewport = {
 };
 
 import { Toaster } from "sonner";
+import NextAuthProvider from "@/components/providers/NextAuthProvider";
 
 export default function RootLayout({
   children,
@@ -41,8 +42,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.variable} ${robotoMono.variable} antialiased`}>
-        {children}
-        <Toaster richColors position="top-right" />
+        <NextAuthProvider>
+          {children}
+          <Toaster richColors position="top-right" />
+        </NextAuthProvider>
       </body>
     </html>
   );

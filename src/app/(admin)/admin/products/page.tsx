@@ -79,7 +79,7 @@ export default async function AdminProductsPage({ searchParams }: PageProps) {
         </div>
         <Link
           href="/admin/products/new"
-          className="bg-blue-600 text-white px-4 py-2 rounded-lg flex items-center hover:bg-blue-700 transition-colors shadow-sm"
+          className="bg-primary text-white px-4 py-2 rounded-lg flex items-center hover:bg-primary/90 transition-colors shadow-sm"
         >
           <Plus className="h-5 w-5 mr-2" />
           Add Product
@@ -135,7 +135,7 @@ export default async function AdminProductsPage({ searchParams }: PageProps) {
                           </div>
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap">
-                          <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">
+                          <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-primary/10 text-primary">
                             {product.categoryName || "Uncategorized"}
                           </span>
                           {product.categorySpecification && (
@@ -149,14 +149,14 @@ export default async function AdminProductsPage({ searchParams }: PageProps) {
                             <Link
                               href={`/products/${product.slug}`}
                               target="_blank"
-                              className="text-gray-600 hover:text-blue-600 p-1"
+                              className="text-gray-600 hover:text-primary p-1"
                               title="View in Site"
                             >
                               <ExternalLink className="h-4 w-4" />
                             </Link>
                             <Link
                               href={`/admin/products/edit/${product.id}`}
-                              className="text-blue-600 hover:text-blue-900 p-1"
+                              className="text-primary hover:text-primary/80 p-1"
                               title="Edit"
                             >
                               <Edit className="h-4 w-4" />
@@ -223,7 +223,7 @@ export default async function AdminProductsPage({ searchParams }: PageProps) {
           <BulkUpload />
           <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
             <h3 className="font-bold text-gray-800 mb-4 flex items-center">
-              <span className="bg-blue-100 text-blue-600 p-1.5 rounded-lg mr-2">
+              <span className="bg-primary/10 text-primary p-1.5 rounded-lg mr-2">
                 <Plus className="h-4 w-4" />
               </span>
               Instructions
@@ -234,20 +234,20 @@ export default async function AdminProductsPage({ searchParams }: PageProps) {
             </p>
             <ul className="text-sm text-gray-600 space-y-2 list-none">
               <li className="flex items-center">
-                <div className="h-1.5 w-1.5 bg-blue-400 rounded-full mr-2"></div>
+                <div className="h-1.5 w-1.5 bg-primary/40 rounded-full mr-2"></div>
                 <span>
                   <strong>ID Search:</strong> You can search by product ID as
                   well.
                 </span>
               </li>
               <li className="flex items-center">
-                <div className="h-1.5 w-1.5 bg-blue-400 rounded-full mr-2"></div>
+                <div className="h-1.5 w-1.5 bg-primary/40 rounded-full mr-2"></div>
                 <span>
                   <strong>Pagination:</strong> Showing 10 products per page.
                 </span>
               </li>
               <li className="flex items-center">
-                <div className="h-1.5 w-1.5 bg-blue-400 rounded-full mr-2"></div>
+                <div className="h-1.5 w-1.5 bg-primary/40 rounded-full mr-2"></div>
                 <span>
                   <strong>Bulk Ops:</strong> Updates are based on product ID.
                 </span>

@@ -79,7 +79,7 @@ export default function CategoryForm({
               onChange={(e) =>
                 setFormData({ ...formData, name: e.target.value })
               }
-              className="w-full border-gray-400 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 p-2.5 border text-gray-900"
+              className="w-full border-gray-400 rounded-lg shadow-sm focus:ring-primary focus:border-primary p-2.5 border text-gray-900"
               placeholder="e.g. Centrifugal Pumps"
             />
           </div>
@@ -96,7 +96,7 @@ export default function CategoryForm({
               onChange={(e) =>
                 setFormData({ ...formData, slug: e.target.value })
               }
-              className="w-full border-gray-400 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 p-2.5 border bg-gray-50 text-gray-900"
+              className="w-full border-gray-400 rounded-lg shadow-sm focus:ring-primary focus:border-primary p-2.5 border bg-gray-50 text-gray-900"
               placeholder="centrifugal-pumps"
             />
           </div>
@@ -115,7 +115,7 @@ export default function CategoryForm({
         <button
           type="submit"
           disabled={loading}
-          className="px-6 py-2.5 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors flex items-center disabled:opacity-50 disabled:cursor-not-allowed"
+          className="px-6 py-2.5 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors flex items-center disabled:opacity-50 disabled:cursor-not-allowed"
         >
           {loading ? (
             <Loader2 className="h-4 w-4 mr-2 animate-spin" />

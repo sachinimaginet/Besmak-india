@@ -26,13 +26,13 @@
   --foreground: #171717;
 
   /* Industrial Blue Theme */
-  --primary: #1e3a8a; /* blue-900 */
+  --primary: #284b8c;
   --primary-foreground: #ffffff;
 
   --secondary: #f3f4f6; /* gray-100 */
   --secondary-foreground: #1f2937; /* gray-800 */
 
-  --accent: #2563eb; /* blue-600 */
+  --accent: #284b8c;
   --accent-foreground: #ffffff;
 
   --muted: #f3f4f6;
@@ -52,13 +52,13 @@
     --background: #0a0a0a;
     --foreground: #ededed;
 
-    --primary: #3b82f6; /* Lighter blue for dark mode */
+    --primary: #284B8C; /* Lighter blue for dark mode visibility */
     --primary-foreground: #ffffff;
 
     --secondary: #1f2937;
     --secondary-foreground: #f3f4f6;
 
-    --accent: #1d4ed8;
+    --accent: #4a7fd8;
     --accent-foreground: #ffffff;
 
     --muted: #1f2937;

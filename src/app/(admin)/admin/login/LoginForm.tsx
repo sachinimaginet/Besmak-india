@@ -12,12 +12,12 @@ function LoginButton() {
   const { pending } = useFormStatus();
   return (
     <button
-      className="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-semibold rounded-xl text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-blue-500/30"
+      className="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-semibold rounded-xl text-white bg-primary hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-primary/30"
       aria-disabled={pending}
     >
       <span className="absolute left-0 inset-y-0 flex items-center pl-3">
         <LogIn
-          className="h-5 w-5 text-blue-300 group-hover:text-blue-200"
+          className="h-5 w-5 text-primary-foreground/60 group-hover:text-primary-foreground/80"
           aria-hidden="true"
         />
       </span>
@@ -79,7 +79,7 @@ export default function LoginForm({
               type="email"
               autoComplete="email"
               required
-              className="appearance-none block w-full pl-10 pr-3 py-3 border border-gray-200 rounded-xl placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 text-gray-900 sm:text-sm bg-gray-50/50"
+              className="appearance-none block w-full pl-10 pr-3 py-3 border border-gray-200 rounded-xl placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-200 text-gray-900 sm:text-sm bg-gray-50/50"
               placeholder="admin@example.com"
             />
           </div>
@@ -101,22 +101,22 @@ export default function LoginForm({
               type="password"
               autoComplete="current-password"
               required
-              className="appearance-none block w-full pl-10 pr-3 py-3 border border-gray-200 rounded-xl placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 text-gray-900 sm:text-sm bg-gray-50/50"
+              className="appearance-none block w-full pl-10 pr-3 py-3 border border-gray-200 rounded-xl placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-200 text-gray-900 sm:text-sm bg-gray-50/50"
               placeholder="••••••••"
             />
           </div>
         </div>
 
         {/* Captcha Field */}
-        <div className="bg-blue-50/50 p-4 rounded-2xl border border-blue-100/50">
+        <div className="bg-primary/5 p-4 rounded-2xl border border-primary/10">
           <div className="flex items-center justify-between mb-2">
             <label
               htmlFor="captchaAnswer"
               className="text-sm font-medium text-gray-700 flex items-center"
             >
-              <Hash className="h-4 w-4 mr-2 text-blue-500" />
+              <Hash className="h-4 w-4 mr-2 text-primary" />
               Security Check: What is{" "}
-              <span className="font-bold text-blue-700 ml-1">
+              <span className="font-bold text-primary ml-1">
                 {captcha.question}
               </span>
               ?
@@ -125,7 +125,7 @@ export default function LoginForm({
               type="button"
               onClick={handleRefreshCaptcha}
               disabled={isRefreshing}
-              className="text-blue-600 hover:text-blue-500 disabled:text-gray-400 transition-colors p-1"
+              className="text-primary hover:text-primary/80 disabled:text-gray-400 transition-colors p-1"
               title="Refresh Captcha"
             >
               <RefreshCcw
@@ -152,7 +152,7 @@ export default function LoginForm({
             id="remember-me"
             name="remember-me"
             type="checkbox"
-            className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded-md transition-all duration-200"
+            className="h-4 w-4 text-primary focus:ring-primary border-gray-300 rounded-md transition-all duration-200"
           />
           <label
             htmlFor="remember-me"
@@ -165,7 +165,7 @@ export default function LoginForm({
         <div className="text-sm">
           <a
             href="#"
-            className="font-medium text-blue-600 hover:text-blue-500 transition-colors"
+            className="font-medium text-primary hover:text-primary/80 transition-colors"
           >
             Forgot password?
           </a>
