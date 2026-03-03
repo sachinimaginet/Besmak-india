@@ -2,13 +2,17 @@ import Link from "next/link";
 import Image from "next/image";
 import { Menu } from "lucide-react";
 
-export function Header() {
+import { getSetting } from "@/lib/settings";
+
+export async function Header() {
+  const logoUrl = await getSetting("logo_url", "/images/Besmak-Logo.png");
+
   return (
     <header className="bg-white shadow-sm sticky top-0 z-50">
       <div className="container mx-auto px-4 h-20 flex items-center justify-between">
         <Link href="/" className="flex items-center">
           <Image
-            src="/images/Besmak-Logo.png"
+            src={logoUrl}
             alt="Besmak Logo"
             width={320}
             height={120}
