@@ -23,14 +23,12 @@ export default function TextImageSection({ content }: TextImageSectionProps) {
     } = content || {};
 
     return (
-        <section className={`py-16 md:py-24 ${bgColor}`}>
+        <section className={`py-12 ${bgColor}`}>
             <div className="container mx-auto px-4 max-w-7xl">
                 {/* Main Title atop the layout */}
-                <div className="mb-12 md:mb-16">
-                    <h2 className="text-3xl md:text-5xl lg:text-6xl text-gray-900">
-                        {title}
-                    </h2>
-                </div>
+                <h1 className="font-bold text-gray-900 leading-tight">
+                    {title}
+                </h1>
 
                 <div
                     className={`flex flex-col ${imagePosition === "left" ? "md:flex-row-reverse" : "md:flex-row"
