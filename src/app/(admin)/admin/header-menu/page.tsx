@@ -228,6 +228,38 @@ export default function HeaderMenuPage() {
                   Adjust the size of the logo relative to its default size.
                 </p>
               </div>
+
+              <div className="space-y-4">
+                <label className="text-sm font-semibold text-gray-700">
+                  Menu Font Family
+                </label>
+                <select
+                  value={settings.menu_font || "Inter"}
+                  onChange={(e) =>
+                    setSettings({ ...settings, menu_font: e.target.value })
+                  }
+                  className="w-full p-2.5 border border-gray-200 rounded-lg text-gray-900 focus:ring-2 focus:ring-primary outline-none bg-white font-medium"
+                >
+                  {[
+                    "Inter",
+                    "Times New Roman",
+                    "Roboto",
+                    "Open Sans",
+                    "Montserrat",
+                    "Playfair Display",
+                    "Oswald",
+                    "Poppins",
+                    "Lato",
+                  ].map((font) => (
+                    <option key={font} value={font}>
+                      {font}
+                    </option>
+                  ))}
+                </select>
+                <p className="text-xs text-gray-500">
+                  Choose the font family for the navigation menu links.
+                </p>
+              </div>
             </div>
           </div>
         </section>

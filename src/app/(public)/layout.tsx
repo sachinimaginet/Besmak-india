@@ -16,7 +16,7 @@ export default async function PublicLayout({
       <Header settings={settings} />
 
       <main className="grow">{children}</main>
-      <Footer />
+      <Footer settings={settings} />
     </div>
   );
 }
