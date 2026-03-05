@@ -98,10 +98,9 @@ const Header = ({ settings }: HeaderProps) => {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-white ${
-        expandedMenu || scrolled ? "shadow-md" : ""
-      }`}
-      style={{ fontFamily: menuFont }}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-white ${expandedMenu || scrolled ? "shadow-md" : ""
+        }`}
+      style={{ fontFamily: 'var(--font-body)' }}
     >
       <div className="container mx-auto px-4">
         {/* Main Header Row */}
@@ -137,28 +136,25 @@ const Header = ({ settings }: HeaderProps) => {
                   {item.child ? (
                     <button
                       onClick={() => toggleMenu(item.title)}
-                      className={`flex items-center gap-1.5 text-[15px] font-medium transition-colors ${
-                        expandedMenu === item.title ||
-                        pathname.startsWith(item.href || "")
+                      className={`flex items-center gap-1.5 text-[15px] font-medium transition-colors ${expandedMenu === item.title ||
+                          pathname.startsWith(item.href || "")
                           ? "text-primary"
                           : "text-gray-600 hover:text-primary"
-                      }`}
+                        }`}
                     >
                       {item.title}
                       <ChevronDown
-                        className={`w-3.5 h-3.5 transition-transform duration-300 ${
-                          expandedMenu === item.title ? "rotate-180" : ""
-                        }`}
+                        className={`w-3.5 h-3.5 transition-transform duration-300 ${expandedMenu === item.title ? "rotate-180" : ""
+                          }`}
                       />
                     </button>
                   ) : (
                     <Link
                       href={item.href || "#"}
-                      className={`text-[15px] font-medium transition-colors ${
-                        pathname === item.href
+                      className={`text-[15px] font-medium transition-colors ${pathname === item.href
                           ? "text-primary"
                           : "text-gray-600 hover:text-primary"
-                      }`}
+                        }`}
                     >
                       {item.title}
                     </Link>
@@ -204,11 +200,10 @@ const Header = ({ settings }: HeaderProps) => {
                           <Link
                             href={subItem.href}
                             onClick={() => setExpandedMenu(null)}
-                            className={`text-[15px] font-medium transition-colors inline-block ${
-                              pathname === subItem.href
+                            className={`text-[15px] font-medium transition-colors inline-block ${pathname === subItem.href
                                 ? "text-primary"
                                 : "text-gray-800 hover:text-primary"
-                            }`}
+                              }`}
                           >
                             {subItem.name}
                           </Link>

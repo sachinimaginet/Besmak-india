@@ -186,7 +186,7 @@ export default function EventsAchievements({ content }: EventsAchievementsProps)
         }
 
         .ea-title {
-          font-family: Georgia, "Times New Roman", serif;
+          font-family: var(--font-heading), serif;
           font-size: 2.75rem;
           font-weight: 400;
           color: #111827;

@@ -145,7 +145,7 @@ export default function TwoCardsSection({ content }: TwoCardsSectionProps) {
                 }
 
                 .tc-title {
-                    font-family: Georgia, "Times New Roman", serif;
+                    font-family: var(--font-heading), serif;
                     font-size: 2.5rem;
                     font-weight: 400;
                     margin-bottom: 2rem;

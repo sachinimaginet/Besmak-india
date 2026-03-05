@@ -33,14 +33,20 @@ export const viewport: Viewport = {
 
 import { Toaster } from "sonner";
 import NextAuthProvider from "@/components/providers/NextAuthProvider";
-export default function RootLayout({
+import ThemeRegistry from "@/components/layout/ThemeRegistry";
+import { getAllSettings } from "@/lib/settings";
+
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const settings = await getAllSettings();
+
   return (
     <html lang="en">
       <body className={`${inter.variable} ${robotoMono.variable} antialiased`}>
+        <ThemeRegistry initialSettings={settings} />
         <NextAuthProvider>
           {children}
           <Toaster richColors position="top-right" />

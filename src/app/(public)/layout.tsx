@@ -12,7 +12,6 @@ export default async function PublicLayout({
 
   return (
     <div className="flex flex-col min-h-screen site-content">
-      <ThemeRegistry initialSettings={settings} />
       <Header settings={settings} />
 
       <main className="grow">{children}</main>

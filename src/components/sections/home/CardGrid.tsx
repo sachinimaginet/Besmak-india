@@ -245,11 +245,11 @@ export default function CardGrid({ content }: CardGridProps) {
         /* ── Heading ───────────────────────────────────────────── */
         .cg-heading {
           text-align: center;
-          font-size: 2rem;
+          font-size: 2.75rem;
           font-weight: 400;
           color: #111827;
           margin-bottom: 2.5rem;
-          font-family: Georgia, "Times New Roman", serif;
+          font-family: var(--font-heading), serif;
           letter-spacing: -0.01em;
         }
 
