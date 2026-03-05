@@ -71,6 +71,7 @@ const Header = ({ settings }: HeaderProps) => {
     : 24;
 
   const logoSize = settings?.logo_size ? parseInt(settings.logo_size) / 100 : 1;
+  const menuFont = settings?.menu_font || "Inter";
 
   useEffect(() => {
     const handleScroll = () => {
@@ -100,6 +101,7 @@ const Header = ({ settings }: HeaderProps) => {
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-white ${
         expandedMenu || scrolled ? "shadow-md" : ""
       }`}
+      style={{ fontFamily: menuFont }}
     >
       <div className="container mx-auto px-4">
         {/* Main Header Row */}
