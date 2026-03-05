@@ -6,8 +6,11 @@ import { useState, useEffect, useRef } from "react";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { usePathname } from "next/navigation";
 
-// The official menu structure for Besmak-india
-const menu = [
+interface HeaderProps {
+  settings?: Record<string, string>;
+}
+
+const DEFAULT_MENU = [
   {
     title: "Discover Us",
     child: [
@@ -15,8 +18,9 @@ const menu = [
       { name: "Our Values & Governance", href: "/about-us/values-governance" },
       { name: "Partnerships", href: "/about-us/partnerships" },
     ],
-    image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800&auto=format&fit=crop",
-    tagline: "Building a legacy of precision and trust."
+    image:
+      "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800&auto=format&fit=crop",
+    tagline: "Building a legacy of precision and trust.",
   },
   {
     title: "Products",
@@ -24,31 +28,43 @@ const menu = [
       { name: "Connectors", href: "/products/connectors" },
       { name: "Engineering Products", href: "/products/engineering-products" },
     ],
-    image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=800&auto=format&fit=crop",
-    tagline: "Quality components for global industries."
+    image:
+      "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=800&auto=format&fit=crop",
+    tagline: "Quality components for global industries.",
   },
   {
     title: "Infrastructure",
     child: [
       { name: "Tool Room", href: "/infrastructure/tool-room" },
-      { name: "Automation & Technology", href: "/infrastructure/automation-technology" },
+      {
+        name: "Automation & Technology",
+        href: "/infrastructure/automation-technology",
+      },
     ],
-    image: "https://images.unsplash.com/photo-1504917595217-d4dc5fee1227?q=80&w=800&auto=format&fit=crop",
-    tagline: "Cutting-edge technology at our core."
+    image:
+      "https://images.unsplash.com/photo-1504917595217-d4dc5fee1227?q=80&w=800&auto=format&fit=crop",
+    tagline: "Cutting-edge technology at our core.",
   },
   { title: "Events", href: "/events" },
   { title: "CSR", href: "/csr" },
   { title: "Contact Us", href: "/contact" },
 ];
 
-const Header = () => {
+const Header = ({ settings }: HeaderProps) => {
   const [expandedMenu, setExpandedMenu] = useState<string | null>(null);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
   const navRef = useRef<HTMLDivElement>(null);
 
-  const logoUrl = "/images/Besmak-Logo.png";
+  const menu = settings?.main_menu
+    ? JSON.parse(settings.main_menu)
+    : DEFAULT_MENU;
+  const logoUrl = settings?.logo_url || "/images/Besmak-Logo.png";
+  const headerHeight = settings?.header_height
+    ? parseInt(settings.header_height)
+    : 24;
+  const scrolledHeaderHeight = Math.max(16, headerHeight - 4);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -75,13 +91,17 @@ const Header = () => {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-white ${expandedMenu ? "shadow-2xl" : scrolled ? "shadow-md" : ""
-        }`}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-white ${
+        expandedMenu ? "shadow-2xl" : scrolled ? "shadow-md" : ""
+      }`}
     >
       <div className="container mx-auto px-4">
         {/* Main Header Row */}
-        <div className={`flex items-center justify-between transition-all duration-300 ${scrolled || expandedMenu ? "h-20" : "h-24"
-          }`}>
+        <div
+          className={`flex items-center justify-between transition-all duration-300 h-${
+            scrolled || expandedMenu ? scrolledHeaderHeight : headerHeight
+          }`}
+        >
           {/* Logo - Left Aligned */}
           <Link href="/" className="flex items-center">
             <Image
@@ -89,8 +109,11 @@ const Header = () => {
               alt="Besmak Logo"
               width={280}
               height={100}
-              className={`transition-all duration-300 object-contain ${scrolled || expandedMenu ? "h-14" : "h-16"
-                } w-auto`}
+              className={`transition-all duration-300 object-contain h-${
+                scrolled || expandedMenu
+                  ? scrolledHeaderHeight - 6
+                  : headerHeight - 8
+              } w-auto`}
               priority
             />
           </Link>
@@ -98,27 +121,33 @@ const Header = () => {
           {/* Navigation - Right Aligned */}
           <div className="flex items-center gap-6">
             <nav ref={navRef} className="hidden lg:flex items-center gap-6">
-              {menu.map((item) => (
+              {menu.map((item: any) => (
                 <div key={item.title} className="relative">
                   {item.child ? (
                     <button
                       onClick={() => toggleMenu(item.title)}
-                      className={`flex items-center gap-1.5 text-[15px] font-medium transition-colors ${expandedMenu === item.title || pathname.startsWith(item.href || "")
+                      className={`flex items-center gap-1.5 text-[15px] font-medium transition-colors ${
+                        expandedMenu === item.title ||
+                        pathname.startsWith(item.href || "")
                           ? "text-primary"
                           : "text-gray-600 hover:text-primary"
-                        }`}
+                      }`}
                     >
                       {item.title}
                       <ChevronDown
-                        className={`w-3.5 h-3.5 transition-transform duration-300 ${expandedMenu === item.title ? "rotate-180" : ""
-                          }`}
+                        className={`w-3.5 h-3.5 transition-transform duration-300 ${
+                          expandedMenu === item.title ? "rotate-180" : ""
+                        }`}
                       />
                     </button>
                   ) : (
                     <Link
                       href={item.href || "#"}
-                      className={`text-[15px] font-medium transition-colors ${pathname === item.href ? "text-primary" : "text-gray-600 hover:text-primary"
-                        }`}
+                      className={`text-[15px] font-medium transition-colors ${
+                        pathname === item.href
+                          ? "text-primary"
+                          : "text-gray-600 hover:text-primary"
+                      }`}
                     >
                       {item.title}
                     </Link>
@@ -140,7 +169,11 @@ const Header = () => {
               className="lg:hidden p-2 text-gray-700 hover:text-primary transition-colors"
               onClick={() => setMobileOpen(!mobileOpen)}
             >
-              {mobileOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+              {mobileOpen ? (
+                <X className="h-6 w-6" />
+              ) : (
+                <Menu className="h-6 w-6" />
+              )}
             </button>
           </div>
         </div>
@@ -153,24 +186,29 @@ const Header = () => {
                 {/* Submenu Links Pane */}
                 <div className="min-w-[240px]">
                   <ul className="space-y-4">
-                    {menu.find(m => m.title === expandedMenu)?.child?.map((subItem) => (
-                      <li key={subItem.name}>
-                        <Link
-                          href={subItem.href}
-                          onClick={() => setExpandedMenu(null)}
-                          className={`text-[15px] font-medium transition-colors inline-block ${pathname === subItem.href ? "text-primary" : "text-gray-800 hover:text-primary"
+                    {menu
+                      .find((m: any) => m.title === expandedMenu)
+                      ?.child?.map((subItem: any) => (
+                        <li key={subItem.name}>
+                          <Link
+                            href={subItem.href}
+                            onClick={() => setExpandedMenu(null)}
+                            className={`text-[15px] font-medium transition-colors inline-block ${
+                              pathname === subItem.href
+                                ? "text-primary"
+                                : "text-gray-800 hover:text-primary"
                             }`}
-                        >
-                          {subItem.name}
-                        </Link>
-                      </li>
-                    ))}
+                          >
+                            {subItem.name}
+                          </Link>
+                        </li>
+                      ))}
                   </ul>
                 </div>
 
                 {/* Submenu Image Pane */}
                 {(() => {
-                  const activeMenu = menu.find(m => m.title === expandedMenu);
+                  const activeMenu = menu.find((m) => m.title === expandedMenu);
                   if (!activeMenu) return null;
                   return (
                     <div className="w-[380px] shrink-0">
@@ -193,17 +231,26 @@ const Header = () => {
 
       {/* Mobile Navigation Sidebar */}
       {mobileOpen && (
-        <div className="fixed inset-0 z-[60] bg-white lg:hidden overflow-y-auto animate-in slide-in-from-right duration-300">
+        <div className="fixed inset-0 z-60 bg-white lg:hidden overflow-y-auto animate-in slide-in-from-right duration-300">
           <div className="flex flex-col h-full">
             <div className="p-4 flex items-center justify-between border-b border-gray-50">
-              <Image src={logoUrl} alt="Logo" width={140} height={50} className="h-10 w-auto object-contain" />
-              <button onClick={() => setMobileOpen(false)} className="p-2 text-gray-900 bg-gray-50 rounded-full">
+              <Image
+                src={logoUrl}
+                alt="Logo"
+                width={140}
+                height={50}
+                className="h-10 w-auto object-contain"
+              />
+              <button
+                onClick={() => setMobileOpen(false)}
+                className="p-2 text-gray-900 bg-gray-50 rounded-full"
+              >
                 <X className="w-6 h-6" />
               </button>
             </div>
 
             <nav className="p-6 space-y-6">
-              {menu.map((item) => (
+              {menu.map((item: any) => (
                 <div key={item.title} className="space-y-3">
                   {item.child ? (
                     <>
@@ -211,7 +258,7 @@ const Header = () => {
                         {item.title}
                       </h4>
                       <div className="flex flex-col space-y-3 pl-3">
-                        {item.child.map((subItem) => (
+                        {item.child.map((subItem: any) => (
                           <Link
                             key={subItem.name}
                             href={subItem.href}
