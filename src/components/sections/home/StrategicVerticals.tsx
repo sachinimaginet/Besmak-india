@@ -5,123 +5,123 @@ import Link from "next/link";
 import { useState } from "react";
 
 interface Vertical {
-    id: string;
-    title: string;
-    description: string;
-    image: string;
-    href: string;
+  id: string;
+  title: string;
+  description: string;
+  image: string;
+  href: string;
 }
 
 interface StrategicVerticalsProps {
-    content?: {
-        heading?: string;
-        subheading?: string;
-        verticals?: Vertical[];
-    };
+  content?: {
+    heading?: string;
+    subheading?: string;
+    verticals?: Vertical[];
+  };
 }
 
 const defaultVerticals: Vertical[] = [
-    {
-        id: "connection-systems",
-        title: "Connection Systems",
-        description:
-            "The Connection Systems division is dedicated to designing and manufacturing high quality connector solutions that enable secure electrical and mechanical connectivity across applications.",
-        image: "https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&q=80",
-        href: "/divisions/connection-systems",
-    },
-    {
-        id: "engineering-products",
-        title: "Engineering Products Division",
-        description:
-            "Our Engineering Products Division delivers precision-engineered components built for performance, reliability, and long-term durability in demanding industrial environments.",
-        image: "https://images.unsplash.com/photo-1565043589221-1a6fd9ae45c7?w=600&q=80",
-        href: "/divisions/engineering-products",
-    },
-    {
-        id: "precision-stamping",
-        title: "Precision Stamping Manufacturing",
-        description:
-            "We specialise in precision metal stamping, producing complex, tight-tolerance parts at scale for automotive, aerospace and industrial applications.",
-        image: "https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=600&q=80",
-        href: "/divisions/precision-stamping",
-    },
-    {
-        id: "cnh-moulds",
-        title: "CNH Moulds",
-        description:
-            "Our CNH Moulds division offers advanced mould design and manufacturing capabilities, delivering high-quality tooling solutions for complex part geometries.",
-        image: "https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=600&q=80",
-        href: "/divisions/cnh-moulds",
-    },
+  {
+    id: "connection-systems",
+    title: "Connection Systems",
+    description:
+      "The Connection Systems division is dedicated to designing and manufacturing high quality connector solutions that enable secure electrical and mechanical connectivity across applications.",
+    image: "https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&q=80",
+    href: "/divisions/connection-systems",
+  },
+  {
+    id: "engineering-products",
+    title: "Engineering Products Division",
+    description:
+      "Our Engineering Products Division delivers precision-engineered components built for performance, reliability, and long-term durability in demanding industrial environments.",
+    image: "https://images.unsplash.com/photo-1565043589221-1a6fd9ae45c7?w=600&q=80",
+    href: "/divisions/engineering-products",
+  },
+  {
+    id: "precision-stamping",
+    title: "Precision Stamping Manufacturing",
+    description:
+      "We specialise in precision metal stamping, producing complex, tight-tolerance parts at scale for automotive, aerospace and industrial applications.",
+    image: "https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=600&q=80",
+    href: "/divisions/precision-stamping",
+  },
+  {
+    id: "cnh-moulds",
+    title: "CNH Moulds",
+    description:
+      "Our CNH Moulds division offers advanced mould design and manufacturing capabilities, delivering high-quality tooling solutions for complex part geometries.",
+    image: "https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=600&q=80",
+    href: "/divisions/cnh-moulds",
+  },
 ];
 
 export default function StrategicVerticals({
-    content,
+  content,
 }: StrategicVerticalsProps) {
-    const {
-        heading = "Our Strategic Verticals",
-        subheading = `At Besmak, we are not just building products. We are shaping the future of manufacturing — with purpose, passion and progress. Across every vertical, our focus remains on innovation, operational excellence and long term value for our customers, employees and stakeholders.`,
-        verticals = defaultVerticals,
-    } = content || {};
+  const {
+    heading = "Our Strategic Verticals",
+    subheading = `At Besmak, we are not just building products. We are shaping the future of manufacturing — with purpose, passion and progress. Across every vertical, our focus remains on innovation, operational excellence and long term value for our customers, employees and stakeholders.`,
+    verticals = defaultVerticals,
+  } = content || {};
 
-    const [hoveredId, setHoveredId] = useState<string | null>(null);
+  const [hoveredId, setHoveredId] = useState<string | null>(null);
 
-    return (
-        <section className="strategic-verticals py-20 bg-white">
-            <div className="container mx-auto px-4 max-w-7xl">
-                {/* Header */}
-                <div className="text-center mb-14">
-                    <h2 className="text-4xl font-bold text-gray-900 mb-5">{heading}</h2>
-                    <p className="text-gray-500 max-w-2xl mx-auto leading-relaxed text-base">
-                        {subheading}
-                    </p>
+  return (
+    <section className="strategic-verticals py-20 bg-white">
+      <div className="container mx-auto px-4 max-w-7xl">
+        {/* Header */}
+        <div className="text-center mb-14">
+          <h2 className="text-4xl font-bold text-gray-900 mb-5">{heading}</h2>
+          <p className="text-gray-500 max-w-2xl mx-auto leading-relaxed text-base">
+            {subheading}
+          </p>
+        </div>
+
+        {/* Cards */}
+        <div className="sv-grid">
+          {verticals.map((vertical) => {
+            const isHovered = hoveredId === vertical.id;
+            return (
+              <div
+                key={vertical.id}
+                className={`sv-card${isHovered ? " sv-card--hovered" : ""}`}
+                onMouseEnter={() => setHoveredId(vertical.id)}
+                onMouseLeave={() => setHoveredId(null)}
+              >
+                {/* Gradient overlay — visible on hover */}
+                <div className="sv-card__gradient" aria-hidden="true" />
+
+                {/* Content wrapper */}
+                <div className="sv-card__inner">
+                  {/* Title row */}
+                  <h3 className="sv-card__title text-center">{vertical.title}</h3>
+
+                  {/* Description — only on hover */}
+                  <p className="sv-card__description">{vertical.description}</p>
+
+                  {/* Product image — hides on hover */}
+                  <div className="sv-card__image-wrap">
+                    <Image
+                      src={vertical.image}
+                      alt={vertical.title}
+                      fill
+                      className="sv-card__image object-contain"
+                      sizes="(max-width: 768px) 100vw, 25vw"
+                    />
+                  </div>
+
+                  {/* View More link */}
+                  <Link href={vertical.href} className="sv-card__link">
+                    View More&nbsp;→
+                  </Link>
                 </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
 
-                {/* Cards */}
-                <div className="sv-grid">
-                    {verticals.map((vertical) => {
-                        const isHovered = hoveredId === vertical.id;
-                        return (
-                            <div
-                                key={vertical.id}
-                                className={`sv-card${isHovered ? " sv-card--hovered" : ""}`}
-                                onMouseEnter={() => setHoveredId(vertical.id)}
-                                onMouseLeave={() => setHoveredId(null)}
-                            >
-                                {/* Gradient overlay — visible on hover */}
-                                <div className="sv-card__gradient" aria-hidden="true" />
-
-                                {/* Content wrapper */}
-                                <div className="sv-card__inner">
-                                    {/* Title row */}
-                                    <h3 className="sv-card__title">{vertical.title}</h3>
-
-                                    {/* Description — only on hover */}
-                                    <p className="sv-card__description">{vertical.description}</p>
-
-                                    {/* Product image — hides on hover */}
-                                    <div className="sv-card__image-wrap">
-                                        <Image
-                                            src={vertical.image}
-                                            alt={vertical.title}
-                                            fill
-                                            className="sv-card__image object-contain"
-                                            sizes="(max-width: 768px) 100vw, 25vw"
-                                        />
-                                    </div>
-
-                                    {/* View More link */}
-                                    <Link href={vertical.href} className="sv-card__link">
-                                        View More&nbsp;→
-                                    </Link>
-                                </div>
-                            </div>
-                        );
-                    })}
-                </div>
-            </div>
-
-            <style jsx>{`
+      <style jsx>{`
         /* ── Grid ──────────────────────────────────────────────── */
         .sv-grid {
           display: grid;
@@ -143,7 +143,7 @@ export default function StrategicVerticals({
         /* ── Card base ─────────────────────────────────────────── */
         .sv-card {
           position: relative;
-          border: 1.5px solid #c8daf5;
+          border: 2px solid #284b8c;
           border-radius: 1.25rem;
           overflow: hidden;
           cursor: pointer;
@@ -193,7 +193,7 @@ export default function StrategicVerticals({
         .sv-card__title {
           font-size: 1rem;
           font-weight: 700;
-          color: #1a56e8;
+          color: #284b8c;
           line-height: 1.35;
           transition: color 0.35s ease;
           margin-bottom: 0.75rem;
@@ -275,6 +275,6 @@ export default function StrategicVerticals({
           color: #ffffff;
         }
       `}</style>
-        </section>
-    );
+    </section>
+  );
 }
