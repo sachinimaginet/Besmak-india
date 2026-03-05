@@ -239,6 +239,15 @@ export default function CardGrid({ content }: CardGridProps) {
             );
           })}
         </div>
+
+        <div className="text-center mt-12">
+          <Link
+            href="/products"
+            className="inline-flex items-center gap-2 border-2 border-[#1a4fa0] text-[#1a4fa0] px-8 py-3 rounded-full font-bold hover:bg-[#1a4fa0] hover:text-white transition-all duration-300"
+          >
+            Explore All Products
+          </Link>
+        </div>
       </div>
 
       <style jsx>{`
