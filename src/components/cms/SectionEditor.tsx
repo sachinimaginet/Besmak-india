@@ -72,14 +72,14 @@ export default function SectionEditor({
                 <textarea
                   value={editedContent[key]}
                   onChange={(e) => handleChange(key, e.target.value)}
-                  className="w-full p-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none min-h-[120px] transition-all"
+                  className="w-full p-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none min-h-[120px] transition-all text-gray-900"
                 />
               ) : (
                 <input
                   type="text"
                   value={editedContent[key]}
                   onChange={(e) => handleChange(key, e.target.value)}
-                  className="w-full p-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all"
+                  className="w-full p-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all text-gray-900"
                 />
               )}
             </div>
