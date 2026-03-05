@@ -104,14 +104,14 @@ export default function ProductGrid({ products }: ProductGridProps) {
               ) : (
                 <div className="flex flex-col items-center gap-2 text-gray-400">
                   <ImageIcon className="h-10 w-10 opacity-20" />
-                  <span className="text-xs uppercase tracking-wider font-medium opacity-50">
+                  <span className="text-xs  tracking-wider font-medium opacity-50">
                     No image available
                   </span>
                 </div>
               )}
             </div>
             <div className="p-5">
-              <span className="text-[10px] font-bold text-primary uppercase tracking-widest bg-primary/5 px-2 py-0.5 rounded-full">
+              <span className="text-[10px] font-bold text-primary  tracking-widest bg-primary/5 px-2 py-0.5 rounded-full">
                 {product.category.name}
               </span>
               <h3 className="mt-3 text-lg font-bold text-gray-900 group-hover:text-primary transition-colors line-clamp-1">

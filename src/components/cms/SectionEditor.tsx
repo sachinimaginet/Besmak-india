@@ -64,7 +64,7 @@ export default function SectionEditor({
     <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 backdrop-blur-sm p-4">
       <div className="bg-white rounded-2xl shadow-2xl w-full max-w-2xl overflow-hidden flex flex-col max-h-[90vh]">
         <div className="p-6 border-b flex items-center justify-between bg-gray-50">
-          <h2 className="text-xl font-bold text-gray-800 uppercase tracking-wide">
+          <h2 className="text-xl font-bold text-gray-800  tracking-wide">
             Edit {type} Section
           </h2>
           <button

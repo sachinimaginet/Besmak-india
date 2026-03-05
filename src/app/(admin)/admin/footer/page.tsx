@@ -199,7 +199,7 @@ export default function FooterPage() {
                 onChange={(e) => setHeadingSize(parseInt(e.target.value))}
                 className="w-full h-2 bg-gray-100 rounded-lg appearance-none cursor-pointer accent-primary"
               />
-              <div className="flex justify-between text-[10px] text-gray-400 font-bold uppercase tracking-wider">
+              <div className="flex justify-between text-[10px] text-gray-400 font-bold  tracking-wider">
                 <span>8px</span>
                 <span>30px</span>
               </div>
@@ -469,7 +469,7 @@ export default function FooterPage() {
             {(["linkedin", "facebook", "twitter", "youtube"] as const).map(
               (platform) => (
                 <div key={platform} className="space-y-1.5">
-                  <label className="text-xs font-bold text-gray-500 uppercase flex items-center gap-2">
+                  <label className="text-xs font-bold text-gray-500  flex items-center gap-2">
                     <span className="capitalize">{platform}</span> URL
                   </label>
                   <input

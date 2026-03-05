@@ -53,7 +53,7 @@ export default function DivisionsList() {
                 {division.description}
               </p>
               <div className="mb-8">
-                <h4 className="text-sm font-bold uppercase tracking-wider text-blue-600 mb-3">
+                <h4 className="text-sm font-bold  tracking-wider text-blue-600 mb-3">
                   Core Expertise
                 </h4>
                 <ul className="grid grid-cols-1 gap-2">

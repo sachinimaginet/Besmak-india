@@ -153,7 +153,7 @@ export default function PagesAdmin() {
 
         <div className="overflow-x-auto">
           <table className="w-full text-left">
-            <thead className="bg-gray-50 text-gray-600 text-sm uppercase">
+            <thead className="bg-gray-50 text-gray-600 text-sm ">
               <tr>
                 <th className="px-6 py-4 font-semibold">Page Details</th>
                 <th className="px-6 py-4 font-semibold">SEO Info</th>
@@ -199,11 +199,10 @@ export default function PagesAdmin() {
                     </td>
                     <td className="px-6 py-4">
                       <span
-                        className={`px-2 py-1 rounded-full text-xs font-medium ${
-                          page.isActive
+                        className={`px-2 py-1 rounded-full text-xs font-medium ${page.isActive
                             ? "bg-green-100 text-green-700"
                             : "bg-gray-100 text-gray-600"
-                        }`}
+                          }`}
                       >
                         {page.isActive ? "Active" : "Draft"}
                       </span>
@@ -299,7 +298,7 @@ export default function PagesAdmin() {
                 </label>
                 <div className="space-y-3 mt-2">
                   <div className="space-y-1">
-                    <label className="text-xs font-semibold text-gray-500 uppercase">
+                    <label className="text-xs font-semibold text-gray-500 ">
                       Meta Description
                     </label>
                     <textarea
@@ -310,7 +309,7 @@ export default function PagesAdmin() {
                     />
                   </div>
                   <div className="space-y-1">
-                    <label className="text-xs font-semibold text-gray-500 uppercase">
+                    <label className="text-xs font-semibold text-gray-500 ">
                       Keywords (comma separated)
                     </label>
                     <input

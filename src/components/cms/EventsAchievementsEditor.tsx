@@ -177,7 +177,7 @@ export default function EventsAchievementsEditor({
                                     <div className="flex items-center justify-between">
                                         <div className="flex items-center gap-2">
                                             <GripVertical className="h-4 w-4 text-gray-300" />
-                                            <span className="text-xs font-bold text-gray-500 uppercase tracking-wide">
+                                            <span className="text-xs font-bold text-gray-500  tracking-wide">
                                                 Card {i + 1}
                                             </span>
                                         </div>

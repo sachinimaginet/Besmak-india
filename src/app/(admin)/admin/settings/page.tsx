@@ -170,7 +170,7 @@ export default function SettingsPage() {
                 {/* Fonts */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="space-y-1.5">
-                    <label className="text-xs font-semibold text-gray-500 uppercase">
+                    <label className="text-xs font-semibold text-gray-500 ">
                       Heading Font
                     </label>
                     <select
@@ -201,7 +201,7 @@ export default function SettingsPage() {
                     </select>
                   </div>
                   <div className="space-y-1.5">
-                    <label className="text-xs font-semibold text-gray-500 uppercase">
+                    <label className="text-xs font-semibold text-gray-500 ">
                       Body Font
                     </label>
                     <select
@@ -277,7 +277,7 @@ export default function SettingsPage() {
                     },
                   ].map((h) => (
                     <div key={h.id} className="space-y-1.5">
-                      <label className="text-xs font-semibold text-gray-500 uppercase flex justify-between">
+                      <label className="text-xs font-semibold text-gray-500  flex justify-between">
                         {h.label}
                         <span className="text-primary">
                           {settings[`${h.id}_font_size`] || h.default}px
@@ -300,7 +300,7 @@ export default function SettingsPage() {
                   ))}
 
                   <div className="space-y-1.5 pt-2">
-                    <label className="text-xs font-semibold text-gray-500 uppercase flex justify-between">
+                    <label className="text-xs font-semibold text-gray-500  flex justify-between">
                       Body Text Size
                       <span className="text-primary">
                         {settings.body_font_size || "16"}px

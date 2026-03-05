@@ -184,7 +184,7 @@ export default function MediaPage() {
                     />
                   ) : (
                     <div className="flex items-center justify-center h-full text-gray-400">
-                      <span className="uppercase text-xs font-bold">
+                      <span className=" text-xs font-bold">
                         {item.contentType.split("/")[1]}
                       </span>
                     </div>
@@ -253,11 +253,10 @@ export default function MediaPage() {
                     <button
                       key={p}
                       onClick={() => setPage(p)}
-                      className={`h-10 w-10 rounded-lg border transition-colors ${
-                        page === p
+                      className={`h-10 w-10 rounded-lg border transition-colors ${page === p
                           ? "bg-blue-600 border-blue-600 text-white"
                           : "border-gray-200 hover:bg-gray-50 text-gray-700"
-                      }`}
+                        }`}
                     >
                       {p}
                     </button>

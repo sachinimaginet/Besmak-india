@@ -217,7 +217,7 @@ export default function EventsAchievements({ content }: EventsAchievementsProps)
           color: #1a4fa0;
           letter-spacing: 0.15em;
           margin-bottom: 1rem;
-          text-transform: uppercase;
+          text-transform: ;
         }
 
         .ea-title {

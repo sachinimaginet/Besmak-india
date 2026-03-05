@@ -63,7 +63,7 @@ export default async function ProductDetailPage({
         <div className="flex flex-col h-full">
           <div>
             <div className="flex items-center gap-3 mb-4">
-              <span className="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full font-bold uppercase tracking-wider">
+              <span className="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full font-bold  tracking-wider">
                 {product.category.name}
               </span>
               {product.categorySpecification && (
