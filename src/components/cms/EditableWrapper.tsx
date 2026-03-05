@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Edit2 } from "lucide-react";
 import { useAdmin } from "@/hooks/useAdmin";
 import SectionEditor from "./SectionEditor";
+import ClientsSectionEditor from "./ClientsSectionEditor";
 
 interface EditableWrapperProps {
   sectionId: string;
@@ -37,7 +38,19 @@ export default function EditableWrapper({
 
       {children}
 
-      {isEditing && (
+      {isEditing && type === "clients-section" && (
+        <ClientsSectionEditor
+          sectionId={sectionId}
+          content={content}
+          onClose={() => setIsEditing(false)}
+          onSave={() => {
+            setIsEditing(false);
+            onUpdate?.();
+          }}
+        />
+      )}
+
+      {isEditing && type !== "clients-section" && (
         <SectionEditor
           sectionId={sectionId}
           type={type}

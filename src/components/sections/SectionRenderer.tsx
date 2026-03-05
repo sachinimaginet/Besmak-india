@@ -6,6 +6,7 @@ import TextImageSection from "./home/TextImageSection";
 import StatsSection from "./home/StatsSection";
 import CardGrid from "./home/CardGrid";
 import StrategicVerticals from "./home/StrategicVerticals";
+import ClientsSection from "./home/ClientsSection";
 import AboutHero from "./about/AboutHero";
 import AboutContent from "./about/AboutContent";
 import EditableWrapper from "../cms/EditableWrapper";
@@ -45,6 +46,8 @@ export default function SectionRenderer({
         return <StatsSection content={section.content} />;
       case "strategic-verticals":
         return <StrategicVerticals content={section.content} />;
+      case "clients-section":
+        return <ClientsSection content={section.content} />;
       default:
         return null;
     }
