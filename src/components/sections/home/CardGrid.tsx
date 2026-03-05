@@ -93,35 +93,35 @@ const defaultCards: CardData[] = [
   },
   /* ── Row 3 ────────────────────────────────── */
   {
-    id: "relay",
-    category: "Precision Control",
+    id: "cover",
+    category: "Housing Components",
     categoryColor: "#b07c0a",
-    title: "Relay",
+    title: "Cover",
     image:
-      "https://cvnvhpmvk12hdosq.public.blob.vercel-storage.com/6420af06203961d21746289b7e874ff9a58f9440.png",
-    href: "/products/relay",
+      "https://cvnvhpmvk12hdosq.public.blob.vercel-storage.com/2247c41c398bc9896bb054d9d143bfc429ab4d88.png",
+    href: "/products/cover",
     bg: "#f5ece0",
     isDark: false,
   },
   {
-    id: "cases",
-    category: "Housing Components",
+    id: "clips",
+    category: "Fastning Systems",
     categoryColor: "#2e8b57",
-    title: "Cases",
+    title: "Clips",
     image:
-      "https://cvnvhpmvk12hdosq.public.blob.vercel-storage.com/4619bea2ef8e89cf657c09c72c5bb81b40bdedaf.png",
-    href: "/products/cases",
+      "https://cvnvhpmvk12hdosq.public.blob.vercel-storage.com/71932dd7d557a3c819f0764768fa6f17576d179e.png",
+    href: "/products/clips",
     bg: "#e6f3e2",
     isDark: false,
   },
   {
-    id: "cable-tuf",
-    category: "Cable Management",
+    id: "connection-systems",
+    category: "Connection Systems",
     categoryColor: "rgba(255,255,255,0.75)",
-    title: "Cable TUF",
+    title: "Terminals",
     image:
-      "https://cvnvhpmvk12hdosq.public.blob.vercel-storage.com/e3f1e3094cda2b6a926451650265bbb4d9ca5ab9.png",
-    href: "/products/cable-tuf",
+      "https://cvnvhpmvk12hdosq.public.blob.vercel-storage.com/de2ecd4bd7af1d3dcd61a30720645dc39bad67cc.png",
+    href: "/products/connection-systems",
     bg: "#1a4fa0",
     isDark: true,
   },
@@ -157,7 +157,7 @@ export default function CardGrid({ content }: CardGridProps) {
   const totalRows = rows.length;
 
   return (
-    <section className="cg-section py-16 bg-white">
+    <section className="cg-section py-12 bg-white">
       <div className="container mx-auto px-4 max-w-7xl">
         <h2 className="cg-heading">{title}</h2>
 
@@ -178,6 +178,7 @@ export default function CardGrid({ content }: CardGridProps) {
                   const linkColor = card.isDark ? "#ffffff" : "#1a4fa0";
 
                   return (
+
                     <div
                       key={card.id}
                       className={`cg-card${isExpanded ? " cg-card--exp" : ""}`}
@@ -197,40 +198,40 @@ export default function CardGrid({ content }: CardGridProps) {
                         })
                       }
                     >
-                      {/* Text block — top-left */}
-                      <div className="cg-card__text">
-                        <span
-                          className="cg-card__cat"
-                          style={{ color: catColor }}
-                        >
-                          {card.category}
-                        </span>
-                        <h3
-                          className={`cg-card__title${isExpanded ? " cg-card__title--big" : ""}`}
-                          style={{ color: titleColor }}
-                        >
-                          {card.title}
-                        </h3>
-                        <Link
-                          href={card.href}
-                          className={`cg-card__link${isExpanded ? " cg-card__link--vis" : ""}`}
-                          style={{ color: linkColor }}
-                          tabIndex={isExpanded ? 0 : -1}
-                        >
-                          View More&nbsp;&rarr;
-                        </Link>
-                      </div>
+                      <Link
+                        href={card.href}
+                        className={`cg-card__link${isExpanded ? " cg-card__link--vis" : ""}`}
+                        style={{ color: linkColor }}
+                        tabIndex={isExpanded ? 0 : -1}
+                      >
+                        {/* Text block — top-left */}
+                        <div className="cg-card__text">
+                          <span
+                            className="cg-card__cat"
+                            style={{ color: catColor }}
+                          >
+                            {card.category}
+                          </span>
+                          <h3
+                            className={`cg-card__title${isExpanded ? " cg-card__title--big" : ""}`}
+                            style={{ color: titleColor }}
+                          >
+                            {card.title}
+                          </h3>
+                        </div>
 
-                      {/* Product image — bottom-right area */}
-                      <div className="cg-card__img-wrap">
-                        <Image
-                          src={card.image}
-                          alt={card.title}
-                          fill
-                          className="cg-card__img object-contain"
-                          sizes="(max-width: 768px) 100vw, 33vw"
-                        />
-                      </div>
+
+                        {/* Product image — bottom-right area */}
+                        <div className="cg-card__img-wrap">
+                          <Image
+                            src={card.image}
+                            alt={card.title}
+                            fill
+                            className="cg-card__img object-contain"
+                            sizes="(max-width: 768px) 100vw, 33vw"
+                          />
+                        </div>
+                      </Link>
                     </div>
                   );
                 })}
@@ -367,6 +368,6 @@ export default function CardGrid({ content }: CardGridProps) {
           }
         }
       `}</style>
-    </section>
+    </section >
   );
 }
