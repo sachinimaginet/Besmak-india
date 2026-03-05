@@ -289,7 +289,7 @@ export default function HeaderMenuPage() {
                   <div className="flex items-center justify-between gap-4">
                     <div className="flex-1 grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div className="space-y-1">
-                        <label className="text-[10px] font-bold text-gray-400 uppercase">
+                        <label className="text-[10px] font-bold text-gray-400 ">
                           Title
                         </label>
                         <input
@@ -303,7 +303,7 @@ export default function HeaderMenuPage() {
                         />
                       </div>
                       <div className="space-y-1">
-                        <label className="text-[10px] font-bold text-gray-400 uppercase">
+                        <label className="text-[10px] font-bold text-gray-400 ">
                           Link / Path
                         </label>
                         <input
@@ -345,7 +345,7 @@ export default function HeaderMenuPage() {
                   {/* Submenu Items */}
                   <div className="pl-6 border-l-2 border-gray-200 space-y-3">
                     <div className="flex items-center justify-between">
-                      <span className="text-xs font-bold text-gray-500 uppercase tracking-wider">
+                      <span className="text-xs font-bold text-gray-500  tracking-wider">
                         Submenu Items
                       </span>
                       <button
@@ -398,7 +398,7 @@ export default function HeaderMenuPage() {
                           </button>
                         </div>
                         <div className="pl-2 flex items-center gap-2">
-                          <label className="text-[10px] font-bold text-gray-400 uppercase shrink-0">
+                          <label className="text-[10px] font-bold text-gray-400  shrink-0">
                             Hover Image URL:
                           </label>
                           <input
@@ -423,7 +423,7 @@ export default function HeaderMenuPage() {
                     {item.child && item.child.length > 0 && (
                       <div className="pt-2 grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div className="space-y-1">
-                          <label className="text-[10px] font-bold text-gray-400 uppercase">
+                          <label className="text-[10px] font-bold text-gray-400 ">
                             Mega-menu Image URL
                           </label>
                           <input
@@ -437,7 +437,7 @@ export default function HeaderMenuPage() {
                           />
                         </div>
                         <div className="space-y-1">
-                          <label className="text-[10px] font-bold text-gray-400 uppercase">
+                          <label className="text-[10px] font-bold text-gray-400 ">
                             Mega-menu Tagline
                           </label>
                           <input

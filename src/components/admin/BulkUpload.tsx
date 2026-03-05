@@ -166,7 +166,7 @@ export default function BulkUpload() {
         </div>
 
         <div className="relative">
-          <div className="relative flex justify-center text-xs uppercase text-gray-400">
+          <div className="relative flex justify-center text-xs  text-gray-400">
             <span className="bg-white px-2 italic">
               Careful: Uploading will clear existing catalog
             </span>
@@ -206,13 +206,12 @@ export default function BulkUpload() {
         {/* Status Message */}
         {status && (
           <div
-            className={`flex items-start gap-3 p-3 rounded-lg text-sm ${
-              status.type === "success"
+            className={`flex items-start gap-3 p-3 rounded-lg text-sm ${status.type === "success"
                 ? "bg-green-50 text-green-700 border border-green-100"
                 : status.type === "error"
                   ? "bg-red-50 text-red-700 border border-red-100"
                   : "bg-primary/5 text-primary border border-primary/10"
-            }`}
+              }`}
           >
             {working ? (
               <Loader2 className="h-4 w-4 mt-0.5 animate-spin" />

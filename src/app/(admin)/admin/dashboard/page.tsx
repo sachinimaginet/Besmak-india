@@ -36,7 +36,7 @@ export default async function DashboardPage() {
           href="/admin/products"
           className="bg-white p-6 rounded-lg shadow-sm border border-gray-200 hover:border-blue-300 hover:shadow-md transition-all group"
         >
-          <h3 className="text-gray-500 font-medium text-sm uppercase group-hover:text-blue-600">
+          <h3 className="text-gray-500 font-medium text-sm  group-hover:text-blue-600">
             Total Products
           </h3>
           <p className="text-3xl font-bold text-gray-900 mt-2">
@@ -47,7 +47,7 @@ export default async function DashboardPage() {
           href="/admin/pages"
           className="bg-white p-6 rounded-lg shadow-sm border border-blue-100 hover:border-blue-400 hover:shadow-md transition-all group ring-1 ring-blue-50"
         >
-          <h3 className="text-blue-600 font-bold text-sm uppercase">
+          <h3 className="text-blue-600 font-bold text-sm ">
             Total Pages
           </h3>
           <p className="text-4xl font-black text-blue-900 mt-2">
@@ -61,7 +61,7 @@ export default async function DashboardPage() {
           href="/admin/enquiries"
           className="bg-white p-6 rounded-lg shadow-sm border border-gray-200 hover:border-blue-300 hover:shadow-md transition-all group"
         >
-          <h3 className="text-gray-500 font-medium text-sm uppercase group-hover:text-blue-600">
+          <h3 className="text-gray-500 font-medium text-sm  group-hover:text-blue-600">
             Total Enquiries
           </h3>
           <p className="text-3xl font-bold text-gray-900 mt-2">
@@ -72,7 +72,7 @@ export default async function DashboardPage() {
           href="/admin/media"
           className="bg-white p-6 rounded-lg shadow-sm border border-gray-200 hover:border-blue-300 hover:shadow-md transition-all group"
         >
-          <h3 className="text-gray-500 font-medium text-sm uppercase group-hover:text-blue-600">
+          <h3 className="text-gray-500 font-medium text-sm  group-hover:text-blue-600">
             Media Files
           </h3>
           <p className="text-3xl font-bold text-gray-900 mt-2">

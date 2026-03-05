@@ -95,7 +95,7 @@ export function Footer({ settings }: FooterProps) {
           <div>
             <h4
               style={{ fontSize: headingSize }}
-              className="font-bold tracking-[0.2em] uppercase mb-6 pb-1"
+              className="font-bold tracking-[0.2em] mb-6 pb-1"
             >
               Verticals
             </h4>
@@ -117,7 +117,7 @@ export function Footer({ settings }: FooterProps) {
           <div className="lg:col-span-2 lg:pl-12">
             <h4
               style={{ fontSize: headingSize }}
-              className="font-bold tracking-[0.2em] uppercase mb-6 pb-1"
+              className="font-bold tracking-[0.2em] mb-6 pb-1"
             >
               Products
             </h4>
@@ -157,7 +157,7 @@ export function Footer({ settings }: FooterProps) {
           <div>
             <h4
               style={{ fontSize: headingSize }}
-              className="font-bold tracking-[0.2em] uppercase mb-6 pb-1"
+              className="font-bold tracking-[0.2em] mb-6 pb-1"
             >
               Legal Information
             </h4>
@@ -178,7 +178,7 @@ export function Footer({ settings }: FooterProps) {
 
         {/* Social Section */}
         <div className="flex flex-col items-center justify-center mb-5">
-          <p className="text-[13px] font-bold tracking-widest uppercase mb-4 opacity-90">
+          <p className="text-[13px] font-bold tracking-widest mb-4 opacity-90">
             Stay up-to-date
           </p>
           <div className="flex items-center gap-6">
@@ -196,7 +196,7 @@ export function Footer({ settings }: FooterProps) {
         </div>
 
         {/* Bottom Bar */}
-        <div className="flex flex-col md:flex-row justify-between items-center pt-6 border-t border-white/10 text-[11px] font-bold tracking-widest uppercase opacity-60">
+        <div className="flex flex-col md:flex-row justify-between items-center pt-6 border-t border-white/10 text-[11px] font-bold tracking-widest opacity-60">
           <p>© {currentYear} Besmak India Pvt. Ltd. All rights reserved.</p>
           <div className="flex items-center gap-1">
             <span>Designed By</span>

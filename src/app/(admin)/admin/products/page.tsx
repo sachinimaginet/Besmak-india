@@ -97,13 +97,13 @@ export default async function AdminProductsPage({ searchParams }: PageProps) {
               <table className="min-w-full divide-y divide-gray-200">
                 <thead className="bg-gray-50">
                   <tr>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500  tracking-wider">
                       Name
                     </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500  tracking-wider">
                       Category
                     </th>
-                    <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th className="px-6 py-3 text-right text-xs font-medium text-gray-500  tracking-wider">
                       Actions
                     </th>
                   </tr>
@@ -188,11 +188,10 @@ export default async function AdminProductsPage({ searchParams }: PageProps) {
                         page: Math.max(1, currentPage - 1),
                       },
                     }}
-                    className={`p-2 rounded-md border ${
-                      currentPage === 1
+                    className={`p-2 rounded-md border ${currentPage === 1
                         ? "bg-gray-100 text-gray-400 cursor-not-allowed"
                         : "bg-white text-gray-700 hover:bg-gray-50"
-                    }`}
+                      }`}
                     aria-disabled={currentPage === 1}
                   >
                     <ChevronLeft className="h-4 w-4" />
@@ -204,11 +203,10 @@ export default async function AdminProductsPage({ searchParams }: PageProps) {
                         page: Math.min(totalPages, currentPage + 1),
                       },
                     }}
-                    className={`p-2 rounded-md border ${
-                      currentPage === totalPages
+                    className={`p-2 rounded-md border ${currentPage === totalPages
                         ? "bg-gray-100 text-gray-400 cursor-not-allowed"
                         : "bg-white text-gray-700 hover:bg-gray-50"
-                    }`}
+                      }`}
                     aria-disabled={currentPage === totalPages}
                   >
                     <ChevronRight className="h-4 w-4" />

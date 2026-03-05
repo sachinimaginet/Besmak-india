@@ -166,7 +166,7 @@ export default function VideoSection({ content }: VideoSectionProps) {
 
             {/* Bottom Information Overlay (Optional) */}
             <div className="absolute bottom-20 left-6 md:left-12 z-30 pointer-events-none">
-                <span className="text-white/50 text-sm font-medium tracking-widest uppercase">
+                <span className="text-white/50 text-sm font-medium tracking-widest ">
                     0{currentIndex + 1} / 0{videos.length}
                 </span>
             </div>

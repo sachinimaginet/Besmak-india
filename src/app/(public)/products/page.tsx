@@ -280,7 +280,7 @@ export default async function ProductsPage({
                 {activeChips.length > 0 && (
                   <Link
                     href={clearAllLink()}
-                    className="text-xs font-bold text-red-500 hover:text-red-600 transition-colors uppercase tracking-wider"
+                    className="text-xs font-bold text-red-500 hover:text-red-600 transition-colors  tracking-wider"
                   >
                     Clear All Filters
                   </Link>
@@ -295,7 +295,7 @@ export default async function ProductsPage({
                       href={getClearFilterLink(chip.id)}
                       className="group flex items-center gap-1.5 bg-white border border-blue-100 pl-3 pr-2 py-1.5 rounded-full text-[10px] font-bold text-gray-700 hover:border-red-200 hover:bg-red-50 transition-all shadow-sm"
                     >
-                      <span className="text-blue-600 uppercase tracking-tighter opacity-70">
+                      <span className="text-blue-600  tracking-tighter opacity-70">
                         {chip.label}:
                       </span>
                       <span className="text-gray-900">{chip.valueLabel}</span>

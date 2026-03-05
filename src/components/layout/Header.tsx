@@ -222,8 +222,8 @@ const Header = ({ settings }: HeaderProps) => {
                               setHoverImage(null);
                             }}
                             className={`text-[15px] font-medium transition-colors inline-block ${pathname === subItem.href
-                                ? "text-primary"
-                                : "text-gray-800 hover:text-primary"
+                              ? "text-primary"
+                              : "text-gray-800 hover:text-primary"
                               }`}
                           >
                             {subItem.name}
@@ -290,7 +290,7 @@ const Header = ({ settings }: HeaderProps) => {
                 <div key={item.title} className="space-y-3">
                   {item.child ? (
                     <>
-                      <h4 className="text-xs font-bold uppercase tracking-widest text-[#00469b]">
+                      <h4 className="text-xs font-bold  tracking-widest text-[#00469b]">
                         {item.title}
                       </h4>
                       <div className="flex flex-col space-y-3 pl-3">
