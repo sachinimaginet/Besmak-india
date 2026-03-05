@@ -359,42 +359,63 @@ export default function HeaderMenuPage() {
                     {item.child?.map((subItem: any, subIndex: number) => (
                       <div
                         key={subIndex}
-                        className="flex items-center gap-3 bg-white p-2 rounded-lg border border-gray-100"
+                        className="bg-white p-4 rounded-xl border border-gray-100 space-y-3"
                       >
-                        <input
-                          type="text"
-                          placeholder="Submenu Name"
-                          value={subItem.name}
-                          onChange={(e) =>
-                            updateSubItem(
-                              index,
-                              subIndex,
-                              "name",
-                              e.target.value,
-                            )
-                          }
-                          className="flex-1 text-sm p-1 border-none focus:ring-0 text-gray-900"
-                        />
-                        <input
-                          type="text"
-                          placeholder="Submenu Link"
-                          value={subItem.href}
-                          onChange={(e) =>
-                            updateSubItem(
-                              index,
-                              subIndex,
-                              "href",
-                              e.target.value,
-                            )
-                          }
-                          className="flex-1 text-sm p-1 border-none focus:ring-0 text-gray-600"
-                        />
-                        <button
-                          onClick={() => removeSubItem(index, subIndex)}
-                          className="p-1 text-red-300 hover:text-red-500"
-                        >
-                          <Trash2 className="h-3 w-3" />
-                        </button>
+                        <div className="flex items-center gap-3">
+                          <input
+                            type="text"
+                            placeholder="Submenu Name"
+                            value={subItem.name}
+                            onChange={(e) =>
+                              updateSubItem(
+                                index,
+                                subIndex,
+                                "name",
+                                e.target.value,
+                              )
+                            }
+                            className="flex-1 text-sm p-2 border border-gray-100 rounded bg-gray-50 focus:ring-1 focus:ring-primary text-gray-900"
+                          />
+                          <input
+                            type="text"
+                            placeholder="Submenu Link"
+                            value={subItem.href}
+                            onChange={(e) =>
+                              updateSubItem(
+                                index,
+                                subIndex,
+                                "href",
+                                e.target.value,
+                              )
+                            }
+                            className="flex-1 text-sm p-2 border border-gray-100 rounded bg-gray-50 focus:ring-1 focus:ring-primary text-gray-600"
+                          />
+                          <button
+                            onClick={() => removeSubItem(index, subIndex)}
+                            className="p-1.5 text-red-300 hover:text-red-500 transition-colors"
+                          >
+                            <Trash2 className="h-4 w-4" />
+                          </button>
+                        </div>
+                        <div className="pl-2 flex items-center gap-2">
+                          <label className="text-[10px] font-bold text-gray-400 uppercase shrink-0">
+                            Hover Image URL:
+                          </label>
+                          <input
+                            type="text"
+                            placeholder="Optional image for this sub-item"
+                            value={subItem.image || ""}
+                            onChange={(e) =>
+                              updateSubItem(
+                                index,
+                                subIndex,
+                                "image",
+                                e.target.value,
+                              )
+                            }
+                            className="flex-1 text-[11px] p-2 border border-gray-100 rounded bg-gray-50 focus:ring-1 focus:ring-primary text-gray-600"
+                          />
+                        </div>
                       </div>
                     ))}
 

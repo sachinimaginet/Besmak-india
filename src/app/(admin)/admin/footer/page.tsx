@@ -31,6 +31,7 @@ export default function FooterPage() {
   const [socials, setSocials] = useState<SocialLink[]>([]);
   const [headingSize, setHeadingSize] = useState(11);
   const [fontFamily, setFontFamily] = useState("Inter");
+  const [bgColor, setBgColor] = useState("#00469b");
   const [isLoading, setIsLoading] = useState(true);
   const [isSaving, setIsSaving] = useState(false);
 
@@ -52,6 +53,7 @@ export default function FooterPage() {
       if (data.footer_heading_size)
         setHeadingSize(parseInt(data.footer_heading_size));
       if (data.footer_font_family) setFontFamily(data.footer_font_family);
+      if (data.footer_bg_color) setBgColor(data.footer_bg_color);
     } catch (error) {
       toast.error("Error loading footer settings");
       console.error(error);
@@ -70,6 +72,7 @@ export default function FooterPage() {
         footer_socials: JSON.stringify(socials),
         footer_heading_size: headingSize.toString(),
         footer_font_family: fontFamily,
+        footer_bg_color: bgColor,
       };
 
       const res = await fetch("/api/admin/settings", {
@@ -202,36 +205,63 @@ export default function FooterPage() {
               </div>
             </div>
 
-            <div className="space-y-3 pt-4 border-t border-gray-100">
-              <label className="text-sm font-bold text-gray-700">
-                Footer Font Family
-              </label>
-              <select
-                value={fontFamily}
-                onChange={(e) => setFontFamily(e.target.value)}
-                className="w-full p-2.5 border border-gray-200 rounded-lg text-gray-900 focus:ring-2 focus:ring-primary outline-none bg-white font-medium"
-              >
-                {[
-                  "Inter",
-                  "Times New Roman",
-                  "Roboto",
-                  "Open Sans",
-                  "Montserrat",
-                  "Playfair Display",
-                  "Oswald",
-                  "Raleway",
-                  "Nunito",
-                  "Poppins",
-                ].map((font) => (
-                  <option key={font} value={font} style={{ fontFamily: font }}>
-                    {font}
-                  </option>
-                ))}
-              </select>
-              <p className="text-xs text-gray-500">
-                Choose the font family for all text in the footer.
-              </p>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-4 border-t border-gray-100">
+              <div className="space-y-3">
+                <label className="text-sm font-bold text-gray-700">
+                  Footer Font Family
+                </label>
+                <select
+                  value={fontFamily}
+                  onChange={(e) => setFontFamily(e.target.value)}
+                  className="w-full p-2.5 border border-gray-200 rounded-lg text-gray-900 focus:ring-2 focus:ring-primary outline-none bg-white font-medium"
+                >
+                  {[
+                    "Inter",
+                    "Times New Roman",
+                    "Roboto",
+                    "Open Sans",
+                    "Montserrat",
+                    "Playfair Display",
+                    "Oswald",
+                    "Raleway",
+                    "Nunito",
+                    "Poppins",
+                  ].map((font) => (
+                    <option
+                      key={font}
+                      value={font}
+                      style={{ fontFamily: font }}
+                    >
+                      {font}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              <div className="space-y-3">
+                <label className="text-sm font-bold text-gray-700">
+                  Footer Background Color
+                </label>
+                <div className="flex gap-3">
+                  <input
+                    type="color"
+                    value={bgColor}
+                    onChange={(e) => setBgColor(e.target.value)}
+                    className="h-11 w-20 p-1 bg-white border border-gray-200 rounded-lg cursor-pointer"
+                  />
+                  <input
+                    type="text"
+                    value={bgColor}
+                    onChange={(e) => setBgColor(e.target.value)}
+                    className="flex-1 p-2.5 border border-gray-200 rounded-lg text-gray-900 focus:ring-2 focus:ring-primary outline-none bg-white font-mono text-sm"
+                  />
+                </div>
+              </div>
             </div>
+            <p className="text-xs text-gray-500 mt-4">
+              Customize the typography and background color of the website
+              footer.
+            </p>
           </div>
         </section>
 

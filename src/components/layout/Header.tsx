@@ -52,6 +52,7 @@ const DEFAULT_MENU = [
 
 const Header = ({ settings }: HeaderProps) => {
   const [expandedMenu, setExpandedMenu] = useState<string | null>(null);
+  const [hoverImage, setHoverImage] = useState<string | null>(null);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
@@ -93,7 +94,14 @@ const Header = ({ settings }: HeaderProps) => {
   }, []);
 
   const toggleMenu = (title: string) => {
-    setExpandedMenu((prev) => (prev === title ? null : title));
+    if (expandedMenu === title) {
+      setExpandedMenu(null);
+      setHoverImage(null);
+    } else {
+      setExpandedMenu(title);
+      const activeMenu = menu.find((item: any) => item.title === title);
+      setHoverImage(activeMenu?.image || null);
+    }
   };
 
   return (
@@ -203,7 +211,20 @@ const Header = ({ settings }: HeaderProps) => {
                         <li key={subItem.name}>
                           <Link
                             href={subItem.href}
-                            onClick={() => setExpandedMenu(null)}
+                            onMouseEnter={() => {
+                              if (subItem.image) {
+                                setHoverImage(subItem.image);
+                              } else {
+                                const activeMenu = menu.find(
+                                  (m: any) => m.title === expandedMenu,
+                                );
+                                setHoverImage(activeMenu?.image || null);
+                              }
+                            }}
+                            onClick={() => {
+                              setExpandedMenu(null);
+                              setHoverImage(null);
+                            }}
                             className={`text-[15px] font-medium transition-colors inline-block ${
                               pathname === subItem.href
                                 ? "text-primary"
@@ -225,13 +246,20 @@ const Header = ({ settings }: HeaderProps) => {
                   if (!activeMenu) return null;
                   return (
                     <div className="w-[380px] shrink-0">
-                      <div className="relative rounded-2xl overflow-hidden aspect-[1.8/1] shadow-xl border border-gray-100">
-                        <Image
-                          src={activeMenu.image || ""}
-                          alt={activeMenu.title}
-                          fill
-                          className="object-cover"
-                        />
+                      <div className="relative rounded-2xl overflow-hidden aspect-[1.8/1] shadow-xl border border-gray-100 bg-gray-50">
+                        {hoverImage ? (
+                          <Image
+                            src={hoverImage}
+                            alt={expandedMenu}
+                            fill
+                            className="object-cover animate-in fade-in duration-500"
+                            key={hoverImage}
+                          />
+                        ) : (
+                          <div className="flex items-center justify-center h-full text-gray-300">
+                            <Menu className="w-12 h-12" />
+                          </div>
+                        )}
                       </div>
                     </div>
                   );
