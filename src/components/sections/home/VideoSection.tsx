@@ -36,7 +36,7 @@ export default function VideoSection({ content }: VideoSectionProps) {
     };
 
     return (
-        <section className="relative w-full h-screen overflow-hidden bg-black">
+        <section className="relative w-full h-screen overflow-hidden bg-black mt-20">
             {overlay && (
                 <div className="absolute inset-0 bg-black/40 z-10 pointer-events-none" />
             )}

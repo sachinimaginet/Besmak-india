@@ -11,8 +11,9 @@ interface CardData {
   title: string;
   image: string;
   href: string;
-  bg: string;       // card background colour
-  isDark: boolean;  // true = dark bg → white text
+  bg: string;            // card background colour
+  isDark: boolean;       // true = dark bg → white text
+  defaultExpanded?: boolean; // marks the card expanded by default in its row
 }
 
 interface CardGridProps {
@@ -34,6 +35,7 @@ const defaultCards: CardData[] = [
     href: "/products/connectors",
     bg: "#1a4fa0",
     isDark: true,
+    defaultExpanded: true,
   },
   {
     id: "fuse-box",
@@ -90,6 +92,7 @@ const defaultCards: CardData[] = [
     href: "/products/cable-tuf",
     bg: "#1a4fa0",
     isDark: true,
+    defaultExpanded: true,
   },
   /* ── Row 3 ────────────────────────────────── */
   {
@@ -102,6 +105,7 @@ const defaultCards: CardData[] = [
     href: "/products/cover",
     bg: "#f5ece0",
     isDark: false,
+    defaultExpanded: true
   },
   {
     id: "clips",
@@ -129,12 +133,10 @@ const defaultCards: CardData[] = [
 
 const ROW_SIZE = 3;
 
-// Default expanded card index within each row
-// Row 0 → first card (0), last row → last card (ROW_SIZE - 1)
-function getDefaultExpanded(rowIndex: number, totalRows: number): number {
-  if (rowIndex === 0) return 0;
-  if (rowIndex === totalRows - 1) return ROW_SIZE - 1;
-  return 0;
+// Returns the index of the card marked defaultExpanded in a row, or 0 as fallback
+function getDefaultExpanded(rowCards: CardData[]): number {
+  const idx = rowCards.findIndex((c) => c.defaultExpanded);
+  return idx === -1 ? 0 : idx;
 }
 
 export default function CardGrid({ content }: CardGridProps) {
@@ -154,8 +156,6 @@ export default function CardGrid({ content }: CardGridProps) {
     Array(rows.length).fill(null),
   );
 
-  const totalRows = rows.length;
-
   return (
     <section className="cg-section py-12 bg-white">
       <div className="container mx-auto px-4 max-w-7xl">
@@ -165,7 +165,7 @@ export default function CardGrid({ content }: CardGridProps) {
           {rows.map((rowCards, rowIndex) => {
             const hovered = hoverByRow[rowIndex];
             const expandedIdx =
-              hovered !== null ? hovered : getDefaultExpanded(rowIndex, totalRows);
+              hovered !== null ? hovered : getDefaultExpanded(rowCards);
 
             return (
               <div key={rowIndex} className="cg-row">
