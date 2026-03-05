@@ -4,6 +4,9 @@ import { useState } from "react";
 import { Edit2 } from "lucide-react";
 import { useAdmin } from "@/hooks/useAdmin";
 import SectionEditor from "./SectionEditor";
+import ClientsSectionEditor from "./ClientsSectionEditor";
+import EventsAchievementsEditor from "./EventsAchievementsEditor";
+import TwoCardsSectionEditor from "./TwoCardsSectionEditor";
 
 interface EditableWrapperProps {
   sectionId: string;
@@ -37,7 +40,43 @@ export default function EditableWrapper({
 
       {children}
 
-      {isEditing && (
+      {isEditing && type === "clients-section" && (
+        <ClientsSectionEditor
+          sectionId={sectionId}
+          content={content}
+          onClose={() => setIsEditing(false)}
+          onSave={() => {
+            setIsEditing(false);
+            onUpdate?.();
+          }}
+        />
+      )}
+
+      {isEditing && type === "events-achievements" && (
+        <EventsAchievementsEditor
+          sectionId={sectionId}
+          content={content}
+          onClose={() => setIsEditing(false)}
+          onSave={() => {
+            setIsEditing(false);
+            onUpdate?.();
+          }}
+        />
+      )}
+
+      {isEditing && type === "dual-cards-section" && (
+        <TwoCardsSectionEditor
+          sectionId={sectionId}
+          content={content}
+          onClose={() => setIsEditing(false)}
+          onSave={() => {
+            setIsEditing(false);
+            onUpdate?.();
+          }}
+        />
+      )}
+
+      {isEditing && !["clients-section", "events-achievements", "dual-cards-section"].includes(type) && (
         <SectionEditor
           sectionId={sectionId}
           type={type}

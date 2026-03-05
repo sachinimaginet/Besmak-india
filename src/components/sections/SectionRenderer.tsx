@@ -6,8 +6,12 @@ import TextImageSection from "./home/TextImageSection";
 import StatsSection from "./home/StatsSection";
 import CardGrid from "./home/CardGrid";
 import StrategicVerticals from "./home/StrategicVerticals";
+import ClientsSection from "./home/ClientsSection";
+import EventsAchievements from "./home/EventsAchievements";
+import TwoCardsSection from "./home/TwoCardsSection";
 import AboutHero from "./about/AboutHero";
 import AboutContent from "./about/AboutContent";
+import ProductSearchSection from "./home/ProductSearchSection";
 import EditableWrapper from "../cms/EditableWrapper";
 
 interface SectionRendererProps {
@@ -45,6 +49,14 @@ export default function SectionRenderer({
         return <StatsSection content={section.content} />;
       case "strategic-verticals":
         return <StrategicVerticals content={section.content} />;
+      case "clients-section":
+        return <ClientsSection content={section.content} />;
+      case "events-achievements":
+        return <EventsAchievements content={section.content} />;
+      case "dual-cards-section":
+        return <TwoCardsSection content={section.content} />;
+      case "product-search":
+        return <ProductSearchSection />;
       default:
         return null;
     }

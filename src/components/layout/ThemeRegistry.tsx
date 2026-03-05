@@ -26,18 +26,16 @@ export default function ThemeRegistry({
 
     if (settings.heading_font) {
       const fallback = isSerif(settings.heading_font) ? "serif" : "sans-serif";
-      document.documentElement.style.setProperty(
-        "--font-heading",
-        `'${settings.heading_font}', ${fallback}`,
-      );
+      const fontValue = `'${settings.heading_font}', ${fallback}`;
+      document.documentElement.style.setProperty("--font-heading", fontValue);
+      document.documentElement.style.setProperty("--font-serif", fontValue);
     }
 
     if (settings.body_font) {
       const fallback = isSerif(settings.body_font) ? "serif" : "sans-serif";
-      document.documentElement.style.setProperty(
-        "--font-body",
-        `'${settings.body_font}', ${fallback}`,
-      );
+      const fontValue = `'${settings.body_font}', ${fallback}`;
+      document.documentElement.style.setProperty("--font-body", fontValue);
+      document.documentElement.style.setProperty("--font-sans", fontValue);
     }
 
     // ... rest of sizes ... (kept same)
