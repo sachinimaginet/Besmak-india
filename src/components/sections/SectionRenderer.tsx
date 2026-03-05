@@ -1,6 +1,11 @@
 import Hero from "./home/Hero";
 import About from "./home/About";
 import FeaturedProducts from "./home/FeaturedProducts";
+import VideoSection from "./home/VideoSection";
+import TextImageSection from "./home/TextImageSection";
+import StatsSection from "./home/StatsSection";
+import CardGrid from "./home/CardGrid";
+import StrategicVerticals from "./home/StrategicVerticals";
 import AboutHero from "./about/AboutHero";
 import AboutContent from "./about/AboutContent";
 import EditableWrapper from "../cms/EditableWrapper";
@@ -30,6 +35,16 @@ export default function SectionRenderer({
         return <AboutContent content={section.content} />;
       case "featured-products":
         return <FeaturedProducts content={section.content} />;
+      case "card-grid":
+        return <CardGrid content={section.content} />;
+      case "video-section":
+        return <VideoSection content={section.content} />;
+      case "text-image-section":
+        return <TextImageSection content={section.content} />;
+      case "stats-section":
+        return <StatsSection content={section.content} />;
+      case "strategic-verticals":
+        return <StrategicVerticals content={section.content} />;
       default:
         return null;
     }

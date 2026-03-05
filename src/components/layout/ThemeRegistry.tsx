@@ -18,56 +18,35 @@ export default function ThemeRegistry({
       );
     }
 
+    // Detect if a font is likely serif
+    const isSerif = (font: string) => {
+      const serifFonts = ["Times New Roman", "Playfair Display", "Georgia", "Garamond"];
+      return serifFonts.some(s => font.includes(s));
+    };
+
     if (settings.heading_font) {
+      const fallback = isSerif(settings.heading_font) ? "serif" : "sans-serif";
       document.documentElement.style.setProperty(
         "--font-heading",
-        `'${settings.heading_font}', sans-serif`,
+        `'${settings.heading_font}', ${fallback}`,
       );
     }
 
     if (settings.body_font) {
+      const fallback = isSerif(settings.body_font) ? "serif" : "sans-serif";
       document.documentElement.style.setProperty(
         "--font-body",
-        `'${settings.body_font}', sans-serif`,
+        `'${settings.body_font}', ${fallback}`,
       );
     }
 
-    if (settings.h1_font_size) {
-      document.documentElement.style.setProperty(
-        "--font-size-h1",
-        `${settings.h1_font_size}px`,
-      );
-    }
-    if (settings.h2_font_size) {
-      document.documentElement.style.setProperty(
-        "--font-size-h2",
-        `${settings.h2_font_size}px`,
-      );
-    }
-    if (settings.h3_font_size) {
-      document.documentElement.style.setProperty(
-        "--font-size-h3",
-        `${settings.h3_font_size}px`,
-      );
-    }
-    if (settings.h4_font_size) {
-      document.documentElement.style.setProperty(
-        "--font-size-h4",
-        `${settings.h4_font_size}px`,
-      );
-    }
-    if (settings.h5_font_size) {
-      document.documentElement.style.setProperty(
-        "--font-size-h5",
-        `${settings.h5_font_size}px`,
-      );
-    }
-    if (settings.h6_font_size) {
-      document.documentElement.style.setProperty(
-        "--font-size-h6",
-        `${settings.h6_font_size}px`,
-      );
-    }
+    // ... rest of sizes ... (kept same)
+    if (settings.h1_font_size) document.documentElement.style.setProperty("--font-size-h1", `${settings.h1_font_size}px`);
+    if (settings.h2_font_size) document.documentElement.style.setProperty("--font-size-h2", `${settings.h2_font_size}px`);
+    if (settings.h3_font_size) document.documentElement.style.setProperty("--font-size-h3", `${settings.h3_font_size}px`);
+    if (settings.h4_font_size) document.documentElement.style.setProperty("--font-size-h4", `${settings.h4_font_size}px`);
+    if (settings.h5_font_size) document.documentElement.style.setProperty("--font-size-h5", `${settings.h5_font_size}px`);
+    if (settings.h6_font_size) document.documentElement.style.setProperty("--font-size-h6", `${settings.h6_font_size}px`);
 
     if (settings.body_font_size) {
       document.documentElement.style.setProperty(
@@ -76,13 +55,14 @@ export default function ThemeRegistry({
       );
     }
 
-    // Load fonts
+    // Load fonts (skip system fonts)
+    const systemFonts = ["Inter", "Times New Roman", "Arial", "Verdana", "Georgia", "Helvetica"];
     const fontsToLoad = [];
-    if (settings.heading_font && settings.heading_font !== "Inter")
+    if (settings.heading_font && !systemFonts.includes(settings.heading_font))
       fontsToLoad.push(settings.heading_font);
     if (
       settings.body_font &&
-      settings.body_font !== "Inter" &&
+      !systemFonts.includes(settings.body_font) &&
       settings.body_font !== settings.heading_font
     )
       fontsToLoad.push(settings.body_font);
