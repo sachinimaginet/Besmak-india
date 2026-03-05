@@ -27,7 +27,7 @@ export default function TextImageSection({ content }: TextImageSectionProps) {
             <div className="container mx-auto px-4 max-w-7xl">
                 {/* Main Title atop the layout */}
                 <div className="mb-12 md:mb-16">
-                    <h2 className="text-3xl md:text-5xl lg:text-6xl font-serif text-gray-900 leading-tight">
+                    <h2 className="text-3xl md:text-5xl lg:text-6xl text-gray-900">
                         {title}
                     </h2>
                 </div>

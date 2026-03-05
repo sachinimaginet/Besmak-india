@@ -184,8 +184,8 @@ export default function SettingsPage() {
                       className="w-full p-2.5 border border-gray-200 rounded-lg text-gray-900 focus:ring-2 focus:ring-primary outline-none bg-white font-medium"
                     >
                       {[
-                        "Times new Roman",
                         "Inter",
+                        "Times New Roman",
                         "Roboto",
                         "Open Sans",
                         "Montserrat",
@@ -212,8 +212,8 @@ export default function SettingsPage() {
                       className="w-full p-2.5 border border-gray-200 rounded-lg text-gray-900 focus:ring-2 focus:ring-primary outline-none bg-white font-medium"
                     >
                       {[
-                        "Times new Roman",
                         "Inter",
+                        "Times New Roman",
                         "Roboto",
                         "Open Sans",
                         "Lato",
