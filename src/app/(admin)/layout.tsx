@@ -7,6 +7,7 @@ import {
   Settings,
   Image as ImageIcon,
   Layers,
+  Menu as MenuIcon,
 } from "lucide-react";
 import { signOut, auth } from "@/auth";
 
@@ -77,6 +78,13 @@ export default async function AdminLayout({
           >
             <ImageIcon className="h-5 w-5 mr-3" />
             Media
+          </Link>
+          <Link
+            href="/admin/header-menu"
+            className="flex items-center p-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-lg transition-colors"
+          >
+            <MenuIcon className="h-5 w-5 mr-3" />
+            Header & Menu
           </Link>
           <Link
             href="/admin/settings"

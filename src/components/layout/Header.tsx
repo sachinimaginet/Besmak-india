@@ -57,14 +57,20 @@ const Header = ({ settings }: HeaderProps) => {
   const pathname = usePathname();
   const navRef = useRef<HTMLDivElement>(null);
 
-  const menu = settings?.main_menu
-    ? JSON.parse(settings.main_menu)
-    : DEFAULT_MENU;
+  let menu = DEFAULT_MENU;
+  if (settings?.main_menu) {
+    try {
+      menu = JSON.parse(settings.main_menu);
+    } catch (e) {
+      console.error("Failed to parse main_menu setting", e);
+    }
+  }
   const logoUrl = settings?.logo_url || "/images/Besmak-Logo.png";
   const headerHeight = settings?.header_height
     ? parseInt(settings.header_height)
     : 24;
-  const scrolledHeaderHeight = Math.max(16, headerHeight - 4);
+
+  const logoSize = settings?.logo_size ? parseInt(settings.logo_size) / 100 : 1;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -92,30 +98,33 @@ const Header = ({ settings }: HeaderProps) => {
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-white ${
-        expandedMenu ? "shadow-2xl" : scrolled ? "shadow-md" : ""
+        expandedMenu || scrolled ? "shadow-md" : ""
       }`}
     >
       <div className="container mx-auto px-4">
         {/* Main Header Row */}
         <div
-          className={`flex items-center justify-between transition-all duration-300 h-${
-            scrolled || expandedMenu ? scrolledHeaderHeight : headerHeight
-          }`}
+          className={`flex items-center justify-between transition-all duration-300 h-${headerHeight}`}
         >
           {/* Logo - Left Aligned */}
           <Link href="/" className="flex items-center">
-            <Image
-              src={logoUrl}
-              alt="Besmak Logo"
-              width={280}
-              height={100}
-              className={`transition-all duration-300 object-contain h-${
-                scrolled || expandedMenu
-                  ? scrolledHeaderHeight - 6
-                  : headerHeight - 8
-              } w-auto`}
-              priority
-            />
+            <div
+              className="relative transition-all duration-300 flex items-center"
+              style={{
+                height: `${(headerHeight - 8) * 4}px`,
+                transform: `scale(${logoSize})`,
+                transformOrigin: "left center",
+              }}
+            >
+              <Image
+                src={logoUrl}
+                alt="Besmak Logo"
+                width={280}
+                height={100}
+                className="object-contain h-full w-auto"
+                priority
+              />
+            </div>
           </Link>
 
           {/* Navigation - Right Aligned */}
@@ -208,7 +217,9 @@ const Header = ({ settings }: HeaderProps) => {
 
                 {/* Submenu Image Pane */}
                 {(() => {
-                  const activeMenu = menu.find((m) => m.title === expandedMenu);
+                  const activeMenu = menu.find(
+                    (m: any) => m.title === expandedMenu,
+                  );
                   if (!activeMenu) return null;
                   return (
                     <div className="w-[380px] shrink-0">
