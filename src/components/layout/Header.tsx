@@ -11,8 +11,8 @@ const menu = [
   {
     title: "Discover Us",
     child: [
-      { name: "At a glance", href: "/about-us/at-a-glance" },
-      { name: "Our values & governance", href: "/about-us/values-governance" },
+      { name: "At a Glance", href: "/about-us/at-a-glance" },
+      { name: "Our Values & Governance", href: "/about-us/values-governance" },
       { name: "Partnerships", href: "/about-us/partnerships" },
     ],
     image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800&auto=format&fit=crop",
@@ -22,7 +22,7 @@ const menu = [
     title: "Products",
     child: [
       { name: "Connectors", href: "/products/connectors" },
-      { name: "Engineering products", href: "/products/engineering-products" },
+      { name: "Engineering Products", href: "/products/engineering-products" },
     ],
     image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=800&auto=format&fit=crop",
     tagline: "Quality components for global industries."
@@ -30,8 +30,8 @@ const menu = [
   {
     title: "Infrastructure",
     child: [
-      { name: "Tool room", href: "/infrastructure/tool-room" },
-      { name: "Automation & technology", href: "/infrastructure/automation-technology" },
+      { name: "Tool Room", href: "/infrastructure/tool-room" },
+      { name: "Automation & Technology", href: "/infrastructure/automation-technology" },
     ],
     image: "https://images.unsplash.com/photo-1504917595217-d4dc5fee1227?q=80&w=800&auto=format&fit=crop",
     tagline: "Cutting-edge technology at our core."
@@ -75,136 +75,117 @@ const Header = () => {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 bg-white border-b border-gray-100 overflow-hidden ${expandedMenu ? "max-h-[600px] shadow-2xl" : scrolled ? "max-h-16 shadow-md" : "max-h-20"
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-white ${expandedMenu ? "shadow-2xl" : scrolled ? "shadow-md" : ""
         }`}
     >
-      <div className="container mx-auto px-4 h-full flex flex-col">
-        {/* Top Header Bar */}
-        <div className={`flex items-center justify-between transition-all duration-300 ${scrolled || expandedMenu ? "h-16" : "h-20"
+      <div className="container mx-auto px-4">
+        {/* Main Header Row */}
+        <div className={`flex items-center justify-between transition-all duration-300 ${scrolled || expandedMenu ? "h-20" : "h-24"
           }`}>
-          <Link href="/" className="flex items-center group">
+          {/* Logo - Left Aligned */}
+          <Link href="/" className="flex items-center">
             <Image
               src={logoUrl}
               alt="Besmak Logo"
-              width={320}
-              height={120}
-              className={`transition-all duration-500 object-contain ${scrolled || expandedMenu ? "h-10" : "h-14"
-                } w-auto group-hover:scale-105`}
+              width={280}
+              height={100}
+              className={`transition-all duration-300 object-contain ${scrolled || expandedMenu ? "h-14" : "h-16"
+                } w-auto`}
               priority
             />
           </Link>
 
-          {/* Desktop Navigation */}
-          <nav ref={navRef} className="hidden lg:flex items-center space-x-1">
-            {menu.map((item) => (
-              <div key={item.title} className="relative h-full flex items-center px-1">
-                {item.child ? (
-                  <button
-                    onClick={() => toggleMenu(item.title)}
-                    className={`flex items-center gap-1.5 font-bold text-sm tracking-tight transition-all px-4 py-2.5 rounded-full ${expandedMenu === item.title
-                      ? "text-primary bg-primary/5"
-                      : "text-gray-600 hover:text-primary hover:bg-gray-50"
-                      }`}
-                  >
-                    {item.title}
-                    <ChevronDown
-                      className={`w-3.5 h-3.5 transition-transform duration-500 ${expandedMenu === item.title ? "rotate-180" : ""
+          {/* Navigation - Right Aligned */}
+          <div className="flex items-center gap-6">
+            <nav ref={navRef} className="hidden lg:flex items-center gap-6">
+              {menu.map((item) => (
+                <div key={item.title} className="relative">
+                  {item.child ? (
+                    <button
+                      onClick={() => toggleMenu(item.title)}
+                      className={`flex items-center gap-1.5 text-[15px] font-medium transition-colors ${expandedMenu === item.title || pathname.startsWith(item.href || "")
+                          ? "text-primary"
+                          : "text-gray-600 hover:text-primary"
                         }`}
-                    />
-                  </button>
-                ) : (
-                  <Link
-                    href={item.href || "#"}
-                    className={`font-bold text-sm tracking-tight transition-all px-4 py-2.5 rounded-full ${pathname === item.href
-                      ? "text-primary bg-primary/5"
-                      : "text-gray-600 hover:text-primary hover:bg-gray-50"
-                      }`}
-                  >
-                    {item.title}
-                  </Link>
-                )}
-              </div>
-            ))}
+                    >
+                      {item.title}
+                      <ChevronDown
+                        className={`w-3.5 h-3.5 transition-transform duration-300 ${expandedMenu === item.title ? "rotate-180" : ""
+                          }`}
+                      />
+                    </button>
+                  ) : (
+                    <Link
+                      href={item.href || "#"}
+                      className={`text-[15px] font-medium transition-colors ${pathname === item.href ? "text-primary" : "text-gray-600 hover:text-primary"
+                        }`}
+                    >
+                      {item.title}
+                    </Link>
+                  )}
+                </div>
+              ))}
+            </nav>
 
+            {/* CTA Button */}
             <Link
               href="/e-catalog"
-              className="px-6 py-2.5 bg-primary text-white rounded-full hover:bg-primary/90 font-black text-sm uppercase tracking-wider transition-all shadow-lg hover:shadow-primary/20 active:scale-95 ml-4"
+              className="hidden lg:inline-flex px-6 py-2.5 bg-[#00469b] text-white rounded-lg font-bold text-sm transition-all hover:bg-[#003576] active:scale-95"
             >
               e-Catalog
             </Link>
-          </nav>
 
-          {/* Mobile Menu Toggle */}
-          <button
-            className="lg:hidden p-2 text-gray-700 hover:text-primary transition-all rounded-full hover:bg-gray-50"
-            onClick={() => setMobileOpen(!mobileOpen)}
-          >
-            {mobileOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-          </button>
+            {/* Mobile Menu Toggle */}
+            <button
+              className="lg:hidden p-2 text-gray-700 hover:text-primary transition-colors"
+              onClick={() => setMobileOpen(!mobileOpen)}
+            >
+              {mobileOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+            </button>
+          </div>
         </div>
 
-        {/* Inline Mega Menu Expansion */}
+        {/* Submenu Expansion - Focused under Nav area */}
         {expandedMenu && (
-          <div className="hidden lg:block w-full border-t border-gray-50 py-10 animate-in fade-in slide-in-from-top-4 duration-700">
-            <div className="flex gap-16 items-start max-w-6xl mx-auto">
-              {/* Left Pane: Submenu Links */}
-              <div className="flex-1">
-                <div className="grid grid-cols-1 gap-1">
-                  {menu.find(m => m.title === expandedMenu)?.child?.map((subItem, idx) => (
-                    <Link
-                      key={subItem.name}
-                      href={subItem.href}
-                      onClick={() => setExpandedMenu(null)}
-                      className="group/item flex items-center justify-between px-6 py-4 rounded-2xl transition-all duration-300 hover:bg-primary/5"
-                      style={{
-                        animationDelay: `${idx * 40}ms`,
-                        animation: "slideInLeft 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards",
-                        opacity: 0,
-                      }}
-                    >
-                      <span className="text-xl font-black text-gray-800 group-hover/item:text-primary transition-colors tracking-tight">
-                        {subItem.name}
-                      </span>
-                      <div className="w-10 h-10 rounded-full bg-white shadow-sm flex items-center justify-center opacity-0 -translate-x-4 group-hover/item:opacity-100 group-hover/item:translate-x-0 transition-all duration-300">
-                        <span className="text-primary font-bold">→</span>
-                      </div>
-                    </Link>
-                  ))}
+          <div className="hidden lg:block w-full border-t border-gray-50 py-12 animate-in fade-in slide-in-from-top-4 duration-300">
+            <div className="flex justify-end pr-8">
+              <div className="flex gap-12 max-w-4xl">
+                {/* Submenu Links Pane */}
+                <div className="min-w-[240px]">
+                  <ul className="space-y-4">
+                    {menu.find(m => m.title === expandedMenu)?.child?.map((subItem) => (
+                      <li key={subItem.name}>
+                        <Link
+                          href={subItem.href}
+                          onClick={() => setExpandedMenu(null)}
+                          className={`text-[15px] font-medium transition-colors inline-block ${pathname === subItem.href ? "text-primary" : "text-gray-800 hover:text-primary"
+                            }`}
+                        >
+                          {subItem.name}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-              </div>
 
-              {/* Right Pane: Featured Image & Content */}
-              {(() => {
-                const activeMenu = menu.find(m => m.title === expandedMenu);
-                if (!activeMenu) return null;
-                return (
-                  <div className="w-[440px] shrink-0 animate-in fade-in zoom-in-95 duration-1000">
-                    <div className="relative group/img overflow-hidden rounded-[2rem] aspect-[1.4/1] shadow-2xl border-[6px] border-white">
-                      <Image
-                        src={activeMenu.image || ""}
-                        alt={activeMenu.title}
-                        fill
-                        className="object-cover transition-transform duration-1000 group-hover/img:scale-110"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-                      <div className="absolute bottom-6 left-6 right-6">
-                        <span className="inline-block px-3 py-1 bg-white/20 backdrop-blur-md rounded-full text-[10px] font-black text-white uppercase tracking-[0.2em] mb-3">
-                          Featured
-                        </span>
-                        <h3 className="text-white font-black text-2xl leading-none uppercase tracking-tighter">
-                          {activeMenu.title}
-                        </h3>
+                {/* Submenu Image Pane */}
+                {(() => {
+                  const activeMenu = menu.find(m => m.title === expandedMenu);
+                  if (!activeMenu) return null;
+                  return (
+                    <div className="w-[380px] shrink-0">
+                      <div className="relative rounded-2xl overflow-hidden aspect-[1.8/1] shadow-xl border border-gray-100">
+                        <Image
+                          src={activeMenu.image || ""}
+                          alt={activeMenu.title}
+                          fill
+                          className="object-cover"
+                        />
                       </div>
                     </div>
-                    <div className="mt-6 flex items-start gap-3">
-                      <div className="w-1 h-12 bg-primary/20 rounded-full shrink-0" />
-                      <p className="text-gray-500 font-bold leading-relaxed italic text-lg opacity-80">
-                        "{activeMenu.tagline}"
-                      </p>
-                    </div>
-                  </div>
-                );
-              })()}
+                  );
+                })()}
+              </div>
             </div>
           </div>
         )}
@@ -212,30 +193,30 @@ const Header = () => {
 
       {/* Mobile Navigation Sidebar */}
       {mobileOpen && (
-        <div className="fixed inset-0 top-0 z-[60] bg-white lg:hidden overflow-y-auto animate-in slide-in-from-bottom duration-500">
-          <div className="flex flex-col h-full bg-white">
+        <div className="fixed inset-0 z-[60] bg-white lg:hidden overflow-y-auto animate-in slide-in-from-right duration-300">
+          <div className="flex flex-col h-full">
             <div className="p-4 flex items-center justify-between border-b border-gray-50">
-              <Image src={logoUrl} alt="Logo" width={120} height={40} className="h-8 w-auto object-contain" />
-              <button onClick={() => setMobileOpen(false)} className="p-2 bg-gray-50 rounded-full">
-                <X className="w-6 h-6 text-gray-900" />
+              <Image src={logoUrl} alt="Logo" width={140} height={50} className="h-10 w-auto object-contain" />
+              <button onClick={() => setMobileOpen(false)} className="p-2 text-gray-900 bg-gray-50 rounded-full">
+                <X className="w-6 h-6" />
               </button>
             </div>
 
-            <nav className="p-8 space-y-10 flex-grow">
+            <nav className="p-6 space-y-6">
               {menu.map((item) => (
-                <div key={item.title} className="space-y-4">
+                <div key={item.title} className="space-y-3">
                   {item.child ? (
                     <>
-                      <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-primary/40">
+                      <h4 className="text-xs font-bold uppercase tracking-widest text-[#00469b]">
                         {item.title}
                       </h4>
-                      <div className="flex flex-col space-y-5">
+                      <div className="flex flex-col space-y-3 pl-3">
                         {item.child.map((subItem) => (
                           <Link
                             key={subItem.name}
                             href={subItem.href}
                             onClick={() => setMobileOpen(false)}
-                            className="text-2xl font-black text-gray-900 hover:text-primary transition-all active:scale-95 origin-left"
+                            className="text-lg font-medium text-gray-800 hover:text-primary transition-colors"
                           >
                             {subItem.name}
                           </Link>
@@ -246,7 +227,7 @@ const Header = () => {
                     <Link
                       href={item.href || "#"}
                       onClick={() => setMobileOpen(false)}
-                      className="text-3xl font-black text-gray-900 hover:text-primary transition-all block uppercase tracking-tighter"
+                      className="text-lg font-bold text-gray-900 border-b border-gray-50 pb-2 block"
                     >
                       {item.title}
                     </Link>
@@ -255,11 +236,11 @@ const Header = () => {
               ))}
             </nav>
 
-            <div className="p-8 border-t border-gray-50">
+            <div className="p-6 mt-auto">
               <Link
                 href="/e-catalog"
                 onClick={() => setMobileOpen(false)}
-                className="block w-full text-center py-6 bg-primary text-white rounded-3xl font-black text-xl uppercase tracking-widest shadow-2xl shadow-primary/30 active:scale-95 transition-all"
+                className="block w-full text-center py-4 bg-[#00469b] text-white rounded-xl font-bold transition-all shadow-lg active:scale-95"
               >
                 e-Catalog
               </Link>
