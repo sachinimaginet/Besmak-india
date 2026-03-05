@@ -94,7 +94,7 @@ export default function StrategicVerticals({
                 {/* Content wrapper */}
                 <div className="sv-card__inner">
                   {/* Title row */}
-                  <h3 className="sv-card__title text-center">{vertical.title}</h3>
+                  <h3 className="sv-card__title">{vertical.title}</h3>
 
                   {/* Description — only on hover */}
                   <p className="sv-card__description">{vertical.description}</p>
@@ -111,9 +111,11 @@ export default function StrategicVerticals({
                   </div>
 
                   {/* View More link */}
-                  <Link href={vertical.href} className="sv-card__link">
-                    View More&nbsp;→
-                  </Link>
+                  <div className="sv-card__link-wrap">
+                    <Link href={vertical.href} className="sv-card__link">
+                      View More&nbsp;→
+                    </Link>
+                  </div>
                 </div>
               </div>
             );
@@ -205,13 +207,17 @@ export default function StrategicVerticals({
           font-weight: 700;
           color: #284b8c;
           line-height: 1.35;
-          transition: color 0.35s ease;
+          transition:
+            color 0.35s ease,
+            text-align 0.2s ease;
           margin-bottom: 0.75rem;
           min-height: 2.5rem;
+          text-align: center;
         }
 
         .sv-card--hovered .sv-card__title {
           color: #ffffff;
+          text-align: left;
         }
 
         /* ── Description (hidden → shown on hover) ─────────────── */
@@ -261,16 +267,27 @@ export default function StrategicVerticals({
           transition: transform 0.4s ease;
         }
 
+        /* ── View More link wrapper ───────────────────────────── */
+        .sv-card__link-wrap {
+          display: flex;
+          justify-content: flex-start;
+          margin-top: auto;
+          padding-top: 1rem;
+          transition: justify-content 0.35s ease;
+        }
+
+        .sv-card--hovered .sv-card__link-wrap {
+          justify-content: flex-end;
+        }
+
         /* ── View More link ────────────────────────────────────── */
         .sv-card__link {
           display: inline-flex;
           align-items: center;
           font-size: 0.82rem;
           font-weight: 600;
-          color: #1a56e8;
+          color: #284b8c;
           text-decoration: none;
-          margin-top: auto;
-          padding-top: 1rem;
           transition:
             color 0.35s ease,
             letter-spacing 0.3s ease;
