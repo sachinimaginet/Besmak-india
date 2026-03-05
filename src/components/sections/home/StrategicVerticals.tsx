@@ -71,7 +71,7 @@ export default function StrategicVerticals({
       <div className="container mx-auto px-4 max-w-7xl">
         {/* Header */}
         <div className="text-center mb-14">
-          <h2 className="text-4xl font-bold text-gray-900 mb-5">{heading}</h2>
+          <h1 className="text-4xl font-bold text-gray-900 mb-5">{heading}</h1>
           <p className="text-gray-500 max-w-2xl mx-auto leading-relaxed text-base">
             {subheading}
           </p>
@@ -144,7 +144,7 @@ export default function StrategicVerticals({
         .sv-card {
           position: relative;
           border: 2px solid #284b8c;
-          border-radius: 1.25rem;
+          border-radius: 0.625rem;
           overflow: hidden;
           cursor: pointer;
           background: #ffffff;
@@ -162,6 +162,16 @@ export default function StrategicVerticals({
         .sv-card--hovered {
           border-color: transparent;
           box-shadow: 0 20px 50px rgba(67, 97, 238, 0.25);
+        }
+
+        /* First card: large bottom-left corner */
+        .sv-grid .sv-card:first-child {
+          border-radius: 0.625rem 0.625rem 0.625rem 2.5rem;
+        }
+
+        /* Last card: large bottom-right corner */
+        .sv-grid .sv-card:last-child {
+          border-radius: 0.625rem 0.625rem 2.5rem 0.625rem;
         }
 
         /* ── Gradient background (revealed on hover) ───────────── */
