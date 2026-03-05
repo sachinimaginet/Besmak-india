@@ -38,11 +38,21 @@ const DEFAULT_RIGHT: CardContent = {
 /* ── Component ─────────────────────────────────────────────────── */
 
 export default function TwoCardsSection({ content }: TwoCardsSectionProps) {
-    const leftData: CardContent = content?.leftCard ? JSON.parse(content.leftCard) : DEFAULT_LEFT;
-    const rightData: CardContent = content?.rightCard ? JSON.parse(content.rightCard) : DEFAULT_RIGHT;
+    const parseSafe = (data: any, fallback: CardContent): CardContent => {
+        if (!data || typeof data !== 'string') return fallback;
+        try {
+            return JSON.parse(data);
+        } catch (e) {
+            console.error("Error parsing card data:", e);
+            return fallback;
+        }
+    };
+
+    const leftData = parseSafe(content?.leftCard, DEFAULT_LEFT);
+    const rightData = parseSafe(content?.rightCard, DEFAULT_RIGHT);
 
     return (
-        <section className="tc-section py-20 bg-[#646c77]">
+        <section className="tc-section py-10 bg-[#646c77]">
             <div className="container mx-auto px-4 max-w-7xl">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
 
@@ -57,7 +67,9 @@ export default function TwoCardsSection({ content }: TwoCardsSectionProps) {
                                 ))}
                             </div>
                             <Link href={leftData.link} className="tc-btn tc-btn-black">
-                                {leftData.buttonText} <ArrowRight className="w-5 h-5 ml-2" />
+                                <button className="flex items-center gap-2 bg-black text-white px-4 py-2 rounded-full">
+                                    {leftData.buttonText} <ArrowRight className="w-5 h-5 text-white ml-2" />
+                                </button>
                             </Link>
                         </div>
                     </div>
@@ -73,7 +85,9 @@ export default function TwoCardsSection({ content }: TwoCardsSectionProps) {
                                 ))}
                             </div>
                             <Link href={rightData.link} className="tc-btn-link">
-                                {rightData.buttonText} <ArrowRight className="w-5 h-5 ml-2" />
+                                <button className="flex items-center gap-2 bg-white text-primary px-4 py-2 rounded-full">
+                                    {rightData.buttonText} <ArrowRight className="w-5 h-5 text-primary ml-2" />
+                                </button>
                             </Link>
                         </div>
                     </div>
@@ -111,9 +125,9 @@ export default function TwoCardsSection({ content }: TwoCardsSectionProps) {
                     position: absolute;
                     top: -6rem;
                     right: -6rem;
-                    width: 20rem;
-                    height: 20rem;
-                    background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(200,210,230,0.4) 60%, transparent 100%);
+                    width: 12rem;
+                    height: 12rem;
+                    background: radial-gradient(circle, rgba(214, 210, 210, 1) 0%, rgba(208, 212, 218, 0.4) 60%, transparent 100%);
                     border-radius: 50%;
                     filter: blur(20px);
                     z-index: 1;
@@ -123,12 +137,11 @@ export default function TwoCardsSection({ content }: TwoCardsSectionProps) {
                     position: absolute;
                     bottom: -5rem;
                     left: -5rem;
-                    width: 15rem;
-                    height: 15rem;
+                    width: 12rem;
+                    height: 12rem;
                     background-color: #f3efdf;
                     border-radius: 50%;
                     z-index: 1;
-                    filter: blur(5px);
                 }
 
                 .tc-title {
