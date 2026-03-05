@@ -1,6 +1,9 @@
 import Hero from "./home/Hero";
 import About from "./home/About";
 import FeaturedProducts from "./home/FeaturedProducts";
+import VideoSection from "./home/VideoSection";
+import TextImageSection from "./home/TextImageSection";
+import StatsSection from "./home/StatsSection";
 import AboutHero from "./about/AboutHero";
 import AboutContent from "./about/AboutContent";
 import EditableWrapper from "../cms/EditableWrapper";
@@ -30,6 +33,12 @@ export default function SectionRenderer({
         return <AboutContent content={section.content} />;
       case "featured-products":
         return <FeaturedProducts content={section.content} />;
+      case "video-section":
+        return <VideoSection content={section.content} />;
+      case "text-image-section":
+        return <TextImageSection content={section.content} />;
+      case "stats-section":
+        return <StatsSection content={section.content} />;
       default:
         return null;
     }

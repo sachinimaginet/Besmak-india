@@ -263,6 +263,7 @@ export default function SettingsPage() {
                     >
                       {[
                         "Inter",
+                        "Times New Roman",
                         "Roboto",
                         "Open Sans",
                         "Montserrat",
@@ -290,6 +291,7 @@ export default function SettingsPage() {
                     >
                       {[
                         "Inter",
+                        "Times New Roman",
                         "Roboto",
                         "Open Sans",
                         "Lato",
