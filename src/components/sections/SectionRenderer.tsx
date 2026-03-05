@@ -11,6 +11,7 @@ import EventsAchievements from "./home/EventsAchievements";
 import TwoCardsSection from "./home/TwoCardsSection";
 import AboutHero from "./about/AboutHero";
 import AboutContent from "./about/AboutContent";
+import ProductSearchSection from "./home/ProductSearchSection";
 import EditableWrapper from "../cms/EditableWrapper";
 
 interface SectionRendererProps {
@@ -54,6 +55,8 @@ export default function SectionRenderer({
         return <EventsAchievements content={section.content} />;
       case "dual-cards-section":
         return <TwoCardsSection content={section.content} />;
+      case "product-search":
+        return <ProductSearchSection />;
       default:
         return null;
     }

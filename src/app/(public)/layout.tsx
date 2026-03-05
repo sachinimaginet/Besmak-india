@@ -1,5 +1,6 @@
 import Header from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import ProductSearchSection from "@/components/sections/home/ProductSearchSection";
 import ThemeRegistry from "@/components/layout/ThemeRegistry";
 import { getAllSettings } from "@/lib/settings";
 
@@ -15,6 +16,7 @@ export default async function PublicLayout({
       <Header settings={settings} />
 
       <main className="grow">{children}</main>
+      <ProductSearchSection />
       <Footer settings={settings} />
     </div>
   );
