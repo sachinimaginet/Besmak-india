@@ -19,6 +19,7 @@ interface CardData {
 interface CardGridProps {
   content?: {
     title?: string;
+    subtitle?: string;
     cards?: CardData[];
   };
 }
@@ -26,10 +27,10 @@ interface CardGridProps {
 const defaultCards: CardData[] = [
   /* ── Row 1 ────────────────────────────────── */
   {
-    id: "connectors",
-    category: "Automotive",
+    id: "connectors-systems",
+    category: "",
     categoryColor: "rgba(255,255,255,0.75)",
-    title: "Connectors",
+    title: "Connection Systems",
     image:
       "https://cvnvhpmvk12hdosq.public.blob.vercel-storage.com/167574675e2d8b125fbaaaf1b9a7dd028a95e6f5.png",
     href: "/products/connectors",
@@ -38,100 +39,43 @@ const defaultCards: CardData[] = [
     defaultExpanded: true,
   },
   {
-    id: "fuse-box",
-    category: "High Precision",
+    id: "Engineering-Products-Division",
+    category: "",
     categoryColor: "#4a90d9",
-    title: "Fuse Box",
+    title: "Engineering Products Division",
     image:
-      "https://cvnvhpmvk12hdosq.public.blob.vercel-storage.com/1f7673b32195506c3e16ca7fedc10f5d3a08d3b0.png",
+      "https://cvnvhpmvk12hdosq.public.blob.vercel-storage.com/Frame%202147224470.png",
     href: "/products/fuse-box",
     bg: "#dce9f7",
     isDark: false,
   },
+  /* ── Row 2 ────────────────────────────────── */
   {
-    id: "dummy-plugs",
-    category: "Connection System",
+    id: "Precision-Stamping-Manufacturing",
+    category: "",
     categoryColor: "#b07c0a",
-    title: "Dummy Plugs",
+    title: "Precision Stamping Manufacturing",
     image:
-      "https://cvnvhpmvk12hdosq.public.blob.vercel-storage.com/6bbf541a3751e6d87bb11f101e191a95e5d24d58.png",
+      "https://cvnvhpmvk12hdosq.public.blob.vercel-storage.com/Frame%202147224469.png",
     href: "/products/dummy-plugs",
     bg: "#e6f3e2",
     isDark: false,
   },
-  /* ── Row 2 ────────────────────────────────── */
   {
-    id: "relay",
-    category: "Precision Control",
+    id: "CNH-Moulds",
+    category: "",
     categoryColor: "#b07c0a",
-    title: "Relay",
+    title: "CNH Moulds",
     image:
-      "https://cvnvhpmvk12hdosq.public.blob.vercel-storage.com/6420af06203961d21746289b7e874ff9a58f9440.png",
+      "https://cvnvhpmvk12hdosq.public.blob.vercel-storage.com/div%20%281%29.png",
     href: "/products/relay",
     bg: "#f5ece0",
     isDark: false,
-  },
-  {
-    id: "cases",
-    category: "Housing Components",
-    categoryColor: "#2e8b57",
-    title: "Cases",
-    image:
-      "https://cvnvhpmvk12hdosq.public.blob.vercel-storage.com/4619bea2ef8e89cf657c09c72c5bb81b40bdedaf.png",
-    href: "/products/cases",
-    bg: "#e6f3e2",
-    isDark: false,
-  },
-  {
-    id: "cable-tuf",
-    category: "Cable Management",
-    categoryColor: "rgba(255,255,255,0.75)",
-    title: "Cable TUF",
-    image:
-      "https://cvnvhpmvk12hdosq.public.blob.vercel-storage.com/e3f1e3094cda2b6a926451650265bbb4d9ca5ab9.png",
-    href: "/products/cable-tuf",
-    bg: "#1a4fa0",
-    isDark: true,
-    defaultExpanded: true,
-  },
-  /* ── Row 3 ────────────────────────────────── */
-  {
-    id: "cover",
-    category: "Housing Components",
-    categoryColor: "#b07c0a",
-    title: "Cover",
-    image:
-      "https://cvnvhpmvk12hdosq.public.blob.vercel-storage.com/2247c41c398bc9896bb054d9d143bfc429ab4d88.png",
-    href: "/products/cover",
-    bg: "#f5ece0",
-    isDark: false,
     defaultExpanded: true
-  },
-  {
-    id: "clips",
-    category: "Fastning Systems",
-    categoryColor: "#2e8b57",
-    title: "Clips",
-    image:
-      "https://cvnvhpmvk12hdosq.public.blob.vercel-storage.com/71932dd7d557a3c819f0764768fa6f17576d179e.png",
-    href: "/products/clips",
-    bg: "#e6f3e2",
-    isDark: false,
-  },
-  {
-    id: "connection-systems",
-    category: "Connection Systems",
-    categoryColor: "rgba(255,255,255,0.75)",
-    title: "Terminals",
-    image:
-      "https://cvnvhpmvk12hdosq.public.blob.vercel-storage.com/de2ecd4bd7af1d3dcd61a30720645dc39bad67cc.png",
-    href: "/products/connection-systems",
-    bg: "#1a4fa0",
-    isDark: true,
-  },
+  }
 ];
 
-const ROW_SIZE = 3;
+const ROW_SIZE = 2;
 
 // Returns the index of the card marked defaultExpanded in a row, or 0 as fallback
 function getDefaultExpanded(rowCards: CardData[]): number {
@@ -142,6 +86,7 @@ function getDefaultExpanded(rowCards: CardData[]): number {
 export default function CardGrid({ content }: CardGridProps) {
   const {
     title = "Precision Engineered Components",
+    subtitle = "At Besmak, we deliver cutting-edge industrial solutions built on innovation, operational excellence, and uncompromising quality.",
     cards = defaultCards,
   } = content || {};
 
@@ -159,7 +104,10 @@ export default function CardGrid({ content }: CardGridProps) {
   return (
     <section className="cg-section py-12 bg-white">
       <div className="container mx-auto px-4 max-w-7xl">
-        <h2 className="cg-heading">{title}</h2>
+        <div className="text-center mb-10">
+          <h2 className="cg-heading">{title}</h2>
+          {subtitle && <p className="cg-subtitle">{subtitle}</p>}
+        </div>
 
         <div className="cg-rows">
           {rows.map((rowCards, rowIndex) => {
@@ -257,9 +205,17 @@ export default function CardGrid({ content }: CardGridProps) {
           font-size: 2.75rem;
           font-weight: 400;
           color: #111827;
-          margin-bottom: 2.5rem;
+          margin-bottom: 0.5rem;
           font-family: var(--font-heading), serif;
           letter-spacing: -0.01em;
+        }
+        .cg-subtitle {
+          text-align: center;
+          font-size: 1rem;
+          color: #6b7280;
+          max-width: 42rem;
+          margin: 0 auto;
+          line-height: 1.6;
         }
 
         /* ── Row wrapper ───────────────────────────────────────── */
@@ -353,12 +309,12 @@ export default function CardGrid({ content }: CardGridProps) {
           /* sits bottom-right, takes right 55% of card */
           bottom: 0;
           right: 0;
-          width: 60%;
-          height: 80%;
+          width: 70%;
+          height: 100%;
           z-index: 1;
         }
         .cg-card__img {
-          object-position: center bottom;
+          object-position: right bottom;
           transition: transform 0.42s ease;
         }
         .cg-card--exp .cg-card__img {
@@ -366,14 +322,14 @@ export default function CardGrid({ content }: CardGridProps) {
         }
 
         /* ── Responsive ────────────────────────────────────────── */
-        @media (max-width: 768px) {
+        @media (max-width: 480px) {
           .cg-row {
             flex-direction: column;
             height: auto;
           }
           .cg-card {
             flex: none !important;
-            height: 13rem;
+            height: 14rem;
           }
         }
       `}</style>
