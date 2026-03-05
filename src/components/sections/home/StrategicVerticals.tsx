@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { motion } from "framer-motion";
 
 interface Vertical {
   id: string;
@@ -22,284 +22,149 @@ interface StrategicVerticalsProps {
 
 const defaultVerticals: Vertical[] = [
   {
-    id: "connection-systems",
-    title: "Connection Systems",
-    description:
-      "The Connection Systems division is dedicated to designing and manufacturing high quality connector solutions that enable secure electrical and mechanical connectivity across applications.",
-    image: "https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&q=80",
-    href: "/divisions/connection-systems",
+    id: "connectors",
+    title: "Connectors",
+    description: "High-reliability automotive and industrial connectors.",
+    image: "https://cvnvhpmvk12hdosq.public.blob.vercel-storage.com/167574675e2d8b125fbaaaf1b9a7dd028a95e6f5.png",
+    href: "/products/connectors",
   },
   {
-    id: "engineering-products",
-    title: "Engineering Products Division",
-    description:
-      "Our Engineering Products Division delivers precision-engineered components built for performance, reliability, and long-term durability in demanding industrial environments.",
-    image: "https://images.unsplash.com/photo-1565043589221-1a6fd9ae45c7?w=600&q=80",
-    href: "/divisions/engineering-products",
+    id: "fuse-box",
+    title: "Fuse Box",
+    description: "Precision engineered thermal management solutions.",
+    image: "https://cvnvhpmvk12hdosq.public.blob.vercel-storage.com/1f7673b32195506c3e16ca7fedc10f5d3a08d3b0.png",
+    href: "/products/fuse-box",
   },
   {
-    id: "precision-stamping",
-    title: "Precision Stamping Manufacturing",
-    description:
-      "We specialise in precision metal stamping, producing complex, tight-tolerance parts at scale for automotive, aerospace and industrial applications.",
-    image: "https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=600&q=80",
-    href: "/divisions/precision-stamping",
+    id: "dummy-plugs",
+    title: "Dummy Plugs",
+    description: "Secure sealing solutions for connection systems.",
+    image: "https://cvnvhpmvk12hdosq.public.blob.vercel-storage.com/6bbf541a3751e6d87bb11f101e191a95e5d24d58.png",
+    href: "/products/dummy-plugs",
   },
   {
-    id: "cnh-moulds",
-    title: "CNH Moulds",
-    description:
-      "Our CNH Moulds division offers advanced mould design and manufacturing capabilities, delivering high-quality tooling solutions for complex part geometries.",
-    image: "https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=600&q=80",
-    href: "/divisions/cnh-moulds",
+    id: "relay",
+    title: "Relay",
+    description: "Advanced switching components for control systems.",
+    image: "https://cvnvhpmvk12hdosq.public.blob.vercel-storage.com/6420af06203961d21746289b7e874ff9a58f9440.png",
+    href: "/products/relay",
   },
 ];
+
+const containerVariants: any = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.15,
+    },
+  },
+};
+
+const itemVariants: any = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.8,
+      ease: "easeOut",
+    },
+  },
+};
 
 export default function StrategicVerticals({
   content,
 }: StrategicVerticalsProps) {
   const {
-    heading = "Our Strategic Verticals",
-    subheading = `At Besmak, we are not just building products. We are shaping the future of manufacturing — with purpose, passion and progress. Across every vertical, our focus remains on innovation, operational excellence and long term value for our customers, employees and stakeholders.`,
+    heading = "Precision Engineered Components",
     verticals = defaultVerticals,
   } = content || {};
 
-  const [hoveredId, setHoveredId] = useState<string | null>(null);
-
   return (
-    <section className="strategic-verticals py-20 bg-white">
-      <div className="container mx-auto px-4 max-w-7xl">
+    <section className="strategic-verticals py-24 bg-[#f8fafc] overflow-hidden">
+      <div className="container mx-auto px-6 max-w-7xl">
         {/* Header */}
-        <div className="text-center mb-14">
-          <h1 className="text-4xl font-bold text-gray-900 mb-5">{heading}</h1>
-          <p className="text-gray-500 max-w-2xl mx-auto leading-relaxed text-base">
-            {subheading}
-          </p>
-        </div>
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="text-center mb-16"
+        >
+          <h2 className="text-4xl md:text-5xl font-extrabold text-[#0b327b] tracking-tight mb-4">
+            {heading}
+          </h2>
+          <div className="w-24 h-1.5 bg-[#0b327b] mx-auto rounded-full" />
+        </motion.div>
 
-        {/* Cards */}
-        <div className="sv-grid">
-          {verticals.map((vertical) => {
-            const isHovered = hoveredId === vertical.id;
-            return (
-              <div
-                key={vertical.id}
-                className={`sv-card${isHovered ? " sv-card--hovered" : ""}`}
-                onMouseEnter={() => setHoveredId(vertical.id)}
-                onMouseLeave={() => setHoveredId(null)}
-              >
-                {/* Gradient overlay — visible on hover */}
-                <div className="sv-card__gradient" aria-hidden="true" />
-
-                {/* Content wrapper */}
-                <div className="sv-card__inner">
-                  {/* Title row */}
-                  <h3 className="sv-card__title">{vertical.title}</h3>
-
-                  {/* Description — only on hover */}
-                  <p className="sv-card__description">{vertical.description}</p>
-
-                  {/* Product image — hides on hover */}
-                  <div className="sv-card__image-wrap">
-                    <Image
-                      src={vertical.image}
-                      alt={vertical.title}
-                      fill
-                      className="sv-card__image object-contain"
-                      sizes="(max-width: 768px) 100vw, 25vw"
-                    />
+        {/* Verticals Grid */}
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"
+        >
+          {verticals.map((vertical) => (
+            <motion.div
+              key={vertical.id}
+              variants={itemVariants}
+              whileHover={{ y: -10 }}
+              className="group relative cursor-pointer"
+            >
+              <Link href={vertical.href} className="block">
+                <div className="relative aspect-[4/5] rounded-2xl overflow-hidden bg-white border border-gray-100 shadow-sm transition-shadow duration-500 group-hover:shadow-2xl group-hover:shadow-blue-900/10">
+                  {/* Image Container */}
+                  <div className="absolute inset-0 p-8 flex items-center justify-center transition-transform duration-700 ease-out group-hover:scale-110">
+                    <div className="relative w-full h-full">
+                      <Image
+                        src={vertical.image}
+                        alt={vertical.title}
+                        fill
+                        className="object-contain"
+                        sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                      />
+                    </div>
                   </div>
 
-                  {/* View More link */}
-                  <div className="sv-card__link-wrap">
-                    <Link href={vertical.href} className="sv-card__link">
-                      View More&nbsp;→
-                    </Link>
+                  {/* Gradient Overlay for Title readability */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+                  {/* Title Overlay */}
+                  <div className="absolute bottom-0 inset-x-0 p-6">
+                    <div className="backdrop-blur-md bg-white/80 border border-white/20 rounded-xl p-4 shadow-lg transform translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
+                      <h3 className="text-[#0b327b] text-xl font-bold text-center group-hover:text-blue-700 transition-colors duration-300">
+                        {vertical.title}
+                      </h3>
+                    </div>
+                  </div>
+
+                  {/* Interactive Glow Effect */}
+                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-700">
+                    <div className="absolute -inset-[100%] bg-gradient-to-tr from-blue-400/0 via-blue-400/10 to-blue-400/0 rotate-45 transform translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000" />
                   </div>
                 </div>
-              </div>
-            );
-          })}
-        </div>
+              </Link>
+            </motion.div>
+          ))}
+        </motion.div>
       </div>
 
       <style jsx>{`
-        /* ── Grid ──────────────────────────────────────────────── */
-        .sv-grid {
-          display: grid;
-          grid-template-columns: repeat(4, 1fr);
-          gap: 1.25rem;
-          align-items: stretch;
-        }
-        @media (max-width: 1024px) {
-          .sv-grid {
-            grid-template-columns: repeat(2, 1fr);
-          }
-        }
-        @media (max-width: 600px) {
-          .sv-grid {
-            grid-template-columns: 1fr;
-          }
-        }
-
-        /* ── Card base ─────────────────────────────────────────── */
-        .sv-card {
+        .strategic-verticals {
           position: relative;
-          border: 2px solid #284b8c;
-          border-radius: 0.625rem;
-          overflow: hidden;
-          cursor: pointer;
-          background: #ffffff;
-          display: flex;
-          flex-direction: column;
-          min-height: 24rem;
-
-          /* Smooth all transitions */
-          transition:
-            border-color 0.4s ease,
-            box-shadow 0.4s ease;
         }
-
-        .sv-card:hover,
-        .sv-card--hovered {
-          border-color: transparent;
-          box-shadow: 0 20px 50px rgba(67, 97, 238, 0.25);
-        }
-
-        /* First card: large bottom-left corner */
-        .sv-grid .sv-card:first-child {
-          border-radius: 0.625rem 0.625rem 0.625rem 2.5rem;
-        }
-
-        /* Last card: large bottom-right corner */
-        .sv-grid .sv-card:last-child {
-          border-radius: 0.625rem 0.625rem 2.5rem 0.625rem;
-        }
-
-        /* ── Gradient background (revealed on hover) ───────────── */
-        .sv-card__gradient {
+        
+        /* Subtle background patterns if needed */
+        .strategic-verticals::before {
+          content: "";
           position: absolute;
-          inset: 0;
-          background: linear-gradient(145deg, #4f8ef7 0%, #6c3ee8 100%);
-          opacity: 0;
-          transition: opacity 0.45s ease;
-          z-index: 0;
-          border-radius: inherit;
-        }
-
-        .sv-card--hovered .sv-card__gradient {
-          opacity: 1;
-        }
-
-        /* ── Inner content ─────────────────────────────────────── */
-        .sv-card__inner {
-          position: relative;
-          z-index: 1;
-          display: flex;
-          flex-direction: column;
-          flex: 1;
-          padding: 1.75rem 1.5rem 1.5rem;
-        }
-
-        /* ── Title ─────────────────────────────────────────────── */
-        .sv-card__title {
-          font-size: 1rem;
-          font-weight: 700;
-          color: #284b8c;
-          line-height: 1.35;
-          transition:
-            color 0.35s ease,
-            text-align 0.2s ease;
-          margin-bottom: 0.75rem;
-          min-height: 2.5rem;
-          text-align: center;
-        }
-
-        .sv-card--hovered .sv-card__title {
-          color: #ffffff;
-          text-align: left;
-        }
-
-        /* ── Description (hidden → shown on hover) ─────────────── */
-        .sv-card__description {
-          font-size: 0.82rem;
-          line-height: 1.6;
-          color: rgba(255, 255, 255, 0.9);
-          max-height: 0;
-          overflow: hidden;
-          opacity: 0;
-          transition:
-            max-height 0.45s ease,
-            opacity 0.4s ease,
-            margin-bottom 0.35s ease;
-          margin-bottom: 0;
-        }
-
-        .sv-card--hovered .sv-card__description {
-          max-height: 8rem;
-          opacity: 1;
-          margin-bottom: 1rem;
-        }
-
-        /* ── Product image area ────────────────────────────────── */
-        .sv-card__image-wrap {
-          position: relative;
-          flex: 1;
-          width: 100%;
-          /* Collapses on hover to give room to description */
-          min-height: 10rem;
-          max-height: 14rem;
-          transition:
-            max-height 0.45s ease,
-            opacity 0.4s ease,
-            min-height 0.45s ease;
-          opacity: 1;
-        }
-
-        .sv-card--hovered .sv-card__image-wrap {
-          max-height: 0;
-          min-height: 0;
-          opacity: 0;
-          overflow: hidden;
-        }
-
-        .sv-card__image {
-          transition: transform 0.4s ease;
-        }
-
-        /* ── View More link wrapper ───────────────────────────── */
-        .sv-card__link-wrap {
-          display: flex;
-          justify-content: flex-start;
-          margin-top: auto;
-          padding-top: 1rem;
-          transition: justify-content 0.35s ease;
-        }
-
-        .sv-card--hovered .sv-card__link-wrap {
-          justify-content: flex-end;
-        }
-
-        /* ── View More link ────────────────────────────────────── */
-        .sv-card__link {
-          display: inline-flex;
-          align-items: center;
-          font-size: 0.82rem;
-          font-weight: 600;
-          color: #284b8c;
-          text-decoration: none;
-          transition:
-            color 0.35s ease,
-            letter-spacing 0.3s ease;
-          letter-spacing: 0;
-        }
-
-        .sv-card__link:hover {
-          letter-spacing: 0.03em;
-        }
-
-        .sv-card--hovered .sv-card__link {
-          color: #ffffff;
+          top: 0;
+          left: 0;
+          right: 0;
+          height: 1px;
+          background: linear-gradient(90deg, transparent, #0b327b/10, transparent);
         }
       `}</style>
     </section>

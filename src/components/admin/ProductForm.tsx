@@ -86,7 +86,7 @@ export default function ProductForm({
         const errorData = await res.json();
         throw new Error(
           errorData.error ||
-            (isEdit ? "Failed to update product" : "Failed to create product"),
+          (isEdit ? "Failed to update product" : "Failed to create product"),
         );
       }
 

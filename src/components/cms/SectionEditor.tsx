@@ -47,8 +47,21 @@ export default function SectionEditor({
     setEditedContent((prev: any) => ({ ...prev, [key]: value }));
   };
 
+  const standardFields: Record<string, string[]> = {
+    "card-grid": ["title", "subtitle"],
+    "strategic-verticals": ["heading", "subheading"],
+    "hero": ["title", "subtitle", "ctaText", "ctaLink"],
+    "about": ["title", "subtitle", "description"],
+    "stats-section": ["stat1_value", "stat1_label", "stat2_value", "stat2_label", "stat3_value", "stat3_label", "stat4_value", "stat4_label"],
+  };
+
+  const allKeys = Array.from(new Set([
+    ...Object.keys(content).filter(k => typeof content[k] === 'string'),
+    ...(standardFields[type] || [])
+  ]));
+
   return (
-    <div className="fixed inset-0 z-100 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4">
+    <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 backdrop-blur-sm p-4">
       <div className="bg-white rounded-2xl shadow-2xl w-full max-w-2xl overflow-hidden flex flex-col max-h-[90vh]">
         <div className="p-6 border-b flex items-center justify-between bg-gray-50">
           <h2 className="text-xl font-bold text-gray-800 uppercase tracking-wide">
@@ -63,21 +76,21 @@ export default function SectionEditor({
         </div>
 
         <div className="p-8 overflow-y-auto space-y-6">
-          {Object.keys(content).map((key) => (
+          {allKeys.map((key) => (
             <div key={key} className="space-y-2">
               <label className="block text-sm font-semibold text-gray-700 capitalize">
-                {key.replace(/([A-Z])/g, " $1").trim()}
+                {key.replace(/([A-Z]|_)/g, " $1").replace(/_/g, "").trim()}
               </label>
-              {typeof content[key] === "string" && content[key].length > 50 ? (
+              {(editedContent[key] || "").length > 50 ? (
                 <textarea
-                  value={editedContent[key]}
+                  value={editedContent[key] || ""}
                   onChange={(e) => handleChange(key, e.target.value)}
                   className="w-full p-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none min-h-[120px] transition-all text-gray-900"
                 />
               ) : (
                 <input
                   type="text"
-                  value={editedContent[key]}
+                  value={editedContent[key] || ""}
                   onChange={(e) => handleChange(key, e.target.value)}
                   className="w-full p-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all text-gray-900"
                 />

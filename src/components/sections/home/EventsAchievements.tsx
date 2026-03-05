@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
@@ -80,85 +80,107 @@ export default function EventsAchievements({ content }: EventsAchievementsProps)
         }
     }
 
-    const [currentIndex, setCurrentIndex] = useState(0);
-    const [cardsToShow, setCardsToShow] = useState(4);
+    const [page, setPage] = useState(0);
+    const [itemsPerPage, setItemsPerPage] = useState(3);
 
-    // Responsive cards to show
+    // Responsive items per page
     useEffect(() => {
         const handleResize = () => {
-            if (window.innerWidth < 640) setCardsToShow(1.2);
-            else if (window.innerWidth < 1024) setCardsToShow(2.5);
-            else setCardsToShow(4);
+            if (window.innerWidth < 640) setItemsPerPage(1);
+            else if (window.innerWidth < 1024) setItemsPerPage(2);
+            else setItemsPerPage(3);
         };
         handleResize();
         window.addEventListener("resize", handleResize);
         return () => window.removeEventListener("resize", handleResize);
     }, []);
 
-    const totalCards = events.length;
-    const maxIndex = Math.max(0, totalCards - Math.floor(cardsToShow));
+    const totalPages = Math.ceil(events.length / itemsPerPage);
 
     const nextSlide = () => {
-        setCurrentIndex((prev) => Math.min(prev + 1, maxIndex));
+        setPage((prev) => (prev + 1) % totalPages);
     };
 
     const prevSlide = () => {
-        setCurrentIndex((prev) => Math.max(prev - 1, 0));
+        setPage((prev) => (prev - 1 + totalPages) % totalPages);
+    };
+
+    // Auto cycling
+    useEffect(() => {
+        const interval = setInterval(nextSlide, 5000);
+        return () => clearInterval(interval);
+    }, [totalPages]);
+
+    // Get current set of images
+    const getCurrentItems = () => {
+        const start = page * itemsPerPage;
+        return events.slice(start, start + itemsPerPage);
     };
 
     return (
-        <section className="ea-section py-16 bg-white overflow-hidden">
-            <div className="container mx-auto px-4 max-w-7xl">
+        <section className="ea-section py-20 bg-white overflow-hidden">
+            <div className="container mx-auto px-6 max-w-7xl">
                 {/* ── Header ── */}
-                <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-6">
-                    <div className="max-w-2xl">
+                <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-8">
+                    <motion.div
+                        initial={{ opacity: 0, x: -30 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.8 }}
+                        className="max-w-2xl"
+                    >
                         <span className="ea-caption">{caption}</span>
                         <h2 className="ea-title">{title}</h2>
+                        <div className="w-20 h-1 bg-[#1a4fa0] mb-6 rounded-full" />
                         <p className="ea-description">{description}</p>
-                    </div>
+                    </motion.div>
 
-                    <div className="flex gap-2">
+                    <div className="flex gap-4">
                         <button
                             onClick={prevSlide}
-                            disabled={currentIndex === 0}
-                            className="ea-nav-btn"
-                            aria-label="Previous slide"
+                            className="ea-nav-btn group"
+                            aria-label="Previous set"
                         >
-                            <ChevronLeft className="w-5 h-5" />
+                            <ChevronLeft className="w-6 h-6 group-hover:-translate-x-1 transition-transform" />
                         </button>
                         <button
                             onClick={nextSlide}
-                            disabled={currentIndex >= maxIndex}
-                            className="ea-nav-btn"
-                            aria-label="Next slide"
+                            className="ea-nav-btn group"
+                            aria-label="Next set"
                         >
-                            <ChevronRight className="w-5 h-5" />
+                            <ChevronRight className="w-6 h-6 group-hover:translate-x-1 transition-transform" />
                         </button>
                     </div>
                 </div>
 
-                {/* ── Slider ── */}
-                <div className="relative">
-                    <motion.div
-                        className="flex gap-6"
-                        animate={{ x: `calc(-${currentIndex * (100 / (cardsToShow === 1.2 ? 1.2 : cardsToShow))}% - ${currentIndex * (24 * (cardsToShow - 1) / cardsToShow)}px)` }}
-                        transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                    >
-                        {events.map((event) => (
-                            <div
-                                key={event.id}
-                                className="flex-shrink-0"
-                                style={{ width: `calc((100% - ${(Math.floor(cardsToShow) - 1) * 1.5}rem) / ${cardsToShow})` }}
-                            >
-                                <div className="ea-card group">
-                                    <div className="relative aspect-[4/5] overflow-hidden rounded-xl border border-gray-100 shadow-sm transition-all duration-300 group-hover:shadow-xl group-hover:border-blue-200">
+                {/* ── Fade Gallery ── */}
+                <div className="relative min-h-[400px]">
+                    <AnimatePresence mode="wait">
+                        <motion.div
+                            key={page}
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            transition={{ duration: 0.8, ease: "easeInOut" }}
+                            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+                        >
+                            {getCurrentItems().map((event, index) => (
+                                <motion.div
+                                    key={event.id}
+                                    initial={{ opacity: 0, scale: 0.95 }}
+                                    animate={{ opacity: 1, scale: 1 }}
+                                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                                    className="relative group"
+                                >
+                                    <div className="ea-card aspect-square relative rounded-2xl overflow-hidden p-6 flex items-center justify-center">
                                         <Image
                                             src={event.image}
                                             alt={event.alt}
                                             fill
-                                            className="object-cover transition-transform duration-500 group-hover:scale-105"
-                                            sizes="(max-width: 640px) 80vw, (max-width: 1024px) 40vw, 25vw"
+                                            className="object-contain p-4 transition-transform duration-700 group-hover:scale-105"
+                                            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                                         />
+
                                         {event.href && (
                                             <a
                                                 href={event.href}
@@ -167,71 +189,76 @@ export default function EventsAchievements({ content }: EventsAchievementsProps)
                                             />
                                         )}
                                     </div>
-                                </div>
-                            </div>
+                                </motion.div>
+                            ))}
+                        </motion.div>
+                    </AnimatePresence>
+
+                    {/* Page Indicator dots */}
+                    <div className="flex justify-center mt-12 gap-3">
+                        {Array.from({ length: totalPages }).map((_, i) => (
+                            <button
+                                key={i}
+                                onClick={() => setPage(i)}
+                                className={`h-1.5 rounded-full transition-all duration-300 ${i === page ? "w-8 bg-[#1a4fa0]" : "w-1.5 bg-gray-200"
+                                    }`}
+                                aria-label={`Go to page ${i + 1}`}
+                            />
                         ))}
-                    </motion.div>
+                    </div>
                 </div>
             </div>
 
             <style jsx>{`
         .ea-caption {
           display: block;
-          font-size: 0.85rem;
-          font-weight: 600;
+          font-size: 0.9rem;
+          font-weight: 700;
           color: #1a4fa0;
-          letter-spacing: 0.1em;
+          letter-spacing: 0.15em;
           margin-bottom: 1rem;
           text-transform: uppercase;
         }
 
         .ea-title {
-          font-family: var(--font-heading), serif;
-          font-size: 2.75rem;
-          font-weight: 400;
+          font-size: 3rem;
+          font-weight: 800;
           color: #111827;
-          line-height: 1.2;
+          line-height: 1.1;
           margin-bottom: 1.5rem;
+          letter-spacing: -0.02em;
         }
 
         .ea-description {
-          font-size: 1.05rem;
+          font-size: 1.1rem;
           color: #4b5563;
-          line-height: 1.6;
-          max-width: 500px;
+          line-height: 1.7;
+          max-width: 550px;
         }
 
         .ea-nav-btn {
-          width: 2.5rem;
-          height: 2.5rem;
+          width: 3.5rem;
+          height: 3.5rem;
           display: flex;
           align-items: center;
           justify-content: center;
           border: 1px solid #e5e7eb;
-          border-radius: 4px;
+          border-radius: 99px;
           color: #4b5563;
-          transition: all 0.2s ease;
+          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
           background: white;
         }
 
-        .ea-nav-btn:hover:not(:disabled) {
+        .ea-nav-btn:hover {
           border-color: #1a4fa0;
           color: #1a4fa0;
-          box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
-        }
-
-        .ea-nav-btn:disabled {
-          opacity: 0.4;
-          cursor: not-allowed;
-        }
-
-        .ea-card {
-          width: 100%;
+          background: #f0f7ff;
+          box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
         }
 
         @media (max-width: 768px) {
           .ea-title {
-            font-size: 2rem;
+            font-size: 2.25rem;
           }
         }
       `}</style>
