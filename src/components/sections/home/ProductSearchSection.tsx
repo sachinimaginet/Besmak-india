@@ -11,7 +11,7 @@ export default function ProductSearchSection() {
     const handleSearch = (e?: React.FormEvent) => {
         e?.preventDefault();
         if (query.trim()) {
-            router.push(`/products?categoryNumber=${encodeURIComponent(query.trim())}`);
+            router.push(`/products?q=${encodeURIComponent(query.trim())}`);
         }
     };
 
@@ -19,7 +19,7 @@ export default function ProductSearchSection() {
         <section className="bg-[#6a92c2] py-16 text-white font-body">
             <div className="container mx-auto px-4 max-w-6xl">
                 <h2 className="text-3xl md:text-4xl font-serif mb-8 text-white/95">
-                    Search by product number.
+                    Search by product name or number.
                 </h2>
 
                 <form

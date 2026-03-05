@@ -184,8 +184,12 @@ export default async function ProductsPage({
     const categoryConditions = keywords
       .map(() => "c.name LIKE ?")
       .join(" AND ");
-    whereClause = `(${nameConditions}) OR (c.name IS NOT NULL AND ${categoryConditions})`;
+    const numberConditions = keywords
+      .map(() => "p.categorySpecification LIKE ?")
+      .join(" AND ");
+    whereClause = `(${nameConditions}) OR (c.name IS NOT NULL AND ${categoryConditions}) OR (${numberConditions})`;
     queryParams = [
+      ...keywords.map((k) => `%${k}%`),
       ...keywords.map((k) => `%${k}%`),
       ...keywords.map((k) => `%${k}%`),
     ];
