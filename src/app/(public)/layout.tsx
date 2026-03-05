@@ -1,4 +1,4 @@
-import { Header } from "@/components/layout/Header";
+import Header from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import ThemeRegistry from "@/components/layout/ThemeRegistry";
 import { getAllSettings } from "@/lib/settings";
