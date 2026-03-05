@@ -7,6 +7,7 @@ import StatsSection from "./home/StatsSection";
 import CardGrid from "./home/CardGrid";
 import StrategicVerticals from "./home/StrategicVerticals";
 import ClientsSection from "./home/ClientsSection";
+import EventsAchievements from "./home/EventsAchievements";
 import AboutHero from "./about/AboutHero";
 import AboutContent from "./about/AboutContent";
 import EditableWrapper from "../cms/EditableWrapper";
@@ -48,6 +49,8 @@ export default function SectionRenderer({
         return <StrategicVerticals content={section.content} />;
       case "clients-section":
         return <ClientsSection content={section.content} />;
+      case "events-achievements":
+        return <EventsAchievements content={section.content} />;
       default:
         return null;
     }
