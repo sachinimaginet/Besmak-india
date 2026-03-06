@@ -119,7 +119,7 @@ export default function EventsAchievements({ content }: EventsAchievementsProps)
 
     return (
         <section className="ea-section py-20 bg-white overflow-hidden">
-            <div className="container mx-auto px-6 max-w-7xl">
+            <div className="container mx-auto px-4 max-w-7xl">
                 {/* ── Header ── */}
                 <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-8">
                     <motion.div

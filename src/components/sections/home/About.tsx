@@ -13,7 +13,7 @@ export default function About({ content }: AboutProps) {
 
   return (
     <section className="py-16 bg-white">
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto px-4 max-w-7xl">
         <div className="max-w-3xl mx-auto text-center">
           <h2 className="text-3xl font-bold text-gray-800 mb-4">{title}</h2>
           <p className="text-gray-600 leading-relaxed whitespace-pre-line">
