@@ -44,7 +44,7 @@ const defaultCards: CardData[] = [
     categoryColor: "#4a90d9",
     title: "Engineering Products Division",
     image:
-      "https://cvnvhpmvk12hdosq.public.blob.vercel-storage.com/Frame%202147224470.png",
+      "https://cvnvhpmvk12hdosq.public.blob.vercel-storage.com/div%20%284%29.png",
     href: "/products/fuse-box",
     bg: "#dce9f7",
     isDark: false,
@@ -56,7 +56,7 @@ const defaultCards: CardData[] = [
     categoryColor: "#b07c0a",
     title: "Precision Stamping Manufacturing",
     image:
-      "https://cvnvhpmvk12hdosq.public.blob.vercel-storage.com/Frame%202147224469.png",
+      "https://cvnvhpmvk12hdosq.public.blob.vercel-storage.com/div%20%283%29.png",
     href: "/products/dummy-plugs",
     bg: "#e6f3e2",
     isDark: false,
@@ -322,6 +322,24 @@ export default function CardGrid({ content }: CardGridProps) {
         }
 
         /* ── Responsive ────────────────────────────────────────── */
+        @media (max-width: 1024px) {
+          .cg-card__title--big {
+            font-size: 1.85rem;
+          }
+        }
+
+        @media (max-width: 768px) {
+          .cg-card__img-wrap {
+            width: 60%;
+          }
+          .cg-card__title {
+            font-size: 1.25rem;
+          }
+          .cg-card__title--big {
+            font-size: 1.6rem;
+          }
+        }
+
         @media (max-width: 480px) {
           .cg-row {
             flex-direction: column;
@@ -330,6 +348,19 @@ export default function CardGrid({ content }: CardGridProps) {
           .cg-card {
             flex: none !important;
             height: 14rem;
+          }
+          .cg-card__img-wrap {
+            width: 50%;
+          }
+          .cg-card__title {
+            font-size: 1.15rem;
+          }
+          .cg-card__title--big {
+            font-size: 1.45rem;
+          }
+          .cg-card__text {
+            top: 1rem;
+            left: 1rem;
           }
         }
       `}</style>
