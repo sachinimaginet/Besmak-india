@@ -25,7 +25,7 @@ const defaultVerticals: Vertical[] = [
     id: "connectors",
     title: "Connectors",
     description: "High-reliability automotive and industrial connectors.",
-    image: "https://cvnvhpmvk12hdosq.public.blob.vercel-storage.com/167574675e2d8b125fbaaaf1b9a7dd028a95e6f5.png",
+    image: "https://cvnvhpmvk12hdosq.public.blob.vercel-storage.com/div-croped.png",
     href: "/products/connectors",
   },
   {
