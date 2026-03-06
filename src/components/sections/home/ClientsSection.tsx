@@ -158,6 +158,13 @@ export default function ClientsSection({ content }: ClientsSectionProps) {
           animation: cs-marquee 18s linear infinite;
         }
 
+        @media (max-width: 768px) {
+          .cs-track {
+            animation-duration: 35s;
+            gap: 2rem;
+          }
+        }
+
         @keyframes cs-marquee {
           0%   { transform: translateX(0); }
           /* scroll forward */

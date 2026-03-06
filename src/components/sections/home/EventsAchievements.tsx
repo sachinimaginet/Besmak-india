@@ -86,8 +86,7 @@ export default function EventsAchievements({ content }: EventsAchievementsProps)
     // Responsive items per page
     useEffect(() => {
         const handleResize = () => {
-            if (window.innerWidth < 640) setItemsPerPage(1);
-            else if (window.innerWidth < 1024) setItemsPerPage(2);
+            if (window.innerWidth < 1024) setItemsPerPage(2);
             else setItemsPerPage(3);
         };
         handleResize();
@@ -121,7 +120,7 @@ export default function EventsAchievements({ content }: EventsAchievementsProps)
         <section className="ea-section py-20 bg-white overflow-hidden">
             <div className="container mx-auto px-4 max-w-7xl">
                 {/* ── Header ── */}
-                <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-8">
+                <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 md:mb-16 gap-8">
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
@@ -129,8 +128,8 @@ export default function EventsAchievements({ content }: EventsAchievementsProps)
                         transition={{ duration: 0.8 }}
                         className="max-w-2xl"
                     >
-                        <span className="ea-caption">{caption}</span>
-                        <h2 className="ea-title">{title}</h2>
+                        <span className="ea-caption font-serif">{caption}</span>
+                        <h2 className="ea-title text-2xl md:text-[3rem] font-serif">{title}</h2>
                         <div className="w-20 h-1 bg-[#1a4fa0] mb-6 rounded-full" />
                         <p className="ea-description">{description}</p>
                     </motion.div>
@@ -154,7 +153,7 @@ export default function EventsAchievements({ content }: EventsAchievementsProps)
                 </div>
 
                 {/* ── Fade Gallery ── */}
-                <div className="relative min-h-[400px]">
+                <div className="relative min-h-[300px] md:min-h-[400px]">
                     <AnimatePresence mode="wait">
                         <motion.div
                             key={page}
@@ -162,7 +161,7 @@ export default function EventsAchievements({ content }: EventsAchievementsProps)
                             animate={{ opacity: 1 }}
                             exit={{ opacity: 0 }}
                             transition={{ duration: 0.8, ease: "easeInOut" }}
-                            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+                            className="grid grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8"
                         >
                             {getCurrentItems().map((event, index) => (
                                 <motion.div
@@ -258,7 +257,10 @@ export default function EventsAchievements({ content }: EventsAchievementsProps)
 
         @media (max-width: 768px) {
           .ea-title {
-            font-size: 2.25rem;
+            font-size: 1.75rem;
+          }
+          .ea-description {
+            font-size: 0.95rem;
           }
         }
       `}</style>
