@@ -14,9 +14,9 @@ const getPool = () => {
   pool = createPool({
     uri: url,
     waitForConnections: true,
-    connectionLimit: 10,
-    maxIdle: 10,
-    idleTimeout: 60000,
+    connectionLimit: 5, // Reduced from 10 to 5 to avoid "Too many connections" on the server
+    maxIdle: 5,
+    idleTimeout: 30000, // Reduced from 60000 to 30000ms
     queueLimit: 0,
     enableKeepAlive: true,
     keepAliveInitialDelay: 0,

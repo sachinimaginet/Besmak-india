@@ -5,7 +5,10 @@ import { query as dbQuery } from '@/lib/db';
 const enquirySchema = z.object({
   name: z.string().min(1, "Name is required"),
   email: z.string().email("Invalid email address"),
-  message: z.string().min(10, "Message must be at least 10 characters"),
+  phone: z.string().optional(),
+  company: z.string().optional(),
+  industry: z.string().optional(),
+  message: z.string().optional(),
   productId: z.string().optional(),
 });
 
@@ -21,15 +24,21 @@ export async function POST(req: Request) {
       );
     }
 
-    const { name, email, message, productId } = result.data;
+    const { name, email, phone, company, industry, message, productId } = result.data;
+
+    // Format message to include company and industry if provided
+    let finalMessage = message || "Interested in this product.";
+    if (company || industry) {
+      finalMessage += `\n\n--- Additional Info ---\nCompany: ${company || 'N/A'}\nIndustry: ${industry || 'N/A'}`;
+    }
 
     try {
         const id = crypto.randomUUID();
         const now = new Date();
         
         await dbQuery(
-            "INSERT INTO enquiry (id, name, email, message, productId, status, createdAt, updatedAt) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
-            [id, name, email, message, productId || null, "PENDING", now, now]
+            "INSERT INTO enquiry (id, name, email, phone, message, productId, status, createdAt, updatedAt) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
+            [id, name, email, phone || null, finalMessage, productId || null, "PENDING", now, now]
         );
         
         return NextResponse.json({ success: true, message: "Enquiry saved successfully" }, { status: 201 });
