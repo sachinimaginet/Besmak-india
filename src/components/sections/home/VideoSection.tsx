@@ -34,9 +34,11 @@ export default function VideoSection({ content }: VideoSectionProps) {
         overlay = true,
     } = content || {};
 
+
     const [currentIndex, setCurrentIndex] = useState(0);
     const [progress, setProgress] = useState(0);
     const videoRef = useRef<HTMLVideoElement>(null);
+
     const currentIndexRef = useRef(currentIndex);
 
     useEffect(() => {
@@ -85,7 +87,7 @@ export default function VideoSection({ content }: VideoSectionProps) {
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
                     transition={{ duration: 1, ease: "easeInOut" }}
-                    className="absolute inset-0 w-full h-full"
+                    className="w-full h-full"
                 >
                     {overlay && (
                         <div className="absolute inset-0 bg-black/40 z-10 pointer-events-none" />
@@ -99,7 +101,7 @@ export default function VideoSection({ content }: VideoSectionProps) {
                         onTimeUpdate={(e) => handleTimeUpdate(e, currentIndex)}
                         onEnded={() => handleVideoEnd(currentIndex)}
                         poster={currentVideo.poster}
-                        className="w-full h-auto md:h-full md:object-cover"
+                        className="w-full h-full object-cover"
                     >
                         <source src={currentVideo.url} type="video/mp4" />
                         Your browser does not support the video tag.
@@ -108,7 +110,7 @@ export default function VideoSection({ content }: VideoSectionProps) {
             </AnimatePresence>
 
             {/* Content Overlay */}
-            <div className="col-start-1 row-start-1 relative z-20 flex items-center justify-center min-h-[40vh] md:h-full text-center px-4 pointer-events-none">
+            <div className="relative z-20 flex items-center justify-center h-full text-center px-4 pointer-events-none">
                 <AnimatePresence mode="wait">
                     <motion.div
                         key={currentIndex}
