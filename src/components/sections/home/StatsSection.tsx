@@ -116,6 +116,7 @@ function StatCard({ item, index }: { item: any, index: number }) {
         iconY.set(0);
     }
 
+
     return (
         <motion.div
             ref={cardRef}
