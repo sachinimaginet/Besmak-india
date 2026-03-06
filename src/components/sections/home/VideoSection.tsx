@@ -19,12 +19,12 @@ interface VideoSectionProps {
 
 const defaultVideos: VideoData[] = [
     {
-        url: "https://cvnvhpmvk12hdosq.public.blob.vercel-storage.com/Besmak%20Ai%20video.mp44",
-        title: "",
+        url: "https://cvnvhpmvk12hdosq.public.blob.vercel-storage.com/Besmak%20Ai%20video.mp4",
+        title: "Engineering the Future of Automotive Connectivity",
     },
     {
-        url: "https://cvnvhpmvk12hdosq.public.blob.vercel-storage.com/Besmak%20Banner%20video%20%281%29.mp44",
-        title: "",
+        url: "https://cvnvhpmvk12hdosq.public.blob.vercel-storage.com/Besmak%20Banner%20video%20%281%29.mp4",
+        title: "Building the Backbone of Tomorrow’s Automotive Electronics",
     }
 ];
 
@@ -37,12 +37,18 @@ export default function VideoSection({ content }: VideoSectionProps) {
 
     const [currentIndex, setCurrentIndex] = useState(0);
     const [progress, setProgress] = useState(0);
+    const [showTitle, setShowTitle] = useState(true);
     const videoRef = useRef<HTMLVideoElement>(null);
 
     const currentIndexRef = useRef(currentIndex);
 
     useEffect(() => {
         currentIndexRef.current = currentIndex;
+        setShowTitle(true);
+        const timer = setTimeout(() => {
+            setShowTitle(false);
+        }, 5000);
+        return () => clearTimeout(timer);
     }, [currentIndex]);
 
     // Handle video progress
@@ -80,7 +86,7 @@ export default function VideoSection({ content }: VideoSectionProps) {
     return (
         <section className="relative w-full grid grid-cols-1 h-auto md:h-[70vh] lg:h-[90vh] overflow-hidden bg-black mt-20">
             {/* Background Video Layer */}
-            <AnimatePresence>
+            <AnimatePresence mode="wait">
                 <motion.div
                     key={currentIndex}
                     initial={{ opacity: 0 }}
@@ -90,7 +96,7 @@ export default function VideoSection({ content }: VideoSectionProps) {
                     className="col-start-1 row-start-1 relative w-full h-auto md:h-full"
                 >
                     {overlay && (
-                        <div className="absolute inset-0 bg-black/40 z-10 pointer-events-none" />
+                        <div className="absolute inset-0 bg-black/30 z-10 pointer-events-none" />
                     )}
 
                     <video
@@ -112,19 +118,20 @@ export default function VideoSection({ content }: VideoSectionProps) {
             {/* Content Overlay */}
             <div className="col-start-1 row-start-1 relative z-20 flex items-center justify-center md:h-full text-center px-4 pointer-events-none">
                 <AnimatePresence mode="wait">
-                    <motion.div
-                        key={currentIndex}
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -20 }}
-                        transition={{ duration: 0.8, delay: 0.3 }}
-                    >
-                        {currentVideo.title && (
-                            <h2 className="text-4xl md:text-7xl font-extrabold text-white tracking-tight drop-shadow-2xl">
+                    {showTitle && currentVideo.title && (
+                        <motion.div
+                            key={currentIndex}
+                            initial={{ opacity: 0, scale: 0.95, y: 30 }}
+                            animate={{ opacity: 1, scale: 1, y: 0 }}
+                            exit={{ opacity: 0, scale: 1.05, y: -30 }}
+                            transition={{ duration: 0.8, ease: "easeOut" }}
+                            className=""
+                        >
+                            <h2 className="text-3xl md:text-5xl lg:text-6xl font-extrabold text-white tracking-tight drop-shadow-[0_2px_15px_rgba(0,0,0,0.5)] leading-[1.1]">
                                 {currentVideo.title}
                             </h2>
-                        )}
-                    </motion.div>
+                        </motion.div>
+                    )}
                 </AnimatePresence>
             </div>
 
