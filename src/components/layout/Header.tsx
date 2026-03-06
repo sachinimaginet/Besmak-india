@@ -123,6 +123,7 @@ const Header = ({ settings }: HeaderProps) => {
                 height: `${(headerHeight - 4) * 4}px`,
                 transform: `scale(${logoSize})`,
                 transformOrigin: "left center",
+                marginTop: "8px"
               }}
             >
               <Image
@@ -143,7 +144,7 @@ const Header = ({ settings }: HeaderProps) => {
                 <div key={item.title} className="relative">
                   {item.child ? (
                     <button
-                      onClick={() => toggleMenu(item.title)}
+                      onMouseEnter={() => toggleMenu(item.title)}
                       className={`flex items-center gap-1.5 text-[18px] font-medium transition-colors ${expandedMenu === item.title ||
                         pathname.startsWith(item.href || "")
                         ? "text-primary"
@@ -195,7 +196,13 @@ const Header = ({ settings }: HeaderProps) => {
 
         {/* Submenu Expansion - Focused under Nav area */}
         {expandedMenu && (
-          <div className="hidden lg:block w-full border-t border-gray-50 py-12 animate-in fade-in slide-in-from-top-4 duration-300">
+          <div
+            onMouseLeave={() => {
+              setExpandedMenu(null);
+              setHoverImage(null);
+            }}
+            className="hidden lg:block w-full border-t border-gray-50 py-12 animate-in fade-in slide-in-from-top-4 duration-300"
+          >
             <div className="flex justify-end pr-8">
               <div className="flex gap-12 max-w-4xl">
                 {/* Submenu Links Pane */}

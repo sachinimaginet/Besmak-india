@@ -60,7 +60,7 @@ export function Footer({ settings }: FooterProps) {
     : "var(--font-body)";
   const bgColor = settings?.footer_bg_color || "#00469b";
 
-  const contactAddress = settings?.footer_contact_address || "Besmak Components Pvt Ltd, Plot No. A-45, SIPCOT Industrial Growth Centre, Oragadam,Kanchipuram – 602118, Tamil Nadu, India.";
+  const contactAddress = settings?.footer_contact_address || "Besmak Components Pvt Ltd, Plot No. A-45, SIPCOT Industrial Growth Centre, Oragadam, Kanchipuram – 602118, Tamil Nadu, India.";
   const contactPhone = settings?.footer_contact_phone || "+91 44 6712 3333";
   const contactEmail = settings?.footer_contact_email || "sales@besmakindia.com";
 
@@ -197,7 +197,7 @@ export function Footer({ settings }: FooterProps) {
                 fontSize: headingSize,
                 fontFamily: settings?.footer_font_family ? fontFamily : "var(--font-heading)"
               }}
-              className="font-bold mb-6 pb-1 uppercase tracking-wider"
+              className="font-bold mb-6 pb-1 tracking-wider"
             >
               Contact
             </h4>
@@ -206,7 +206,7 @@ export function Footer({ settings }: FooterProps) {
                 {contactAddress}
               </p>
 
-              <div className="flex flex-col gap-4 pt-2">
+              <div className="flex flex-col gap-4">
                 <a href={`tel:${contactPhone.replace(/\s+/g, "")}`} className="flex items-center gap-3 hover:opacity-100 transition-opacity">
                   <Phone className="w-5 h-5 fill-white stroke-none" />
                   <span>{contactPhone}</span>

@@ -93,7 +93,7 @@ export default function NewsSection({ content }: NewsSectionProps) {
                                                 {item.title}
                                             </p>
                                             {item.description && (
-                                                <p className="text-sm text-white/80 leading-snug font-medium line-clamp-3 group-hover:text-white transition-colors">
+                                                <p className="text-sm text-white/80 leading-snug font-medium group-hover:text-white transition-colors">
                                                     {item.description}
                                                 </p>
                                             )}
