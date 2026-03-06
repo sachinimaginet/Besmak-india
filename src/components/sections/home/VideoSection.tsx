@@ -127,7 +127,7 @@ export default function VideoSection({ content }: VideoSectionProps) {
                             transition={{ duration: 0.8, ease: "easeOut" }}
                             className=""
                         >
-                            <h2 className="text-3xl md:text-5xl lg:text-6xl font-extrabold text-white tracking-tight drop-shadow-[0_2px_15px_rgba(0,0,0,0.5)] leading-[1.1]">
+                            <h2 className="text-2xl md:text-5xl lg:text-6xl font-extrabold text-white tracking-tight drop-shadow-[0_2px_15px_rgba(0,0,0,0.5)] leading-[1.1]">
                                 {currentVideo.title}
                             </h2>
                         </motion.div>
@@ -136,20 +136,20 @@ export default function VideoSection({ content }: VideoSectionProps) {
             </div>
 
             {/* Navigation Controls */}
-            <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 z-30 flex justify-between px-6 md:px-12 pointer-events-none">
+            <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 z-30 flex justify-between px-4 md:px-12 pointer-events-none">
                 <button
                     onClick={prevVideo}
-                    className="p-3 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 text-white transition-all pointer-events-auto group backdrop-blur-sm"
+                    className="p-2 md:p-3 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 text-white transition-all pointer-events-auto group backdrop-blur-sm"
                     aria-label="Previous Video"
                 >
-                    <ChevronLeft className="w-8 h-8 group-hover:-translate-x-1 transition-transform" />
+                    <ChevronLeft className="w-6 h-6 md:w-8 md:h-8 group-hover:-translate-x-1 transition-transform" />
                 </button>
                 <button
                     onClick={nextVideo}
-                    className="p-3 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 text-white transition-all pointer-events-auto group backdrop-blur-sm"
+                    className="p-2 md:p-3 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 text-white transition-all pointer-events-auto group backdrop-blur-sm"
                     aria-label="Next Video"
                 >
-                    <ChevronRight className="w-8 h-8 group-hover:translate-x-1 transition-transform" />
+                    <ChevronRight className="w-6 h-6 md:w-8 md:h-8 group-hover:translate-x-1 transition-transform" />
                 </button>
             </div>
 
