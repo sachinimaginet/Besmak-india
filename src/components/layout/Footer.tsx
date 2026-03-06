@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Facebook, Linkedin, Twitter, Youtube } from "lucide-react";
+import { Facebook, Linkedin, Twitter, Youtube, Phone, Mail } from "lucide-react";
 
 interface FooterProps {
   settings?: Record<string, string>;
@@ -60,6 +60,10 @@ export function Footer({ settings }: FooterProps) {
     : "var(--font-body)";
   const bgColor = settings?.footer_bg_color || "#00469b";
 
+  const contactAddress = settings?.footer_contact_address || "Besmak Components Pvt Ltd, Plot No. A-45, SIPCOT Industrial Growth Centre, Oragadam, Kanchipuram – 602118, Tamil Nadu, India.";
+  const contactPhone = settings?.footer_contact_phone || "+91 44 6712 3333";
+  const contactEmail = settings?.footer_contact_email || "sales@besmakindia.com";
+
   const getSocialIcon = (platform: string) => {
     const iconClass =
       "w-5 h-5 fill-white stroke-none hover:opacity-100 transition-opacity opacity-90";
@@ -92,7 +96,7 @@ export function Footer({ settings }: FooterProps) {
     >
       <div className="px-4 max-w-7xl mx-auto">
         {/* Main Footer Grid */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-12 mb-12">
           {/* Column 1: Verticals */}
           <div>
             <h4
@@ -162,7 +166,7 @@ export function Footer({ settings }: FooterProps) {
           </div>
 
           {/* Column 4: Legal Information */}
-          <div className="lg:pl-8">
+          <div>
             <h4
               style={{
                 fontSize: headingSize,
@@ -184,6 +188,35 @@ export function Footer({ settings }: FooterProps) {
                 </li>
               ))}
             </ul>
+          </div>
+
+          {/* Column 5: Contact Section */}
+          <div>
+            <h4
+              style={{
+                fontSize: headingSize,
+                fontFamily: settings?.footer_font_family ? fontFamily : "var(--font-heading)"
+              }}
+              className="font-bold mb-6 pb-1 tracking-wider"
+            >
+              Contact
+            </h4>
+            <div className="space-y-6 text-[18px] font-medium opacity-80 leading-relaxed">
+              <p className="max-w-[280px]">
+                {contactAddress}
+              </p>
+
+              <div className="flex flex-col gap-4">
+                <a href={`tel:${contactPhone.replace(/\s+/g, "")}`} className="flex items-center gap-3 hover:opacity-100 transition-opacity">
+                  <Phone className="w-5 h-5 fill-white stroke-none" />
+                  <span>{contactPhone}</span>
+                </a>
+                <a href={`mailto:${contactEmail}`} className="flex items-center gap-3 hover:opacity-100 transition-opacity">
+                  <Mail className="w-5 h-5 fill-white stroke-none" />
+                  <span>{contactEmail}</span>
+                </a>
+              </div>
+            </div>
           </div>
         </div>
 

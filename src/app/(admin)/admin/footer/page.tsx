@@ -11,6 +11,9 @@ import {
   Layout,
   Share2,
   Globe,
+  Phone,
+  Mail,
+  MapPin,
 } from "lucide-react";
 import { toast } from "sonner";
 
@@ -32,6 +35,9 @@ export default function FooterPage() {
   const [headingSize, setHeadingSize] = useState(11);
   const [fontFamily, setFontFamily] = useState("Inter");
   const [bgColor, setBgColor] = useState("#00469b");
+  const [contactAddress, setContactAddress] = useState("");
+  const [contactPhone, setContactPhone] = useState("");
+  const [contactEmail, setContactEmail] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   const [isSaving, setIsSaving] = useState(false);
 
@@ -54,6 +60,9 @@ export default function FooterPage() {
         setHeadingSize(parseInt(data.footer_heading_size));
       if (data.footer_font_family) setFontFamily(data.footer_font_family);
       if (data.footer_bg_color) setBgColor(data.footer_bg_color);
+      if (data.footer_contact_address) setContactAddress(data.footer_contact_address);
+      if (data.footer_contact_phone) setContactPhone(data.footer_contact_phone);
+      if (data.footer_contact_email) setContactEmail(data.footer_contact_email);
     } catch (error) {
       toast.error("Error loading footer settings");
       console.error(error);
@@ -73,6 +82,9 @@ export default function FooterPage() {
         footer_heading_size: headingSize.toString(),
         footer_font_family: fontFamily,
         footer_bg_color: bgColor,
+        footer_contact_address: contactAddress,
+        footer_contact_phone: contactPhone,
+        footer_contact_email: contactEmail,
       };
 
       const res = await fetch("/api/admin/settings", {
@@ -280,6 +292,58 @@ export default function FooterPage() {
               Customize the typography and background color of the website
               footer.
             </p>
+          </div>
+        </section>
+
+        {/* Contact Information Section */}
+        <section className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+          <div className="p-6 border-b bg-gray-50 flex items-center gap-2">
+            <Phone className="h-5 w-5 text-primary" />
+            <h2 className="font-bold text-gray-800">Contact Information</h2>
+          </div>
+          <div className="p-6 space-y-5">
+            <div className="space-y-1.5">
+              <label className="text-sm font-semibold text-gray-700 flex items-center gap-2">
+                <MapPin className="h-4 w-4 text-gray-400" />
+                Office Address
+              </label>
+              <textarea
+                value={contactAddress}
+                onChange={(e) => setContactAddress(e.target.value)}
+                placeholder="Enter company address..."
+                rows={3}
+                className="w-full p-2.5 border border-gray-200 rounded-lg text-gray-900 focus:ring-2 focus:ring-primary outline-none text-sm"
+              />
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
+              <div className="space-y-1.5">
+                <label className="text-sm font-semibold text-gray-700 flex items-center gap-2">
+                  <Phone className="h-4 w-4 text-gray-400" />
+                  Phone Number
+                </label>
+                <input
+                  type="text"
+                  value={contactPhone}
+                  onChange={(e) => setContactPhone(e.target.value)}
+                  placeholder="+91 44 6712 3333"
+                  className="w-full p-2.5 border border-gray-200 rounded-lg text-gray-900 focus:ring-2 focus:ring-primary outline-none text-sm"
+                />
+              </div>
+              <div className="space-y-1.5">
+                <label className="text-sm font-semibold text-gray-700 flex items-center gap-2">
+                  <Mail className="h-4 w-4 text-gray-400" />
+                  Email Address
+                </label>
+                <input
+                  type="email"
+                  value={contactEmail}
+                  onChange={(e) => setContactEmail(e.target.value)}
+                  placeholder="sales@besmakindia.com"
+                  className="w-full p-2.5 border border-gray-200 rounded-lg text-gray-900 focus:ring-2 focus:ring-primary outline-none text-sm"
+                />
+              </div>
+            </div>
           </div>
         </section>
 

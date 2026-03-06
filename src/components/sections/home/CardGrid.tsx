@@ -44,7 +44,7 @@ const defaultCards: CardData[] = [
     categoryColor: "#4a90d9",
     title: "Engineering Products Division",
     image:
-      "https://cvnvhpmvk12hdosq.public.blob.vercel-storage.com/div%20%284%29.png",
+      "https://cvnvhpmvk12hdosq.public.blob.vercel-storage.com/Stamping-Tools.png",
     href: "/products/fuse-box",
     bg: "#dce9f7",
     isDark: false,
@@ -56,7 +56,7 @@ const defaultCards: CardData[] = [
     categoryColor: "#b07c0a",
     title: "Precision Stamping Manufacturing",
     image:
-      "https://cvnvhpmvk12hdosq.public.blob.vercel-storage.com/div%20%283%29.png",
+      "https://cvnvhpmvk12hdosq.public.blob.vercel-storage.com/Gemini_Generated_Image_x6z4itx6z4itx6z4%20%281%29.png",
     href: "/products/dummy-plugs",
     bg: "#e6f3e2",
     isDark: false,

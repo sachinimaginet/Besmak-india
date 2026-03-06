@@ -202,6 +202,9 @@ export default function TwoCardsSection({ content }: TwoCardsSectionProps) {
                     }
                     .tc-title {
                         font-size: 2rem;
+                        min-height: auto;
+                        margin-bottom: 1.5rem;
+                        display: block;
                     }
                 }
 
