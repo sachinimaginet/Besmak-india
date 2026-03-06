@@ -66,21 +66,21 @@ export function Footer({ settings }: FooterProps) {
 
   const getSocialIcon = (platform: string) => {
     const iconClass =
-      "w-5 h-5 fill-white stroke-none hover:opacity-100 transition-opacity opacity-90";
+      "w-5 h-5 hover:opacity-100 transition-opacity opacity-90";
     switch (platform) {
       case "linkedin":
-        return <Linkedin className={iconClass} />;
+        return <Linkedin className={`${iconClass} stroke-white fill-none`} />;
       case "facebook":
-        return <Facebook className={iconClass} />;
+        return <Facebook className={`${iconClass} stroke-white fill-none`} />;
       case "twitter":
         return (
-          <svg viewBox="0 0 24 24" className={iconClass} aria-hidden="true">
+          <svg viewBox="0 0 24 24" className={`${iconClass} fill-white stroke-none`} aria-hidden="true">
             <path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932 6.064-6.932zm-1.292 19.49h2.039L6.486 3.24H4.298l13.311 17.403z" />
           </svg>
         );
       case "youtube":
         return (
-          <svg viewBox="0 0 24 24" className={iconClass} aria-hidden="true">
+          <svg viewBox="0 0 24 24" className={`${iconClass} fill-white stroke-none`} aria-hidden="true">
             <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
           </svg>
         );
@@ -92,7 +92,7 @@ export function Footer({ settings }: FooterProps) {
   return (
     <footer
       style={{ fontFamily, backgroundColor: bgColor }}
-      className="text-white pt-12 pb-5"
+      className="text-white pt-8 pb-3"
     >
       <div className="px-4 max-w-7xl mx-auto">
         {/* Main Footer Grid */}
@@ -191,7 +191,7 @@ export function Footer({ settings }: FooterProps) {
           </div>
 
           {/* Column 5: Contact Section */}
-          <div>
+          <div className="lg:text-right">
             <h4
               style={{
                 fontSize: headingSize,
@@ -201,18 +201,18 @@ export function Footer({ settings }: FooterProps) {
             >
               Contact
             </h4>
-            <div className="space-y-6 text-[18px] font-medium opacity-80 leading-relaxed">
+            <div className="flex flex-col lg:items-end space-y-6 text-[18px] font-medium opacity-80 leading-relaxed">
               <p className="max-w-[280px]">
                 {contactAddress}
               </p>
 
-              <div className="flex flex-col gap-4">
-                <a href={`tel:${contactPhone.replace(/\s+/g, "")}`} className="flex items-center gap-3 hover:opacity-100 transition-opacity">
-                  <Phone className="w-5 h-5 fill-white stroke-none" />
+              <div className="flex flex-col gap-0">
+                <a href={`tel:${contactPhone.replace(/\s+/g, "")}`} className="flex items-center lg:justify-end gap-3 hover:opacity-100 transition-opacity">
+                  <Phone className="w-5 h-5" />
                   <span>{contactPhone}</span>
                 </a>
-                <a href={`mailto:${contactEmail}`} className="flex items-center gap-3 hover:opacity-100 transition-opacity">
-                  <Mail className="w-5 h-5 fill-white stroke-none" />
+                <a href={`mailto:${contactEmail}`} className="flex items-center lg:justify-end gap-3 hover:opacity-100 transition-opacity">
+                  <Mail className="w-5 h-5" />
                   <span>{contactEmail}</span>
                 </a>
               </div>
@@ -240,18 +240,20 @@ export function Footer({ settings }: FooterProps) {
         </div>
 
       </div>
-      {/* Bottom Bar */}
-      <div className="flex flex-col md:flex-row justify-between items-center pt-6 border-t border-white/10 text-[18px] px-5">
-        <p>© {currentYear} Besmak India Pvt. Ltd. All rights reserved.</p>
-        <div className="flex items-center gap-1 text-[18px]">
-          <span>Designed By</span>
-          <Link
-            href="https://imaginetventures.com"
-            target="_blank"
-            className="hover:opacity-100 transition-opacity hover:underline"
-          >
-            ImagiNET Ventures
-          </Link>
+      {/* Bottom Bar Container */}
+      <div className="px-4 max-w-7xl mx-auto">
+        <div className="flex flex-col md:flex-row justify-between items-center pt-6 border-t border-white/10 text-[18px]">
+          <p>© {currentYear} Besmak India Pvt. Ltd. All rights reserved.</p>
+          <div className="flex items-center gap-1 text-[18px]">
+            <span>Designed By</span>
+            <Link
+              href="https://imaginetventures.com"
+              target="_blank"
+              className="hover:opacity-100 transition-opacity hover:underline"
+            >
+              ImagiNET Ventures
+            </Link>
+          </div>
         </div>
       </div>
     </footer>
