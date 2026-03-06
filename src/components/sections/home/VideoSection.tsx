@@ -19,11 +19,11 @@ interface VideoSectionProps {
 
 const defaultVideos: VideoData[] = [
     {
-        url: "https://cvnvhpmvk12hdosq.public.blob.vercel-storage.com/Besmak%20Banner%20video%20%281%29.mp4",
+        url: "https://cvnvhpmvk12hdosq.public.blob.vercel-storage.com/Besmak%20Ai%20video.mp4",
         title: "",
     },
     {
-        url: "https://cvnvhpmvk12hdosq.public.blob.vercel-storage.com/Besmak%20Ai%20video.mp4",
+        url: "https://cvnvhpmvk12hdosq.public.blob.vercel-storage.com/Besmak%20Banner%20video%20%281%29.mp4",
         title: "",
     }
 ];
@@ -39,16 +39,21 @@ export default function VideoSection({ content }: VideoSectionProps) {
     const videoRef = useRef<HTMLVideoElement>(null);
 
     // Handle video progress
-    const handleTimeUpdate = () => {
-        if (videoRef.current) {
-            const currentProgress = (videoRef.current.currentTime / videoRef.current.duration) * 100;
-            setProgress(currentProgress);
+    const handleTimeUpdate = (e: React.SyntheticEvent<HTMLVideoElement>, index: number) => {
+        if (index === currentIndex) {
+            const video = e.currentTarget;
+            if (video.duration) {
+                const currentProgress = (video.currentTime / video.duration) * 100;
+                setProgress(currentProgress);
+            }
         }
     };
 
     // Auto-advance logic
-    const handleVideoEnd = () => {
-        nextVideo();
+    const handleVideoEnd = (index: number) => {
+        if (index === currentIndex) {
+            nextVideo();
+        }
     };
 
     const nextVideo = () => {
@@ -61,27 +66,21 @@ export default function VideoSection({ content }: VideoSectionProps) {
         setCurrentIndex((prev) => (prev - 1 + videos.length) % videos.length);
     };
 
-    // Reset video when index changes
-    useEffect(() => {
-        if (videoRef.current) {
-            videoRef.current.load();
-            videoRef.current.play().catch(e => console.log("Auto-play blocked or failed", e));
-        }
-    }, [currentIndex]);
+
 
     const currentVideo = videos[currentIndex];
 
     return (
         <section className="relative w-full h-auto lg:h-[90vh] overflow-hidden bg-black mt-20">
             {/* Background Video Layer */}
-            <AnimatePresence mode="wait">
+            <AnimatePresence>
                 <motion.div
                     key={currentIndex}
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
                     transition={{ duration: 1, ease: "easeInOut" }}
-                    className="w-full h-full"
+                    className="absolute inset-0 w-full h-full"
                 >
                     {overlay && (
                         <div className="absolute inset-0 bg-black/40 z-10 pointer-events-none" />
@@ -92,8 +91,8 @@ export default function VideoSection({ content }: VideoSectionProps) {
                         autoPlay
                         muted
                         playsInline
-                        onTimeUpdate={handleTimeUpdate}
-                        onEnded={handleVideoEnd}
+                        onTimeUpdate={(e) => handleTimeUpdate(e, currentIndex)}
+                        onEnded={() => handleVideoEnd(currentIndex)}
                         poster={currentVideo.poster}
                         className="w-full h-full object-cover"
                     >
