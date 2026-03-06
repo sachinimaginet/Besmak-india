@@ -242,9 +242,9 @@ export function Footer({ settings }: FooterProps) {
       </div>
       {/* Bottom Bar Container */}
       <div className="px-4 max-w-7xl mx-auto">
-        <div className="flex flex-col md:flex-row justify-between items-center pt-6 border-t border-white/10 text-[18px]">
+        <div className="flex flex-col md:flex-row justify-between items-center pt-6 border-t border-white/10 text-[15px]">
           <p>© {currentYear} Besmak India Pvt. Ltd. All rights reserved.</p>
-          <div className="flex items-center gap-1 text-[18px]">
+          <div className="flex items-center gap-1 text-[15px]">
             <span>Designed By</span>
             <Link
               href="https://imaginetventures.com"
