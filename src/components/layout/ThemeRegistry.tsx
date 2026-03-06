@@ -54,7 +54,7 @@ export default function ThemeRegistry({
     }
 
     // Load fonts (skip system fonts)
-    const systemFonts = ["Inter", "Times New Roman", "Arial", "Verdana", "Georgia", "Helvetica"];
+    const systemFonts = ["Inter", "Gilroy", "Times New Roman", "Arial", "Verdana", "Georgia", "Helvetica"];
     const fontsToLoad = [];
     if (settings.heading_font && !systemFonts.includes(settings.heading_font))
       fontsToLoad.push(settings.heading_font);

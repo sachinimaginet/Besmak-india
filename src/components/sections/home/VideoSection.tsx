@@ -19,11 +19,11 @@ interface VideoSectionProps {
 
 const defaultVideos: VideoData[] = [
     {
-        url: "https://cvnvhpmvk12hdosq.public.blob.vercel-storage.com/Besmak%20Ai%20video.mp4",
+        url: "https://cvnvhpmvk12hdosq.public.blob.vercel-storage.com/Besmak%20Ai%20video.mp44",
         title: "",
     },
     {
-        url: "https://cvnvhpmvk12hdosq.public.blob.vercel-storage.com/Besmak%20Banner%20video%20%281%29.mp4",
+        url: "https://cvnvhpmvk12hdosq.public.blob.vercel-storage.com/Besmak%20Banner%20video%20%281%29.mp44",
         title: "",
     }
 ];
