@@ -66,7 +66,7 @@ export default async function ProductDetailPage({
   };
 
   return (
-    <div className="min-h-screen bg-[#f8fafc] pb-12 pt-[180px] relative overflow-hidden">
+    <div className="min-h-screen bg-[#f8fafc] pb-12 pt-[130px] relative overflow-hidden">
       {/* Background Decorative Elements */}
       <div className="absolute top-0 left-0 w-full h-[500px] bg-gradient-to-b from-blue-50/50 to-transparent pointer-events-none" />
       <div className="absolute -top-24 -right-24 w-96 h-96 bg-primary/5 rounded-full blur-3xl pointer-events-none" />

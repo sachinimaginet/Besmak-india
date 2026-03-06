@@ -81,7 +81,7 @@ export default async function ProductsPage({
         }
         if (specs["Sealed / Unsealed"])
           filterData.sealed.add(String(specs["Sealed / Unsealed"]).trim());
-      } catch (e) { }
+      } catch (e) {}
     }
   });
 
@@ -256,8 +256,8 @@ export default async function ProductsPage({
   }));
 
   return (
-    <div className="py-12 bg-gray-50 min-h-screen">
-      <div className="container mx-auto px-4 py-8">
+    <div className="pt-[110px] pb-12 bg-gray-50 min-h-screen">
+      <div className="container mx-auto px-4">
         <ProductHeader query={searchTerm} />
 
         <div className="flex flex-col lg:flex-row gap-8">
