@@ -66,7 +66,7 @@ export default function ClientsSection({ content }: ClientsSectionProps) {
       <h2 className="cs-heading">{title}</h2>
 
       {/* ── Ticker ── */}
-      <div className="cs-ticker" aria-hidden="true">
+      <div className="cs-ticker container mx-auto" aria-hidden="true">
         <div className="cs-track">
           {track.map((logo, i) =>
             logo.href ? (

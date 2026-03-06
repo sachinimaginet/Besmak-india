@@ -37,10 +37,15 @@ export default function VideoSection({ content }: VideoSectionProps) {
     const [currentIndex, setCurrentIndex] = useState(0);
     const [progress, setProgress] = useState(0);
     const videoRef = useRef<HTMLVideoElement>(null);
+    const currentIndexRef = useRef(currentIndex);
+
+    useEffect(() => {
+        currentIndexRef.current = currentIndex;
+    }, [currentIndex]);
 
     // Handle video progress
     const handleTimeUpdate = (e: React.SyntheticEvent<HTMLVideoElement>, index: number) => {
-        if (index === currentIndex) {
+        if (index === currentIndexRef.current) {
             const video = e.currentTarget;
             if (video.duration) {
                 const currentProgress = (video.currentTime / video.duration) * 100;
@@ -51,7 +56,7 @@ export default function VideoSection({ content }: VideoSectionProps) {
 
     // Auto-advance logic
     const handleVideoEnd = (index: number) => {
-        if (index === currentIndex) {
+        if (index === currentIndexRef.current) {
             nextVideo();
         }
     };
