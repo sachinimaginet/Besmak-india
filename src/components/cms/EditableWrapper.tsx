@@ -8,6 +8,7 @@ import ClientsSectionEditor from "./ClientsSectionEditor";
 import EventsAchievementsEditor from "./EventsAchievementsEditor";
 import TwoCardsSectionEditor from "./TwoCardsSectionEditor";
 import VideoSectionEditor from "./VideoSectionEditor";
+import NewsSectionEditor from "./NewsSectionEditor";
 
 interface EditableWrapperProps {
   sectionId: string;
@@ -89,7 +90,19 @@ export default function EditableWrapper({
         />
       )}
 
-      {isEditing && !["clients-section", "events-achievements", "dual-cards-section", "video-section"].includes(type) && (
+      {isEditing && type === "news-section" && (
+        <NewsSectionEditor
+          sectionId={sectionId}
+          content={content}
+          onClose={() => setIsEditing(false)}
+          onSave={() => {
+            setIsEditing(false);
+            onUpdate?.();
+          }}
+        />
+      )}
+
+      {isEditing && !["clients-section", "events-achievements", "dual-cards-section", "video-section", "news-section"].includes(type) && (
         <SectionEditor
           sectionId={sectionId}
           type={type}
