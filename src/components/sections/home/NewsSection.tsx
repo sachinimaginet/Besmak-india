@@ -71,7 +71,7 @@ export default function NewsSection({ content }: NewsSectionProps) {
     } = content || {};
 
     return (
-        <section className="bg-white py-12">
+        <section className="bg-white py-0">
             <div className="container mx-auto px-4 max-w-7xl">
                 <div className="flex flex-col lg:flex-row min-h-[600px] shadow-xl rounded-2xl overflow-hidden">
                     {/* Left Side: News List */}

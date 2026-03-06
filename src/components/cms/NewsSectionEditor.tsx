@@ -197,41 +197,47 @@ export default function NewsSectionEditor({
                     {/* Collage Images */}
                     <div className="space-y-6">
                         <h3 className="text-lg font-bold text-gray-900">Collage Images (4 total)</h3>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div className="grid grid-cols-2 gap-4 md:gap-6">
                             {images.map((image, index) => (
-                                <div key={index} className="p-5 border border-gray-100 rounded-2xl bg-gray-50/50 space-y-4">
+                                <div key={index} className="p-3 md:p-5 border border-gray-100 rounded-2xl bg-gray-50/50 space-y-3">
                                     <div className="flex items-center justify-between">
-                                        <span className="text-xs font-bold text-blue-600 bg-blue-50 px-2.5 py-1 rounded-full uppercase">Image {index + 1}</span>
+                                        <span className="text-[10px] font-bold text-blue-600 bg-blue-50 px-2 py-0.5 rounded-full uppercase">Img {index + 1}</span>
                                     </div>
                                     <div className="space-y-3">
-                                        <div className="space-y-1">
-                                            <label className="flex items-center gap-2 text-[10px] font-bold text-gray-500 uppercase"><ImageIcon className="w-3 h-3" /> URL</label>
-                                            <input
-                                                type="text"
-                                                value={image.url}
-                                                onChange={(e) => updateImage(index, "url", e.target.value)}
-                                                className="w-full p-2 bg-white border border-gray-200 rounded-lg text-xs"
-                                                placeholder="https://images.unsplash.com/..."
-                                            />
+                                        {/* Preview */}
+                                        <div className="relative aspect-video bg-gray-200 rounded-lg overflow-hidden border border-gray-100">
+                                            {image.url ? (
+                                                <img
+                                                    src={image.url}
+                                                    alt="preview"
+                                                    className="w-full h-full object-contain"
+                                                />
+                                            ) : (
+                                                <div className="flex items-center justify-center h-full text-gray-400">
+                                                    <ImageIcon className="w-5 h-5" />
+                                                </div>
+                                            )}
                                         </div>
-                                        <div className="space-y-1">
-                                            <label className="flex items-center gap-2 text-[10px] font-bold text-gray-500 uppercase"><Type className="w-3 h-3" /> Overlay Title</label>
-                                            <input
-                                                type="text"
-                                                value={image.title}
-                                                onChange={(e) => updateImage(index, "title", e.target.value)}
-                                                className="w-full p-2 bg-white border border-gray-200 rounded-lg text-xs"
-                                            />
-                                        </div>
-                                        <div className="space-y-1">
-                                            <label className="flex items-center gap-2 text-[10px] font-bold text-gray-500 uppercase"><Calendar className="w-3 h-3" /> Date (Optional)</label>
-                                            <input
-                                                type="text"
-                                                value={image.date}
-                                                onChange={(e) => updateImage(index, "date", e.target.value)}
-                                                className="w-full p-2 bg-white border border-gray-200 rounded-lg text-xs"
-                                                placeholder="e.g. January 14, 2026"
-                                            />
+                                        <div className="space-y-2">
+                                            <div className="space-y-1">
+                                                <label className="flex items-center gap-2 text-[9px] font-bold text-gray-500 uppercase"><ImageIcon className="w-3 h-3" /> URL</label>
+                                                <input
+                                                    type="text"
+                                                    value={image.url}
+                                                    onChange={(e) => updateImage(index, "url", e.target.value)}
+                                                    className="w-full p-2 bg-white border border-gray-200 rounded-lg text-xs"
+                                                    placeholder="URL..."
+                                                />
+                                            </div>
+                                            <div className="space-y-1">
+                                                <label className="flex items-center gap-2 text-[9px] font-bold text-gray-500 uppercase"><Type className="w-3 h-3" /> Title</label>
+                                                <input
+                                                    type="text"
+                                                    value={image.title}
+                                                    onChange={(e) => updateImage(index, "title", e.target.value)}
+                                                    className="w-full p-2 bg-white border border-gray-200 rounded-lg text-xs"
+                                                />
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

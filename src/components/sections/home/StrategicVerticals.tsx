@@ -82,7 +82,7 @@ export default function StrategicVerticals({
   } = content || {};
 
   return (
-    <section className="strategic-verticals py-24 bg-[#f8fafc] overflow-hidden">
+    <section className="strategic-verticals py-8 bg-[#f8fafc] overflow-hidden">
       <div className="container mx-auto px-4 max-w-7xl">
         {/* Header */}
         <motion.div

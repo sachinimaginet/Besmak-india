@@ -212,7 +212,7 @@ export default function CardGrid({ content }: CardGridProps) {
         }
         .cg-subtitle {
           text-align: center;
-          font-size: 1rem;
+          font-size: 1.25rem;
           color: #6b7280;
           max-width: 52rem;
           margin: 0 auto;

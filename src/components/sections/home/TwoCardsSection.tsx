@@ -66,9 +66,9 @@ export default function TwoCardsSection({ content }: TwoCardsSectionProps) {
                                     <p key={i}>{p}</p>
                                 ))}
                             </div>
-                            <Link href={leftData.link} className="tc-btn-link">
-                                <button className="flex items-center gap-2 bg-white text-[#1a4fa0] px-4 py-2 rounded-md">
-                                    {leftData.buttonText} <ArrowRight className="w-5 h-5 text-[#1a4fa0] ml-2" />
+                            <Link href={leftData.link} className="tc-btn-link group/btn">
+                                <button className="flex items-center gap-2 bg-white text-[#1a4fa0] px-6 py-3 rounded-full font-bold shadow-md transform transition-all duration-300 group-hover/btn:scale-105 group-hover/btn:shadow-xl group-hover/btn:bg-[#1a4fa0] group-hover/btn:text-white">
+                                    {leftData.buttonText} <ArrowRight className="w-5 h-5 ml-2 transform transition-transform duration-300 group-hover/btn:translate-x-1" />
                                 </button>
                             </Link>
                         </div>
@@ -84,9 +84,9 @@ export default function TwoCardsSection({ content }: TwoCardsSectionProps) {
                                     <p key={i}>{p}</p>
                                 ))}
                             </div>
-                            <Link href={rightData.link} className="tc-btn-link">
-                                <button className="flex items-center gap-2 bg-white text-[#1a4fa0] px-4 py-2 rounded-md">
-                                    {rightData.buttonText} <ArrowRight className="w-5 h-5 text-[#1a4fa0] ml-2" />
+                            <Link href={rightData.link} className="tc-btn-link group/btn">
+                                <button className="flex items-center gap-2 bg-white text-[#1a4fa0] px-6 py-3 rounded-full font-bold shadow-md transform transition-all duration-300 group-hover/btn:scale-105 group-hover/btn:shadow-xl group-hover/btn:bg-[#1a4fa0] group-hover/btn:text-white">
+                                    {rightData.buttonText} <ArrowRight className="w-5 h-5 ml-2 transform transition-transform duration-300 group-hover/btn:translate-x-1" />
                                 </button>
                             </Link>
                         </div>
