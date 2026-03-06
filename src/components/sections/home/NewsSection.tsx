@@ -119,7 +119,7 @@ export default function NewsSection({ content }: NewsSectionProps) {
                                     src={image.url}
                                     alt={image.title}
                                     fill
-                                    className="object-cover"
+                                    className="object-fit"
                                 />
                                 {/* Overlay */}
                                 <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent flex flex-col justify-end p-6 md:p-8">

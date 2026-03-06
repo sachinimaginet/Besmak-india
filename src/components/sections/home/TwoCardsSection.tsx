@@ -67,7 +67,7 @@ export default function TwoCardsSection({ content }: TwoCardsSectionProps) {
                                 ))}
                             </div>
                             <Link href={leftData.link} className="tc-btn-link group/btn">
-                                <button className="flex items-center gap-2 bg-white text-[#1a4fa0] px-6 py-3 rounded-full font-bold shadow-md transform transition-all duration-300 group-hover/btn:scale-105 group-hover/btn:shadow-xl group-hover/btn:bg-[#1a4fa0] group-hover/btn:text-white">
+                                <button className="flex items-center gap-2 bg-white text-[#1a4fa0] px-6 py-3 rounded-md font-bold shadow-md transform transition-all duration-300 group-hover/btn:scale-105 group-hover/btn:shadow-xl group-hover/btn:bg-[#1a4fa0] group-hover/btn:text-white">
                                     {leftData.buttonText} <ArrowRight className="w-5 h-5 ml-2 transform transition-transform duration-300 group-hover/btn:translate-x-1" />
                                 </button>
                             </Link>
@@ -85,7 +85,7 @@ export default function TwoCardsSection({ content }: TwoCardsSectionProps) {
                                 ))}
                             </div>
                             <Link href={rightData.link} className="tc-btn-link group/btn">
-                                <button className="flex items-center gap-2 bg-white text-[#1a4fa0] px-6 py-3 rounded-full font-bold shadow-md transform transition-all duration-300 group-hover/btn:scale-105 group-hover/btn:shadow-xl group-hover/btn:bg-[#1a4fa0] group-hover/btn:text-white">
+                                <button className="flex items-center gap-2 bg-white text-[#1a4fa0] px-6 py-3 rounded-md font-bold shadow-md transform transition-all duration-300 group-hover/btn:scale-105 group-hover/btn:shadow-xl group-hover/btn:bg-[#1a4fa0] group-hover/btn:text-white">
                                     {rightData.buttonText} <ArrowRight className="w-5 h-5 ml-2 transform transition-transform duration-300 group-hover/btn:translate-x-1" />
                                 </button>
                             </Link>
