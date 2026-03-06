@@ -71,70 +71,72 @@ export default function NewsSection({ content }: NewsSectionProps) {
     } = content || {};
 
     return (
-        <section className="bg-white overflow-hidden">
-            <div className="flex flex-col lg:flex-row min-h-[600px]">
-                {/* Left Side: News List */}
-                <div className="lg:w-1/3 bg-primary p-8 md:p-12 lg:p-16 flex flex-col justify-between text-white">
-                    <div>
-                        <h2 className="text-3xl md:text-3xl lg:text-4xl font-bold mb-10 tracking-tight">
-                            {title}
-                        </h2>
+        <section className="bg-white py-12">
+            <div className="container mx-auto px-4 max-w-7xl">
+                <div className="flex flex-col lg:flex-row min-h-[600px] shadow-xl rounded-2xl overflow-hidden">
+                    {/* Left Side: News List */}
+                    <div className="lg:w-1/3 bg-primary p-8 md:p-12 flex flex-col justify-between text-white">
+                        <div>
+                            <h2 className="text-2xl md:text-3xl font-bold mb-8 tracking-tight">
+                                {title}
+                            </h2>
 
-                        <div className="space-y-8">
-                            {newsItems.map((item, index) => (
-                                <a
-                                    key={index}
-                                    href={item.link}
-                                    className="group flex items-start justify-between gap-4 border-b border-white/20 pb-6 hover:border-white transition-colors"
-                                >
+                            <div className="space-y-6">
+                                {newsItems.map((item, index) => (
+                                    <a
+                                        key={index}
+                                        href={item.link}
+                                        className="group flex items-start justify-between gap-4 border-b border-white/20 pb-4 hover:border-white transition-colors"
+                                    >
+                                        <div className="space-y-2">
+                                            <p className="text-base md:text-lg font-bold leading-tight group-hover:text-white transition-colors">
+                                                {item.title}
+                                            </p>
+                                            {item.description && (
+                                                <p className="text-sm text-white/80 leading-snug font-medium line-clamp-3 group-hover:text-white transition-colors">
+                                                    {item.description}
+                                                </p>
+                                            )}
+                                        </div>
+                                        <ArrowRight className="w-5 h-5 flex-shrink-0 mt-1 transform group-hover:translate-x-1 transition-transform" />
+                                    </a>
+                                ))}
+                            </div>
+                        </div>
+
+                        <div className="mt-10 bg-black/20 p-6 rounded-xl">
+                            <p className="text-base md:text-lg font-bold leading-tight">
+                                {featuredBoxText}
+                            </p>
+                        </div>
+                    </div>
+
+                    {/* Right Side: Image Grid Collage */}
+                    <div className="lg:w-2/3 grid grid-cols-1 md:grid-cols-2 bg-gray-100">
+                        {images.slice(0, 4).map((image, index) => (
+                            <div key={index} className="relative group overflow-hidden aspect-video md:aspect-square lg:aspect-auto h-full min-h-[300px]">
+                                <Image
+                                    src={image.url}
+                                    alt={image.title}
+                                    fill
+                                    className="object-cover"
+                                />
+                                {/* Overlay */}
+                                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent flex flex-col justify-end p-6 md:p-8">
                                     <div className="space-y-2">
-                                        <p className="text-base md:text-lg font-bold leading-tight group-hover:text-white transition-colors">
-                                            {item.title}
-                                        </p>
-                                        {item.description && (
-                                            <p className="text-sm md:text-base text-white/80 leading-snug font-medium line-clamp-3 group-hover:text-white transition-colors">
-                                                {item.description}
+                                        <h3 className="text-lg md:text-xl font-bold text-white leading-tight group-hover:text-blue-200 transition-colors">
+                                            {image.title}
+                                        </h3>
+                                        {image.date && (
+                                            <p className="text-xs font-semibold text-white/60 tracking-wider">
+                                                {image.date.toUpperCase()}
                                             </p>
                                         )}
                                     </div>
-                                    <ArrowRight className="w-5 h-5 flex-shrink-0 mt-1 transform group-hover:translate-x-1 transition-transform" />
-                                </a>
-                            ))}
-                        </div>
-                    </div>
-
-                    <div className="mt-12 bg-black/20 p-6 md:p-8 rounded-sm">
-                        <p className="text-lg md:text-xl font-bold leading-tight">
-                            {featuredBoxText}
-                        </p>
-                    </div>
-                </div>
-
-                {/* Right Side: Image Grid Collage */}
-                <div className="lg:w-2/3 grid grid-cols-1 md:grid-cols-2 bg-gray-100">
-                    {images.slice(0, 4).map((image, index) => (
-                        <div key={index} className="relative group overflow-hidden aspect-video md:aspect-square lg:aspect-auto h-full min-h-[300px]">
-                            <Image
-                                src={image.url}
-                                alt={image.title}
-                                fill
-                                className="object-cover transition-transform duration-700 group-hover:scale-110"
-                            />
-                            {/* Overlay */}
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent flex flex-col justify-end p-6 md:p-8">
-                                <div className="space-y-3">
-                                    <h3 className="text-xl md:text-2xl font-bold text-white leading-tight group-hover:text-blue-200 transition-colors">
-                                        {image.title}
-                                    </h3>
-                                    {image.date && (
-                                        <p className="text-sm font-semibold text-white/60 tracking-wider">
-                                            {image.date.toUpperCase()}
-                                        </p>
-                                    )}
                                 </div>
                             </div>
-                        </div>
-                    ))}
+                        ))}
+                    </div>
                 </div>
             </div>
         </section>

@@ -67,7 +67,7 @@ export default function TwoCardsSection({ content }: TwoCardsSectionProps) {
                                 ))}
                             </div>
                             <Link href={leftData.link} className="tc-btn-link">
-                                <button className="flex items-center gap-2 bg-white text-[#1a4fa0] px-4 py-2 rounded-full">
+                                <button className="flex items-center gap-2 bg-white text-[#1a4fa0] px-4 py-2 rounded-md">
                                     {leftData.buttonText} <ArrowRight className="w-5 h-5 text-[#1a4fa0] ml-2" />
                                 </button>
                             </Link>
@@ -85,7 +85,7 @@ export default function TwoCardsSection({ content }: TwoCardsSectionProps) {
                                 ))}
                             </div>
                             <Link href={rightData.link} className="tc-btn-link">
-                                <button className="flex items-center gap-2 bg-white text-[#1a4fa0] px-4 py-2 rounded-full">
+                                <button className="flex items-center gap-2 bg-white text-[#1a4fa0] px-4 py-2 rounded-md">
                                     {rightData.buttonText} <ArrowRight className="w-5 h-5 text-[#1a4fa0] ml-2" />
                                 </button>
                             </Link>
