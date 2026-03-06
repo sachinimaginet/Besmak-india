@@ -3,6 +3,8 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import {
   ChevronRight,
+  ChevronDown,
+  ArrowRight,
   Inbox,
   ShieldCheck,
   Zap,
@@ -152,25 +154,25 @@ export default async function ProductDetailPage({
                 <Sparkles className="w-32 h-32 text-primary" />
               </div>
 
-              <div className="inline-flex items-center gap-2 px-3 py-1 bg-primary/5 text-primary rounded-full text-[10px] font-bold uppercase tracking-[0.1em] mb-4 group cursor-default">
+              <div className="inline-flex items-center gap-2 px-3 py-1 bg-primary/5 text-primary rounded-full text-[10px] font-bold uppercase tracking-widest mb-4 group cursor-default">
                 <span className="w-1.5 h-1.5 bg-primary rounded-full animate-pulse group-hover:scale-150 transition-transform"></span>
                 {product.category.name}
               </div>
 
-              <h1 className="text-[10px] md:text-xs lg:text-sm font-bold text-gray-900 mb-1 leading-tight tracking-tight">
+              <h1 className="text-[10px] md:text-xs lg:text-sm font-black text-primary mb-1 leading-tight tracking-tight">
                 {product.name}
               </h1>
 
               <div className="prose prose-slate max-w-none mb-6">
-                <p className="text-gray-500 text-sm font-medium leading-relaxed">
+                <p className="text-primary/70 text-sm font-bold leading-relaxed">
                   {product.description}
                 </p>
               </div>
 
               {/* Specifications List */}
               <div className="space-y-4 mb-8">
-                <h4 className="text-[7px] font-bold text-gray-400 uppercase tracking-[0.3em] mb-2 flex items-center gap-2">
-                  <span className="w-2.5 h-[1px] bg-gray-200"></span>
+                <h4 className="text-[7px] font-black text-primary/40 uppercase tracking-[0.3em] mb-2 flex items-center gap-2">
+                  <span className="w-2.5 h-[1px] bg-primary/20"></span>
                   Technical Excellence
                 </h4>
                 <div className="grid grid-cols-1 gap-2">
@@ -183,10 +185,10 @@ export default async function ProductDetailPage({
                         className="flex items-center justify-between p-3 bg-gray-50/50 rounded-xl border border-gray-100 hover:border-primary/30 hover:bg-white hover:shadow-sm transition-all duration-300 group animate-in fade-in slide-in-from-right-2"
                         style={{ animationDelay: `${500 + idx * 50}ms` }}
                       >
-                        <span className="text-[11px] font-bold text-gray-500 group-hover:text-primary transition-colors">
+                        <span className="text-[11px] font-black text-primary/50 group-hover:text-primary transition-colors">
                           {key}
                         </span>
-                        <span className="text-[11px] font-black text-gray-900">
+                        <span className="text-[11px] font-black text-primary">
                           {String(value)}
                         </span>
                       </div>
@@ -201,61 +203,90 @@ export default async function ProductDetailPage({
                     <Inbox className="w-5 h-5" />
                   </div>
                   <div>
-                    <h2 className="text-base font-extrabold text-gray-900 leading-none mb-1">
+                    <h2 className="text-base font-black text-primary leading-none mb-1">
                       Request Quote
                     </h2>
-                    <p className="text-[11px] text-gray-400 font-bold uppercase tracking-tighter">
+                    <p className="text-[11px] text-primary/40 font-black uppercase tracking-tighter">
                       Premium Service Desk
                     </p>
                   </div>
                 </div>
 
-                <form className="space-y-3.5">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div className="space-y-1.5 group">
-                      <label className="text-[9px] font-black text-gray-400 uppercase tracking-widest ml-1 group-focus-within:text-primary transition-colors">
-                        Your Name
-                      </label>
-                      <input
-                        type="text"
-                        className="w-full px-4 py-3 bg-gray-50/80 border border-gray-100 rounded-xl focus:ring-4 focus:ring-primary/5 focus:border-primary outline-none text-xs font-bold text-gray-900 transition-all placeholder:text-gray-300 hover:bg-white"
-                        placeholder="John Doe"
-                      />
-                    </div>
-                    <div className="space-y-1.5 group">
-                      <label className="text-[9px] font-black text-gray-400 uppercase tracking-widest ml-1 group-focus-within:text-primary transition-colors">
-                        Email Address
-                      </label>
-                      <input
-                        type="email"
-                        className="w-full px-4 py-3 bg-gray-50/80 border border-gray-100 rounded-xl focus:ring-4 focus:ring-primary/5 focus:border-primary outline-none text-xs font-bold text-gray-900 transition-all placeholder:text-gray-300 hover:bg-white"
-                        placeholder="john@company.com"
-                      />
-                    </div>
+                <form className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="space-y-1.5 group">
+                    <label className="text-[9px] font-black text-primary/40 uppercase tracking-widest ml-1 group-focus-within:text-primary transition-colors">
+                      Full Name
+                    </label>
+                    <input
+                      type="text"
+                      className="w-full px-4 py-3 bg-gray-50/80 border border-gray-100 rounded-xl focus:ring-4 focus:ring-primary/5 focus:border-primary outline-none text-xs font-bold text-primary transition-all placeholder:text-primary/30 hover:bg-white"
+                      placeholder="e.g. John Doe"
+                    />
                   </div>
                   <div className="space-y-1.5 group">
-                    <label className="text-[9px] font-black text-gray-400 uppercase tracking-widest ml-1 group-focus-within:text-primary transition-colors">
-                      Requirements
+                    <label className="text-[9px] font-black text-primary/40 uppercase tracking-widest ml-1 group-focus-within:text-primary transition-colors">
+                      Email Address
                     </label>
-                    <textarea
-                      rows={3}
-                      className="w-full px-4 py-3 bg-gray-50/80 border border-gray-100 rounded-xl focus:ring-4 focus:ring-primary/5 focus:border-primary outline-none text-xs font-bold text-gray-900 transition-all resize-none placeholder:text-gray-300 hover:bg-white"
-                      placeholder={`Let us know your specific requirements for ${product.name}...`}
-                    ></textarea>
+                    <input
+                      type="email"
+                      className="w-full px-4 py-3 bg-gray-50/80 border border-gray-100 rounded-xl focus:ring-4 focus:ring-primary/5 focus:border-primary outline-none text-xs font-bold text-primary transition-all placeholder:text-primary/30 hover:bg-white"
+                      placeholder="john@company.com"
+                    />
+                  </div>
+                  <div className="space-y-1.5 group">
+                    <label className="text-[9px] font-black text-primary/40 uppercase tracking-widest ml-1 group-focus-within:text-primary transition-colors">
+                      Phone Number
+                    </label>
+                    <input
+                      type="tel"
+                      className="w-full px-4 py-3 bg-gray-50/80 border border-gray-100 rounded-xl focus:ring-4 focus:ring-primary/5 focus:border-primary outline-none text-xs font-bold text-primary transition-all placeholder:text-primary/30 hover:bg-white"
+                      placeholder="+91 98XXX XXXXX"
+                    />
+                  </div>
+                  <div className="space-y-1.5 group">
+                    <label className="text-[9px] font-black text-primary/40 uppercase tracking-widest ml-1 group-focus-within:text-primary transition-colors">
+                      Company Name
+                    </label>
+                    <input
+                      type="text"
+                      className="w-full px-4 py-3 bg-gray-50/80 border border-gray-100 rounded-xl focus:ring-4 focus:ring-primary/5 focus:border-primary outline-none text-xs font-bold text-primary transition-all placeholder:text-primary/30 hover:bg-white"
+                      placeholder="Company Pvt Ltd"
+                    />
+                  </div>
+                  <div className="space-y-1.5 group md:col-span-2">
+                    <label className="text-[9px] font-black text-primary/40 uppercase tracking-widest ml-1 group-focus-within:text-primary transition-colors">
+                      Industry Sector
+                    </label>
+                    <div className="relative">
+                      <select className="w-full px-4 py-3 bg-gray-50/80 border border-gray-100 rounded-xl focus:ring-4 focus:ring-primary/5 focus:border-primary outline-none text-xs font-bold text-primary transition-all hover:bg-white appearance-none cursor-pointer">
+                        <option value="">Select Industry</option>
+                        <option value="automotive">Automotive</option>
+                        <option value="aerospace">Aerospace</option>
+                        <option value="electronics">Electronics</option>
+                        <option value="industrial">
+                          Industrial Manufacturing
+                        </option>
+                        <option value="energy">Energy & Infrastructure</option>
+                        <option value="other">Other</option>
+                      </select>
+                      <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-primary/40">
+                        <ChevronDown className="w-4 h-4" />
+                      </div>
+                    </div>
                   </div>
                   <button
                     type="button"
-                    className="w-full relative overflow-hidden group bg-primary text-white py-4 rounded-xl font-black text-[12px] uppercase tracking-widest shadow-[0_15px_30px_-5px_rgba(0,70,155,0.3)] hover:shadow-[0_20px_40px_-5px_rgba(0,70,155,0.4)] active:scale-[0.98] transition-all"
+                    className="md:col-span-2 relative overflow-hidden group bg-primary text-white py-4 rounded-xl font-black text-[12px] uppercase tracking-widest shadow-[0_15px_30px_-5px_rgba(0,70,155,0.3)] hover:shadow-[0_20px_40px_-5px_rgba(0,70,155,0.4)] active:scale-[0.98] transition-all"
                   >
                     <span className="relative z-10 flex items-center justify-center gap-2">
-                      Send Inquiry
+                      Send Enquiry
+                      <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                     </span>
-                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
                   </button>
-                  <p className="text-[8px] text-center text-gray-400 font-bold uppercase tracking-wider mt-2 opacity-60">
-                    Confidential inquiry • Response within 24h
-                  </p>
                 </form>
+                <p className="text-[8px] text-center text-primary/30 font-black uppercase tracking-widest mt-6 opacity-60">
+                  Confidential inquiry • Response within 24h
+                </p>
               </div>
             </div>
           </div>
