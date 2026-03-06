@@ -72,7 +72,7 @@ export default function VideoSection({ content }: VideoSectionProps) {
     const currentVideo = videos[currentIndex];
 
     return (
-        <section className="relative w-full h-auto lg:h-[80vh] overflow-hidden bg-black mt-22">
+        <section className="relative w-full h-auto lg:h-[90vh] overflow-hidden bg-black mt-20">
             {/* Background Video Layer */}
             <AnimatePresence mode="wait">
                 <motion.div
