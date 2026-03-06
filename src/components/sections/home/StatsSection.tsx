@@ -54,22 +54,22 @@ export default function StatsSection({ content }: StatsSectionProps) {
     return (
         <section className={`py-12 ${bgColor}`}>
             <div className="container mx-auto px-4 max-w-7xl">
-                <div className="flex flex-col md:flex-row items-stretch justify-between gap-8 md:gap-0">
+                <div className="grid grid-cols-2 lg:grid-cols-4 items-stretch justify-between gap-y-12 gap-x-2 md:gap-x-4">
                     {items.map((item, index) => {
                         const Icon = IconMap[item.icon] || History;
                         return (
                             <div
                                 key={index}
-                                className={`flex-1 flex flex-col items-center text-center px-4 ${index !== items.length - 1 ? "md:border-r border-gray-300" : ""
+                                className={`flex flex-col items-center text-center px-2 md:px-4 ${index % 2 === 0 ? "border-r border-gray-300" : ""} ${index < 3 ? "lg:border-r lg:border-gray-300" : "lg:border-r-0"
                                     }`}
                             >
-                                <div className="mb-6">
-                                    <Icon className="w-20 h-20 text-primary" strokeWidth={1.5} />
+                                <div className="mb-4 md:mb-6">
+                                    <Icon className="w-12 h-12 md:w-20 md:h-20 text-primary" strokeWidth={1.5} />
                                 </div>
-                                <h3 className="font-serif font-bold text-primary mb-2 leading-tight">
+                                <h3 className="font-serif font-bold text-xl md:text-2xl text-primary mb-2 leading-tight">
                                     {item.value}
                                 </h3>
-                                <p className="text-primary font-serif font-semibold text-sm md:text-base leading-relaxed">
+                                <p className="text-primary font-serif font-semibold text-xs md:text-base leading-relaxed">
                                     {item.label}
                                 </p>
                             </div>

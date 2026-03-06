@@ -92,10 +92,9 @@ export default function StrategicVerticals({
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-extrabold text-[#0b327b] tracking-tight mb-4">
+          <h2 className="text-4xl text-secondary font-bold md:text-5xl tracking-tight mb-4">
             {heading}
           </h2>
-          <div className="w-24 h-1.5 bg-[#0b327b] mx-auto rounded-full" />
         </motion.div>
 
         {/* Verticals Grid */}
@@ -134,7 +133,7 @@ export default function StrategicVerticals({
                   {/* Title Overlay */}
                   <div className="absolute bottom-0 inset-x-0 p-6">
                     <div className="backdrop-blur-md bg-white/80 border border-white/20 rounded-xl p-4 shadow-lg transform translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
-                      <h3 className="text-[#0b327b] text-xl font-bold text-center group-hover:text-blue-700 transition-colors duration-300">
+                      <h3 className="text-primary text-xl font-bold text-center  transition-colors duration-300">
                         {vertical.title}
                       </h3>
                     </div>
