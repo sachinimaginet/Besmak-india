@@ -120,7 +120,7 @@ const Header = ({ settings }: HeaderProps) => {
             <div
               className="relative transition-all duration-300 flex items-center"
               style={{
-                height: `${(headerHeight - 8) * 4}px`,
+                height: `${(headerHeight - 4) * 4}px`,
                 transform: `scale(${logoSize})`,
                 transformOrigin: "left center",
               }}
@@ -144,7 +144,7 @@ const Header = ({ settings }: HeaderProps) => {
                   {item.child ? (
                     <button
                       onClick={() => toggleMenu(item.title)}
-                      className={`flex items-center gap-1.5 text-[15px] font-medium transition-colors ${expandedMenu === item.title ||
+                      className={`flex items-center gap-1.5 text-[18px] font-medium transition-colors ${expandedMenu === item.title ||
                         pathname.startsWith(item.href || "")
                         ? "text-primary"
                         : "text-gray-600 hover:text-primary"
@@ -159,7 +159,7 @@ const Header = ({ settings }: HeaderProps) => {
                   ) : (
                     <Link
                       href={item.href || "#"}
-                      className={`text-[15px] font-medium transition-colors ${pathname === item.href
+                      className={`text-[18px] font-medium transition-colors ${pathname === item.href
                         ? "text-primary"
                         : "text-gray-600 hover:text-primary"
                         }`}
@@ -174,7 +174,7 @@ const Header = ({ settings }: HeaderProps) => {
             {/* CTA Button */}
             <Link
               href="/e-catalog"
-              className="hidden lg:inline-flex px-6 py-2.5 bg-[#00469b] text-white rounded-lg font-bold text-sm transition-all hover:bg-[#003576] active:scale-95"
+              className="hidden lg:inline-flex px-6 py-2.5 bg-[#00469b] text-white rounded-lg font-bold !text-[18px] transition-all hover:bg-[#003576] active:scale-95"
             >
               e-Catalog
             </Link>
@@ -221,7 +221,7 @@ const Header = ({ settings }: HeaderProps) => {
                               setExpandedMenu(null);
                               setHoverImage(null);
                             }}
-                            className={`text-[15px] font-medium transition-colors inline-block ${pathname === subItem.href
+                            className={`text-[18px] font-medium transition-colors inline-block ${pathname === subItem.href
                               ? "text-primary"
                               : "text-gray-800 hover:text-primary"
                               }`}
@@ -273,9 +273,9 @@ const Header = ({ settings }: HeaderProps) => {
               <Image
                 src={logoUrl}
                 alt="Logo"
-                width={140}
-                height={50}
-                className="h-10 w-auto object-contain"
+                width={160}
+                height={60}
+                className="h-12 w-auto object-contain"
               />
               <button
                 onClick={() => setMobileOpen(false)}
@@ -323,10 +323,11 @@ const Header = ({ settings }: HeaderProps) => {
               <Link
                 href="/e-catalog"
                 onClick={() => setMobileOpen(false)}
-                className="block w-full text-center py-4 bg-[#00469b] text-white rounded-xl font-bold transition-all shadow-lg active:scale-95"
+                className="block w-full text-center py-4 bg-[#00469b] text-white rounded-xl font-bold !text-[18px] transition-all shadow-lg active:scale-95"
               >
                 e-Catalog
               </Link>
+
             </div>
           </div>
         </div>

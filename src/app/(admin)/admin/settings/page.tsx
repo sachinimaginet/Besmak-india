@@ -184,16 +184,28 @@ export default function SettingsPage() {
                       className="w-full p-2.5 border border-gray-200 rounded-lg text-gray-900 focus:ring-2 focus:ring-primary outline-none bg-white font-medium"
                     >
                       {[
+                        "Gilroy",
                         "Inter",
-                        "Times New Roman",
                         "Roboto",
                         "Open Sans",
                         "Montserrat",
+                        "Poppins",
                         "Playfair Display",
                         "Oswald",
-                        "Poppins",
                         "Lato",
-                      ].map((font) => (
+                        "Raleway",
+                        "Nunito",
+                        "Merriweather",
+                        "Bebas Neue",
+                        "Lora",
+                        "Libre Baskerville",
+                        "Caveat",
+                        "Dancing Script",
+                        "Cinzel",
+                        "Work Sans",
+                        "Quicksand",
+                        "Ubuntu",
+                      ].sort().map((font) => (
                         <option key={font} value={font}>
                           {font}
                         </option>
@@ -212,8 +224,8 @@ export default function SettingsPage() {
                       className="w-full p-2.5 border border-gray-200 rounded-lg text-gray-900 focus:ring-2 focus:ring-primary outline-none bg-white font-medium"
                     >
                       {[
+                        "Gilroy",
                         "Inter",
-                        "Times New Roman",
                         "Roboto",
                         "Open Sans",
                         "Lato",
@@ -221,7 +233,17 @@ export default function SettingsPage() {
                         "Montserrat",
                         "Nunito",
                         "Source Sans 3",
-                      ].map((font) => (
+                        "Raleway",
+                        "Work Sans",
+                        "Quicksand",
+                        "Ubuntu",
+                        "PT Sans",
+                        "Nunito Sans",
+                        "Muli",
+                        "Arimo",
+                        "Karla",
+                        "Rubik",
+                      ].sort().map((font) => (
                         <option key={font} value={font}>
                           {font}
                         </option>
@@ -277,12 +299,14 @@ export default function SettingsPage() {
                     },
                   ].map((h) => (
                     <div key={h.id} className="space-y-1.5">
-                      <label className="text-xs font-semibold text-gray-500  flex justify-between">
-                        {h.label}
-                        <span className="text-primary">
+                      <div className="flex justify-between items-center">
+                        <label className="text-xs font-semibold text-gray-500">
+                          {h.label}
+                        </label>
+                        <span className="text-xs font-bold text-primary bg-primary/5 px-2 py-0.5 rounded">
                           {settings[`${h.id}_font_size`] || h.default}px
                         </span>
-                      </label>
+                      </div>
                       <input
                         type="range"
                         min={h.min}
@@ -294,18 +318,20 @@ export default function SettingsPage() {
                             [`${h.id}_font_size`]: e.target.value,
                           })
                         }
-                        className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-primary"
+                        className="w-full h-1.5 bg-gray-100 rounded-lg appearance-none cursor-pointer accent-primary"
                       />
                     </div>
                   ))}
 
                   <div className="space-y-1.5 pt-2">
-                    <label className="text-xs font-semibold text-gray-500  flex justify-between">
-                      Body Text Size
-                      <span className="text-primary">
+                    <div className="flex justify-between items-center">
+                      <label className="text-xs font-semibold text-gray-500">
+                        Body Text Size
+                      </label>
+                      <span className="text-xs font-bold text-primary bg-primary/5 px-2 py-0.5 rounded">
                         {settings.body_font_size || "16"}px
                       </span>
-                    </label>
+                    </div>
                     <input
                       type="range"
                       min="12"
@@ -317,7 +343,7 @@ export default function SettingsPage() {
                           body_font_size: e.target.value,
                         })
                       }
-                      className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-primary"
+                      className="w-full h-1.5 bg-gray-100 rounded-lg appearance-none cursor-pointer accent-primary"
                     />
                   </div>
                 </div>

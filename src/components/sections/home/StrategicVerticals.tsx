@@ -82,7 +82,7 @@ export default function StrategicVerticals({
   } = content || {};
 
   return (
-    <section className="strategic-verticals py-24 bg-[#f8fafc] overflow-hidden">
+    <section className="strategic-verticals py-8 bg-[#f8fafc] overflow-hidden">
       <div className="container mx-auto px-4 max-w-7xl">
         {/* Header */}
         <motion.div
@@ -92,7 +92,7 @@ export default function StrategicVerticals({
           transition={{ duration: 0.8 }}
           className="text-center mb-10 md:mb-16"
         >
-          <h2 className="text-secondary mb-4 text-2xl md:text-[2.75rem] leading-tight font-serif px-4">
+          <h2 className="text-[#000] mb-4 text-2xl md:text-[2.75rem] leading-tight font-serif px-4">
             {heading}
           </h2>
         </motion.div>

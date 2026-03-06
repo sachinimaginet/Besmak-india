@@ -153,7 +153,7 @@ export default function FooterPage() {
     <div className="max-w-4xl mx-auto space-y-8 pb-12">
       <div className="flex justify-between items-end">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900 font-sans">
+          <h1 className="text-3xl font-bold text-gray-900">
             Footer Configuration
           </h1>
           <p className="text-gray-600 mt-1">
@@ -184,7 +184,7 @@ export default function FooterPage() {
           <div className="p-6 space-y-6">
             <div className="space-y-3">
               <div className="flex justify-between items-center">
-                <label className="text-sm font-bold text-gray-700">
+                <label className="text-sm font-semibold text-gray-700">
                   Footer Menu Heading Size
                 </label>
                 <span className="bg-primary/10 text-primary px-3 py-1 rounded-lg text-xs font-bold">
@@ -199,7 +199,7 @@ export default function FooterPage() {
                 onChange={(e) => setHeadingSize(parseInt(e.target.value))}
                 className="w-full h-2 bg-gray-100 rounded-lg appearance-none cursor-pointer accent-primary"
               />
-              <div className="flex justify-between text-[10px] text-gray-400 font-bold  tracking-wider">
+              <div className="flex justify-between text-[10px] text-gray-500 font-semibold tracking-wider">
                 <span>8px</span>
                 <span>30px</span>
               </div>
@@ -207,7 +207,7 @@ export default function FooterPage() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-4 border-t border-gray-100">
               <div className="space-y-3">
-                <label className="text-sm font-bold text-gray-700">
+                <label className="text-sm font-semibold text-gray-700">
                   Footer Font Family
                 </label>
                 <select
@@ -216,16 +216,34 @@ export default function FooterPage() {
                   className="w-full p-2.5 border border-gray-200 rounded-lg text-gray-900 focus:ring-2 focus:ring-primary outline-none bg-white font-medium"
                 >
                   {[
+                    "Arimo",
+                    "Bebas Neue",
+                    "Caveat",
+                    "Cinzel",
+                    "Dancing Script",
+                    "Gilroy",
                     "Inter",
-                    "Times New Roman",
-                    "Roboto",
-                    "Open Sans",
+                    "Karla",
+                    "Lato",
+                    "Libre Baskerville",
+                    "Lora",
+                    "Merriweather",
                     "Montserrat",
-                    "Playfair Display",
-                    "Oswald",
-                    "Raleway",
+                    "Muli",
                     "Nunito",
+                    "Nunito Sans",
+                    "Open Sans",
+                    "Oswald",
+                    "Playfair Display",
                     "Poppins",
+                    "PT Sans",
+                    "Quicksand",
+                    "Raleway",
+                    "Roboto",
+                    "Rubik",
+                    "Source Sans 3",
+                    "Ubuntu",
+                    "Work Sans"
                   ].map((font) => (
                     <option
                       key={font}
@@ -239,7 +257,7 @@ export default function FooterPage() {
               </div>
 
               <div className="space-y-3">
-                <label className="text-sm font-bold text-gray-700">
+                <label className="text-sm font-semibold text-gray-700">
                   Footer Background Color
                 </label>
                 <div className="flex gap-3">
@@ -469,7 +487,7 @@ export default function FooterPage() {
             {(["linkedin", "facebook", "twitter", "youtube"] as const).map(
               (platform) => (
                 <div key={platform} className="space-y-1.5">
-                  <label className="text-xs font-bold text-gray-500  flex items-center gap-2">
+                  <label className="text-xs font-semibold text-gray-500  flex items-center gap-2">
                     <span className="capitalize">{platform}</span> URL
                   </label>
                   <input

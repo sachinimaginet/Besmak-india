@@ -192,7 +192,7 @@ export default function CardGrid({ content }: CardGridProps) {
         <div className="text-center mt-12">
           <Link
             href="/products"
-            className="inline-flex items-center gap-2 border-2 border-[#1a4fa0] text-[#1a4fa0] px-8 py-3 rounded-full font-bold hover:bg-[#1a4fa0] hover:text-white transition-all duration-300"
+            className="inline-flex items-center gap-2 border-2 border-[#1a4fa0] text-[#1a4fa0] px-8 py-3 rounded-md font-bold hover:bg-[#1a4fa0] hover:text-white transition-all duration-300"
           >
             Explore All Products
           </Link>
@@ -212,7 +212,7 @@ export default function CardGrid({ content }: CardGridProps) {
         }
         .cg-subtitle {
           text-align: center;
-          font-size: 1rem;
+          font-size: 1.25rem;
           color: #6b7280;
           max-width: 52rem;
           margin: 0 auto;

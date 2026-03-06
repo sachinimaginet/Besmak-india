@@ -55,7 +55,9 @@ export function Footer({ settings }: FooterProps) {
   const headingSize = settings?.footer_heading_size
     ? `${settings.footer_heading_size}px`
     : "14px";
-  const fontFamily = settings?.footer_font_family || "Inter, sans-serif";
+  const fontFamily = settings?.footer_font_family
+    ? `'${settings.footer_font_family}', sans-serif`
+    : "var(--font-body)";
   const bgColor = settings?.footer_bg_color || "#00469b";
 
   const getSocialIcon = (platform: string) => {
@@ -94,12 +96,15 @@ export function Footer({ settings }: FooterProps) {
           {/* Column 1: Verticals */}
           <div>
             <h4
-              style={{ fontSize: headingSize }}
-              className="font-bold tracking-[0.2em] mb-6 pb-1 "
+              style={{
+                fontSize: headingSize,
+                fontFamily: settings?.footer_font_family ? fontFamily : "var(--font-heading)"
+              }}
+              className="font-bold mb-6 pb-1 "
             >
               Verticals
             </h4>
-            <ul className="space-y-3 text-[15px] font-medium opacity-80 decoration-0">
+            <ul className="space-y-3 text-[18px] font-medium opacity-80 decoration-0">
               {verticals.map((link: any, idx: number) => (
                 <li key={idx}>
                   <Link
@@ -116,13 +121,16 @@ export function Footer({ settings }: FooterProps) {
           {/* Column 2 & 3: Products (Split into two columns) */}
           <div className="lg:col-span-2">
             <h4
-              style={{ fontSize: headingSize }}
-              className="font-bold tracking-[0.2em] mb-6 pb-1 "
+              style={{
+                fontSize: headingSize,
+                fontFamily: settings?.footer_font_family ? fontFamily : "var(--font-heading)"
+              }}
+              className="font-bold mb-6 pb-1 "
             >
               Products
             </h4>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 text-[15px] font-medium opacity-80">
-              <ul className="space-y-3">
+              <ul className="space-y-3 text-[18px]">
                 {products
                   .slice(0, Math.ceil(products.length / 2))
                   .map((link: any, idx: number) => (
@@ -136,7 +144,7 @@ export function Footer({ settings }: FooterProps) {
                     </li>
                   ))}
               </ul>
-              <ul className="space-y-3">
+              <ul className="space-y-3 text-[18px]">
                 {products
                   .slice(Math.ceil(products.length / 2))
                   .map((link: any, idx: number) => (
@@ -156,12 +164,15 @@ export function Footer({ settings }: FooterProps) {
           {/* Column 4: Legal Information */}
           <div className="lg:pl-8">
             <h4
-              style={{ fontSize: headingSize }}
-              className="font-bold tracking-[0.2em] mb-6 pb-1 "
+              style={{
+                fontSize: headingSize,
+                fontFamily: settings?.footer_font_family ? fontFamily : "var(--font-heading)"
+              }}
+              className="font-bold mb-6 pb-1 "
             >
               Legal Information
             </h4>
-            <ul className="space-y-3 text-[15px] font-medium opacity-80">
+            <ul className="space-y-3 text-[18px] font-medium opacity-80">
               {legal.map((link: any, idx: number) => (
                 <li key={idx}>
                   <Link
@@ -178,7 +189,7 @@ export function Footer({ settings }: FooterProps) {
 
         {/* Social Section */}
         <div className="flex flex-col items-center justify-center mb-5">
-          <p className="text-[13px] font-bold tracking-widest mb-4 opacity-90">
+          <p className="text-[18px] font-bold tracking-widest mb-4 opacity-90">
             Stay up-to-date
           </p>
           <div className="flex items-center gap-6">
@@ -197,9 +208,9 @@ export function Footer({ settings }: FooterProps) {
 
       </div>
       {/* Bottom Bar */}
-      <div className="flex flex-col md:flex-row justify-between items-center pt-6 border-t border-white/10 text-[11px] font-bold tracking-widest opacity-60 px-5">
+      <div className="flex flex-col md:flex-row justify-between items-center pt-6 border-t border-white/10 text-[18px] px-5">
         <p>© {currentYear} Besmak India Pvt. Ltd. All rights reserved.</p>
-        <div className="flex items-center gap-1">
+        <div className="flex items-center gap-1 text-[18px]">
           <span>Designed By</span>
           <Link
             href="https://imaginetventures.com"

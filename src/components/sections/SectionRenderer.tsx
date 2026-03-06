@@ -1,3 +1,4 @@
+import NewsSection from "./home/NewsSection";
 import Hero from "./home/Hero";
 import About from "./home/About";
 import FeaturedProducts from "./home/FeaturedProducts";
@@ -55,6 +56,8 @@ export default function SectionRenderer({
         return <EventsAchievements content={section.content} />;
       case "dual-cards-section":
         return <TwoCardsSection content={section.content} />;
+      case "news-section":
+        return <NewsSection content={section.content} />;
       case "product-search":
         return <ProductSearchSection />;
       default:
