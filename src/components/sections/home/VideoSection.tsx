@@ -78,7 +78,7 @@ export default function VideoSection({ content }: VideoSectionProps) {
     const currentVideo = videos[currentIndex];
 
     return (
-        <section className="relative w-full h-auto lg:h-[90vh] overflow-hidden bg-black mt-20">
+        <section className="relative w-full grid grid-cols-1 h-auto md:h-[70vh] lg:h-[90vh] overflow-hidden bg-black mt-20">
             {/* Background Video Layer */}
             <AnimatePresence>
                 <motion.div
@@ -87,7 +87,7 @@ export default function VideoSection({ content }: VideoSectionProps) {
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
                     transition={{ duration: 1, ease: "easeInOut" }}
-                    className="w-full h-full"
+                    className="col-start-1 row-start-1 relative w-full h-auto md:h-full"
                 >
                     {overlay && (
                         <div className="absolute inset-0 bg-black/40 z-10 pointer-events-none" />
@@ -101,7 +101,7 @@ export default function VideoSection({ content }: VideoSectionProps) {
                         onTimeUpdate={(e) => handleTimeUpdate(e, currentIndex)}
                         onEnded={() => handleVideoEnd(currentIndex)}
                         poster={currentVideo.poster}
-                        className="w-full h-full object-cover"
+                        className="w-full h-auto md:h-full md:object-cover"
                     >
                         <source src={currentVideo.url} type="video/mp4" />
                         Your browser does not support the video tag.
@@ -110,7 +110,7 @@ export default function VideoSection({ content }: VideoSectionProps) {
             </AnimatePresence>
 
             {/* Content Overlay */}
-            <div className="relative z-20 flex items-center justify-center h-full text-center px-4 pointer-events-none">
+            <div className="col-start-1 row-start-1 relative z-20 flex items-center justify-center md:h-full text-center px-4 pointer-events-none">
                 <AnimatePresence mode="wait">
                     <motion.div
                         key={currentIndex}
