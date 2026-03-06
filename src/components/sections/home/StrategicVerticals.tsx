@@ -113,7 +113,7 @@ export default function StrategicVerticals({
               className="group relative cursor-pointer"
             >
               <Link href={vertical.href} className="block">
-                <div className="relative aspect-[4/5] rounded-2xl overflow-hidden bg-white border border-gray-100 shadow-sm transition-shadow duration-500 group-hover:shadow-2xl group-hover:shadow-blue-900/10">
+                <div className="relative aspect-[4/5] rounded-2xl overflow-hidden bg-white border border-primary/20 shadow-sm transition-shadow duration-500 group-hover:shadow-2xl group-hover:shadow-blue-900/10">
                   {/* Image Container */}
                   <div className="absolute inset-0 p-8 flex items-center justify-center transition-transform duration-700 ease-out group-hover:scale-110">
                     <div className="relative w-full h-full">
@@ -128,7 +128,7 @@ export default function StrategicVerticals({
                   </div>
 
                   {/* Gradient Overlay for Title readability */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-primary/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
                   {/* Title Overlay */}
                   <div className="absolute bottom-0 inset-x-0 p-6">

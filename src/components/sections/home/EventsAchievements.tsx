@@ -123,8 +123,8 @@ export default function EventsAchievements({ content }: EventsAchievementsProps)
                 {/* ── Header ── */}
                 <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-8">
                     <motion.div
-                        initial={{ opacity: 0, x: -30 }}
-                        whileInView={{ opacity: 1, x: 0 }}
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.8 }}
                         className="max-w-2xl"
@@ -172,12 +172,12 @@ export default function EventsAchievements({ content }: EventsAchievementsProps)
                                     transition={{ duration: 0.5, delay: index * 0.1 }}
                                     className="relative group"
                                 >
-                                    <div className="ea-card aspect-square relative rounded-2xl overflow-hidden p-6 flex items-center justify-center">
+                                    <div className="ea-card aspect-square relative rounded-2xl overflow-hidden">
                                         <Image
                                             src={event.image}
                                             alt={event.alt}
                                             fill
-                                            className="object-contain p-4 transition-transform duration-700 group-hover:scale-105"
+                                            className="object-contain transition-transform duration-700 group-hover:scale-105"
                                             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                                         />
 
