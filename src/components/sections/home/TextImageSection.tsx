@@ -26,8 +26,12 @@ export default function TextImageSection({ content }: TextImageSectionProps) {
         <section className={`py-12 ${bgColor}`}>
             <div className="container mx-auto px-4 max-w-7xl">
                 {/* Main Title atop the layout */}
-                <h1 className="font-bold text-gray-900 leading-tight">
-                    {title}
+                <h1 className="text-[1.45rem] md:text-5xl lg:text-6xl font-bold text-gray-900 leading-[1.1] mb-12 md:mb-16">
+                    {title.split('. ').map((part, i, arr) => (
+                        <span key={i} className="block md:inline">
+                            {part}{i < arr.length - 1 ? '. ' : ''}
+                        </span>
+                    ))}
                 </h1>
 
                 <div

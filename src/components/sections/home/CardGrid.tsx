@@ -250,7 +250,7 @@ export default function CardGrid({ content }: CardGridProps) {
           position: absolute;
           top: 1.4rem;
           left: 1.4rem;
-          z-index: 2;
+          z-index: 4;
           display: flex;
           flex-direction: column;
         }
@@ -323,13 +323,15 @@ export default function CardGrid({ content }: CardGridProps) {
         /* Expanded State Layout Adjustments */
         .cg-card--exp .cg-card__img-wrap {
           width: 100%;
-          height: 60%;
+          height: 55%;
           top: auto;
           bottom: 0;
+          padding-top: 1rem;
         }
         .cg-card--exp .cg-card__img {
           object-position: center bottom;
-          transform: scale(1.06);
+          transform: scale(1.1);
+          transform-origin: center bottom;
         }
 
         /* ── Responsive ────────────────────────────────────────── */

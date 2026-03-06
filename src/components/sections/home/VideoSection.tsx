@@ -99,7 +99,7 @@ export default function VideoSection({ content }: VideoSectionProps) {
                         onTimeUpdate={(e) => handleTimeUpdate(e, currentIndex)}
                         onEnded={() => handleVideoEnd(currentIndex)}
                         poster={currentVideo.poster}
-                        className="w-full h-full object-cover"
+                        className="w-full h-auto md:h-full md:object-cover"
                     >
                         <source src={currentVideo.url} type="video/mp4" />
                         Your browser does not support the video tag.
@@ -108,7 +108,7 @@ export default function VideoSection({ content }: VideoSectionProps) {
             </AnimatePresence>
 
             {/* Content Overlay */}
-            <div className="relative z-20 flex items-center justify-center h-full text-center px-4 pointer-events-none">
+            <div className="col-start-1 row-start-1 relative z-20 flex items-center justify-center min-h-[40vh] md:h-full text-center px-4 pointer-events-none">
                 <AnimatePresence mode="wait">
                     <motion.div
                         key={currentIndex}
