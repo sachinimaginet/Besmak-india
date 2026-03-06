@@ -92,7 +92,7 @@ export default function StrategicVerticals({
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl text-secondary font-bold md:text-5xl tracking-tight mb-4">
+          <h2 className="text-secondary mb-4" style={{ fontSize: '2.75rem' }}>
             {heading}
           </h2>
         </motion.div>

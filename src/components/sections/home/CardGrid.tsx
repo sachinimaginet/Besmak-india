@@ -213,7 +213,7 @@ export default function CardGrid({ content }: CardGridProps) {
           text-align: center;
           font-size: 1rem;
           color: #6b7280;
-          max-width: 42rem;
+          max-width: 52rem;
           margin: 0 auto;
           line-height: 1.6;
         }
