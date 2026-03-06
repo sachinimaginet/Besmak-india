@@ -72,7 +72,7 @@ export default function VideoSection({ content }: VideoSectionProps) {
     const currentVideo = videos[currentIndex];
 
     return (
-        <section className="relative w-full h-[100vh] overflow-hidden bg-black">
+        <section className="relative w-full h-auto lg:h-[80vh] overflow-hidden bg-black mt-22">
             {/* Background Video Layer */}
             <AnimatePresence mode="wait">
                 <motion.div
@@ -81,7 +81,7 @@ export default function VideoSection({ content }: VideoSectionProps) {
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
                     transition={{ duration: 1, ease: "easeInOut" }}
-                    className="absolute inset-0 w-full h-full"
+                    className="w-full h-full"
                 >
                     {overlay && (
                         <div className="absolute inset-0 bg-black/40 z-10 pointer-events-none" />
@@ -95,7 +95,7 @@ export default function VideoSection({ content }: VideoSectionProps) {
                         onTimeUpdate={handleTimeUpdate}
                         onEnded={handleVideoEnd}
                         poster={currentVideo.poster}
-                        className="absolute inset-0 w-full h-full object-cover"
+                        className="w-full h-full object-cover"
                     >
                         <source src={currentVideo.url} type="video/mp4" />
                         Your browser does not support the video tag.
