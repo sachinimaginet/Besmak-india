@@ -54,8 +54,8 @@ export function Footer({ settings }: FooterProps) {
 
   const headingSize = settings?.footer_heading_size
     ? `${settings.footer_heading_size}px`
-    : "11px";
-  const fontFamily = settings?.footer_font_family || "Inter";
+    : "14px";
+  const fontFamily = settings?.footer_font_family || "Inter, sans-serif";
   const bgColor = settings?.footer_bg_color || "#00469b";
 
   const getSocialIcon = (platform: string) => {
@@ -88,18 +88,18 @@ export function Footer({ settings }: FooterProps) {
       style={{ fontFamily, backgroundColor: bgColor }}
       className="text-white pt-12 pb-5"
     >
-      <div className="container mx-auto px-4 max-w-7xl">
+      <div className="px-4 max-w-7xl mx-auto">
         {/* Main Footer Grid */}
-        <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-8 mb-12">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
           {/* Column 1: Verticals */}
           <div>
             <h4
               style={{ fontSize: headingSize }}
-              className="font-bold tracking-[0.2em] mb-6 pb-1"
+              className="font-bold tracking-[0.2em] mb-6 pb-1 "
             >
               Verticals
             </h4>
-            <ul className="space-y-3 text-[14px] font-medium opacity-80 decoration-0">
+            <ul className="space-y-3 text-[15px] font-medium opacity-80 decoration-0">
               {verticals.map((link: any, idx: number) => (
                 <li key={idx}>
                   <Link
@@ -113,15 +113,15 @@ export function Footer({ settings }: FooterProps) {
             </ul>
           </div>
 
-          {/* Column 2 & 3: Products (Dual List) */}
-          <div className="lg:col-span-2 lg:pl-12">
+          {/* Column 2 & 3: Products (Split into two columns) */}
+          <div className="lg:col-span-2">
             <h4
               style={{ fontSize: headingSize }}
-              className="font-bold tracking-[0.2em] mb-6 pb-1"
+              className="font-bold tracking-[0.2em] mb-6 pb-1 "
             >
               Products
             </h4>
-            <div className="grid grid-cols-2 gap-x-4 max-w-sm gap-y-3 text-[14px] font-medium opacity-80">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 text-[15px] font-medium opacity-80">
               <ul className="space-y-3">
                 {products
                   .slice(0, Math.ceil(products.length / 2))
@@ -154,14 +154,14 @@ export function Footer({ settings }: FooterProps) {
           </div>
 
           {/* Column 4: Legal Information */}
-          <div>
+          <div className="lg:pl-8">
             <h4
               style={{ fontSize: headingSize }}
-              className="font-bold tracking-[0.2em] mb-6 pb-1"
+              className="font-bold tracking-[0.2em] mb-6 pb-1 "
             >
               Legal Information
             </h4>
-            <ul className="space-y-3 text-[14px] font-medium opacity-80">
+            <ul className="space-y-3 text-[15px] font-medium opacity-80">
               {legal.map((link: any, idx: number) => (
                 <li key={idx}>
                   <Link
@@ -195,19 +195,19 @@ export function Footer({ settings }: FooterProps) {
           </div>
         </div>
 
-        {/* Bottom Bar */}
-        <div className="flex flex-col md:flex-row justify-between items-center pt-6 border-t border-white/10 text-[11px] font-bold tracking-widest opacity-60">
-          <p>© {currentYear} Besmak India Pvt. Ltd. All rights reserved.</p>
-          <div className="flex items-center gap-1">
-            <span>Designed By</span>
-            <Link
-              href="https://imaginetventures.com"
-              target="_blank"
-              className="hover:opacity-100 transition-opacity hover:underline"
-            >
-              ImagiNET Ventures
-            </Link>
-          </div>
+      </div>
+      {/* Bottom Bar */}
+      <div className="flex flex-col md:flex-row justify-between items-center pt-6 border-t border-white/10 text-[11px] font-bold tracking-widest opacity-60 px-5">
+        <p>© {currentYear} Besmak India Pvt. Ltd. All rights reserved.</p>
+        <div className="flex items-center gap-1">
+          <span>Designed By</span>
+          <Link
+            href="https://imaginetventures.com"
+            target="_blank"
+            className="hover:opacity-100 transition-opacity hover:underline"
+          >
+            ImagiNET Ventures
+          </Link>
         </div>
       </div>
     </footer>

@@ -110,7 +110,7 @@ const Header = ({ settings }: HeaderProps) => {
         }`}
       style={{ fontFamily: 'var(--font-body)' }}
     >
-      <div className="container mx-auto px-4">
+      <div className="mx-auto px-4">
         {/* Main Header Row */}
         <div
           className={`flex items-center justify-between transition-all duration-300 h-${headerHeight}`}

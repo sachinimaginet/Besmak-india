@@ -62,42 +62,44 @@ export default function ClientsSection({ content }: ClientsSectionProps) {
       style={{ background: bgColor }}
       aria-label="Our Clients"
     >
-      {/* ── Heading ── */}
-      <h2 className="cs-heading">{title}</h2>
+      <div className="container mx-auto px-4 max-w-7xl">
+        {/* ── Heading ── */}
+        <h2 className="cs-heading">{title}</h2>
 
-      {/* ── Ticker ── */}
-      <div className="cs-ticker" aria-hidden="true">
-        <div className="cs-track">
-          {track.map((logo, i) =>
-            logo.href ? (
-              <a
-                key={`${logo.id}-${i}`}
-                href={logo.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="cs-logo-wrap"
-                tabIndex={-1}
-              >
-                <Image
-                  src={logo.src}
-                  alt={logo.alt}
-                  fill
-                  className="cs-logo-img"
-                  unoptimized
-                />
-              </a>
-            ) : (
-              <span key={`${logo.id}-${i}`} className="cs-logo-wrap">
-                <Image
-                  src={logo.src}
-                  alt={logo.alt}
-                  fill
-                  className="cs-logo-img"
-                  unoptimized
-                />
-              </span>
-            )
-          )}
+        {/* ── Ticker ── */}
+        <div className="cs-ticker" aria-hidden="true">
+          <div className="cs-track">
+            {track.map((logo, i) =>
+              logo.href ? (
+                <a
+                  key={`${logo.id}-${i}`}
+                  href={logo.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="cs-logo-wrap"
+                  tabIndex={-1}
+                >
+                  <Image
+                    src={logo.src}
+                    alt={logo.alt}
+                    fill
+                    className="cs-logo-img"
+                    unoptimized
+                  />
+                </a>
+              ) : (
+                <span key={`${logo.id}-${i}`} className="cs-logo-wrap">
+                  <Image
+                    src={logo.src}
+                    alt={logo.alt}
+                    fill
+                    className="cs-logo-img"
+                    unoptimized
+                  />
+                </span>
+              )
+            )}
+          </div>
         </div>
       </div>
 
@@ -154,6 +156,13 @@ export default function ClientsSection({ content }: ClientsSectionProps) {
           padding: 0 2rem;
           width: max-content;
           animation: cs-marquee 18s linear infinite;
+        }
+
+        @media (max-width: 768px) {
+          .cs-track {
+            animation-duration: 35s;
+            gap: 2rem;
+          }
         }
 
         @keyframes cs-marquee {

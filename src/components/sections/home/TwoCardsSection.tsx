@@ -66,9 +66,9 @@ export default function TwoCardsSection({ content }: TwoCardsSectionProps) {
                                     <p key={i}>{p}</p>
                                 ))}
                             </div>
-                            <Link href={leftData.link} className="tc-btn tc-btn-black">
-                                <button className="flex items-center gap-2 bg-black text-white px-4 py-2 rounded-full">
-                                    {leftData.buttonText} <ArrowRight className="w-5 h-5 text-white ml-2" />
+                            <Link href={leftData.link} className="tc-btn-link">
+                                <button className="flex items-center gap-2 bg-white text-[#1a4fa0] px-4 py-2 rounded-full">
+                                    {leftData.buttonText} <ArrowRight className="w-5 h-5 text-[#1a4fa0] ml-2" />
                                 </button>
                             </Link>
                         </div>
@@ -85,8 +85,8 @@ export default function TwoCardsSection({ content }: TwoCardsSectionProps) {
                                 ))}
                             </div>
                             <Link href={rightData.link} className="tc-btn-link">
-                                <button className="flex items-center gap-2 bg-white text-primary px-4 py-2 rounded-full">
-                                    {rightData.buttonText} <ArrowRight className="w-5 h-5 text-primary ml-2" />
+                                <button className="flex items-center gap-2 bg-white text-[#1a4fa0] px-4 py-2 rounded-full">
+                                    {rightData.buttonText} <ArrowRight className="w-5 h-5 text-[#1a4fa0] ml-2" />
                                 </button>
                             </Link>
                         </div>
@@ -150,6 +150,18 @@ export default function TwoCardsSection({ content }: TwoCardsSectionProps) {
                     font-weight: 400;
                     margin-bottom: 2rem;
                     line-height: 1.1;
+                    min-height: 5.5rem;
+                    display: flex;
+                    align-items: flex-end;
+                }
+
+                .tc-content {
+                    position: relative;
+                    z-index: 10;
+                    height: 100%;
+                    display: flex;
+                    flex-direction: column;
+                    flex: 1;
                 }
 
                 .tc-description {
@@ -165,26 +177,6 @@ export default function TwoCardsSection({ content }: TwoCardsSectionProps) {
                 }
 
                 /* Buttons */
-                .tc-btn {
-                    display: inline-flex;
-                    align-items: center;
-                    padding: 1rem 2rem;
-                    border-radius: 9999px;
-                    font-weight: 600;
-                    font-size: 0.95rem;
-                    transition: all 0.2s ease;
-                    width: fit-content;
-                }
-
-                .tc-btn-black {
-                    background-color: #000;
-                    color: #fff;
-                }
-                .tc-btn-black:hover {
-                    background-color: #222;
-                    transform: translateX(4px);
-                }
-
                 .tc-btn-link {
                     display: inline-flex;
                     align-items: center;

@@ -70,8 +70,7 @@ const defaultCards: CardData[] = [
       "https://cvnvhpmvk12hdosq.public.blob.vercel-storage.com/div%20%281%29.png",
     href: "/products/relay",
     bg: "#f5ece0",
-    isDark: false,
-    defaultExpanded: true
+    isDark: false
   }
 ];
 
@@ -113,7 +112,9 @@ export default function CardGrid({ content }: CardGridProps) {
           {rows.map((rowCards, rowIndex) => {
             const hovered = hoverByRow[rowIndex];
             const expandedIdx =
-              hovered !== null ? hovered : getDefaultExpanded(rowCards);
+              hovered !== null
+                ? hovered
+                : (rowIndex === 0 ? getDefaultExpanded(rowCards) : null);
 
             return (
               <div key={rowIndex} className="cg-row">
@@ -213,7 +214,7 @@ export default function CardGrid({ content }: CardGridProps) {
           text-align: center;
           font-size: 1rem;
           color: #6b7280;
-          max-width: 42rem;
+          max-width: 52rem;
           margin: 0 auto;
           line-height: 1.6;
         }
@@ -249,7 +250,7 @@ export default function CardGrid({ content }: CardGridProps) {
           position: absolute;
           top: 1.4rem;
           left: 1.4rem;
-          z-index: 2;
+          z-index: 4;
           display: flex;
           flex-direction: column;
         }
@@ -312,13 +313,25 @@ export default function CardGrid({ content }: CardGridProps) {
           width: 70%;
           height: 100%;
           z-index: 1;
+          transition: all 0.42s ease;
         }
         .cg-card__img {
           object-position: right bottom;
           transition: transform 0.42s ease;
         }
+
+        /* Expanded State Layout Adjustments */
+        .cg-card--exp .cg-card__img-wrap {
+          width: 100%;
+          height: 55%;
+          top: auto;
+          bottom: 0;
+          padding-top: 1rem;
+        }
         .cg-card--exp .cg-card__img {
-          transform: scale(1.06);
+          object-position: center bottom;
+          transform: scale(1.1);
+          transform-origin: center bottom;
         }
 
         /* ── Responsive ────────────────────────────────────────── */

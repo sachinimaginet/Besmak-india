@@ -83,16 +83,16 @@ export default function StrategicVerticals({
 
   return (
     <section className="strategic-verticals py-24 bg-[#f8fafc] overflow-hidden">
-      <div className="container mx-auto px-6 max-w-7xl">
+      <div className="container mx-auto px-4 max-w-7xl">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="text-center mb-16"
+          className="text-center mb-10 md:mb-16"
         >
-          <h2 className="text-4xl text-secondary font-bold md:text-5xl tracking-tight mb-4">
+          <h2 className="text-secondary mb-4 text-2xl md:text-[2.75rem] leading-tight font-serif px-4">
             {heading}
           </h2>
         </motion.div>
@@ -103,7 +103,7 @@ export default function StrategicVerticals({
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"
+          className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8"
         >
           {verticals.map((vertical) => (
             <motion.div
@@ -113,27 +113,27 @@ export default function StrategicVerticals({
               className="group relative cursor-pointer"
             >
               <Link href={vertical.href} className="block">
-                <div className="relative aspect-[4/5] rounded-2xl overflow-hidden bg-white border border-gray-100 shadow-sm transition-shadow duration-500 group-hover:shadow-2xl group-hover:shadow-blue-900/10">
+                <div className="relative aspect-[4/5] rounded-xl md:rounded-2xl overflow-hidden bg-white border border-primary/20 shadow-sm transition-shadow duration-500 group-hover:shadow-2xl group-hover:shadow-blue-900/10">
                   {/* Image Container */}
-                  <div className="absolute inset-0 p-8 flex items-center justify-center transition-transform duration-700 ease-out group-hover:scale-110">
+                  <div className="absolute inset-0 p-4 md:p-8 flex items-center justify-center transition-transform duration-700 ease-out group-hover:scale-110">
                     <div className="relative w-full h-full">
                       <Image
                         src={vertical.image}
                         alt={vertical.title}
                         fill
                         className="object-contain"
-                        sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                        sizes="(max-width: 768px) 50vw, 25vw"
                       />
                     </div>
                   </div>
 
                   {/* Gradient Overlay for Title readability */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-primary/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
                   {/* Title Overlay */}
-                  <div className="absolute bottom-0 inset-x-0 p-6">
-                    <div className="backdrop-blur-md bg-white/80 border border-white/20 rounded-xl p-4 shadow-lg transform translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
-                      <h3 className="text-primary text-xl font-bold text-center  transition-colors duration-300">
+                  <div className="absolute bottom-0 inset-x-0 p-3 md:p-6">
+                    <div className="backdrop-blur-md bg-white/80 border border-white/20 rounded-lg md:rounded-xl p-2 md:p-4 shadow-lg transform translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
+                      <h3 className="text-primary text-xs md:text-xl font-bold text-center transition-colors duration-300 line-clamp-1">
                         {vertical.title}
                       </h3>
                     </div>

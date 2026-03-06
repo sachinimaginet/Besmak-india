@@ -19,11 +19,11 @@ interface VideoSectionProps {
 
 const defaultVideos: VideoData[] = [
     {
-        url: "https://cvnvhpmvk12hdosq.public.blob.vercel-storage.com/Besmak%20Banner%20video%20%281%29.mp4",
+        url: "https://cvnvhpmvk12hdosq.public.blob.vercel-storage.com/Besmak%20Ai%20video.mp4",
         title: "",
     },
     {
-        url: "https://cvnvhpmvk12hdosq.public.blob.vercel-storage.com/Besmak%20Ai%20video.mp4",
+        url: "https://cvnvhpmvk12hdosq.public.blob.vercel-storage.com/Besmak%20Banner%20video%20%281%29.mp4",
         title: "",
     }
 ];
@@ -34,21 +34,33 @@ export default function VideoSection({ content }: VideoSectionProps) {
         overlay = true,
     } = content || {};
 
+
     const [currentIndex, setCurrentIndex] = useState(0);
     const [progress, setProgress] = useState(0);
     const videoRef = useRef<HTMLVideoElement>(null);
 
+    const currentIndexRef = useRef(currentIndex);
+
+    useEffect(() => {
+        currentIndexRef.current = currentIndex;
+    }, [currentIndex]);
+
     // Handle video progress
-    const handleTimeUpdate = () => {
-        if (videoRef.current) {
-            const currentProgress = (videoRef.current.currentTime / videoRef.current.duration) * 100;
-            setProgress(currentProgress);
+    const handleTimeUpdate = (e: React.SyntheticEvent<HTMLVideoElement>, index: number) => {
+        if (index === currentIndexRef.current) {
+            const video = e.currentTarget;
+            if (video.duration) {
+                const currentProgress = (video.currentTime / video.duration) * 100;
+                setProgress(currentProgress);
+            }
         }
     };
 
     // Auto-advance logic
-    const handleVideoEnd = () => {
-        nextVideo();
+    const handleVideoEnd = (index: number) => {
+        if (index === currentIndexRef.current) {
+            nextVideo();
+        }
     };
 
     const nextVideo = () => {
@@ -61,27 +73,21 @@ export default function VideoSection({ content }: VideoSectionProps) {
         setCurrentIndex((prev) => (prev - 1 + videos.length) % videos.length);
     };
 
-    // Reset video when index changes
-    useEffect(() => {
-        if (videoRef.current) {
-            videoRef.current.load();
-            videoRef.current.play().catch(e => console.log("Auto-play blocked or failed", e));
-        }
-    }, [currentIndex]);
+
 
     const currentVideo = videos[currentIndex];
 
     return (
-        <section className="relative w-full h-auto lg:h-[90vh] overflow-hidden bg-black mt-20">
+        <section className="relative w-full grid grid-cols-1 h-auto md:h-[70vh] lg:h-[90vh] overflow-hidden bg-black mt-20">
             {/* Background Video Layer */}
-            <AnimatePresence mode="wait">
+            <AnimatePresence>
                 <motion.div
                     key={currentIndex}
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
                     transition={{ duration: 1, ease: "easeInOut" }}
-                    className="w-full h-full"
+                    className="col-start-1 row-start-1 relative w-full h-auto md:h-full"
                 >
                     {overlay && (
                         <div className="absolute inset-0 bg-black/40 z-10 pointer-events-none" />
@@ -92,10 +98,10 @@ export default function VideoSection({ content }: VideoSectionProps) {
                         autoPlay
                         muted
                         playsInline
-                        onTimeUpdate={handleTimeUpdate}
-                        onEnded={handleVideoEnd}
+                        onTimeUpdate={(e) => handleTimeUpdate(e, currentIndex)}
+                        onEnded={() => handleVideoEnd(currentIndex)}
                         poster={currentVideo.poster}
-                        className="w-full h-full object-cover"
+                        className="w-full h-auto md:h-full md:object-cover"
                     >
                         <source src={currentVideo.url} type="video/mp4" />
                         Your browser does not support the video tag.
@@ -104,7 +110,7 @@ export default function VideoSection({ content }: VideoSectionProps) {
             </AnimatePresence>
 
             {/* Content Overlay */}
-            <div className="relative z-20 flex items-center justify-center h-full text-center px-4 pointer-events-none">
+            <div className="col-start-1 row-start-1 relative z-20 flex items-center justify-center md:h-full text-center px-4 pointer-events-none">
                 <AnimatePresence mode="wait">
                     <motion.div
                         key={currentIndex}

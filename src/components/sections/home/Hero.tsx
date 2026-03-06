@@ -20,7 +20,7 @@ export default function Hero({ content }: HeroProps) {
 
   return (
     <section className="bg-blue-900 text-white py-20">
-      <div className="container mx-auto px-4 text-center">
+      <div className="container mx-auto px-4 text-center max-w-7xl">
         <h1 className="text-4xl md:text-6xl font-bold mb-6">{title}</h1>
         <p className="text-xl md:text-2xl text-blue-100 mb-8 max-w-3xl mx-auto">
           {subtitle}
