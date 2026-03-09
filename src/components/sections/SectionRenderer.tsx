@@ -14,6 +14,7 @@ import EventsAchievements from "./home/EventsAchievements";
 import TwoCardsSection from "./home/TwoCardsSection";
 import AboutHero from "./about/AboutHero";
 import AboutContent from "./about/AboutContent";
+import ContactBanner from "./contact/ContactBanner";
 import ProductSearchSection from "./home/ProductSearchSection";
 import EditableWrapper from "../cms/EditableWrapper";
 
@@ -30,6 +31,7 @@ export default function SectionRenderer({
   section,
   onUpdate,
 }: SectionRendererProps) {
+  console.log(section);
   const renderContent = () => {
     switch (section.type) {
       case "hero":
@@ -40,6 +42,8 @@ export default function SectionRenderer({
         return <AboutHero content={section.content} />;
       case "about-content":
         return <AboutContent content={section.content} />;
+      case "contact-banner":
+        return <ContactBanner content={section.content} />;
       case "featured-products":
         return <FeaturedProducts content={section.content} />;
       case "card-grid":
