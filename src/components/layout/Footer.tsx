@@ -227,14 +227,20 @@ export function Footer({ settings }: FooterProps) {
           </p>
           <div className="flex items-center gap-6">
             {socials.map((social: any, idx: number) => (
-              <Link
-                key={idx}
-                href={social.url}
-                target="_blank"
-                className="hover:scale-110 transition-transform"
-              >
-                {getSocialIcon(social.platform)}
-              </Link>
+              <>
+                {social.url ? (
+                  <Link
+                    key={idx}
+                    href={social.url}
+                    target="_blank"
+                    className="hover:scale-110 transition-transform"
+                  >
+                    {getSocialIcon(social.platform)}
+                  </Link>
+                ) : (
+                  <></>
+                )}
+              </>
             ))}
           </div>
         </div>

@@ -58,7 +58,15 @@ const defaultImages: NewsImage[] = [
     },
     {
         url: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&q=80&w=2070",
-        title: "Why are enterprises moving their applications to the cloud? – An Infosys research",
+        title: "Why are enterprises moving their applications to the cloud?",
+    },
+    {
+        url: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&q=80&w=2070",
+        title: "Digital Transformation in Manufacturing",
+    },
+    {
+        url: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=2070",
+        title: "Next-Gen Engineering Solutions",
     },
 ];
 
@@ -112,8 +120,8 @@ export default function NewsSection({ content }: NewsSectionProps) {
                     </div>
 
                     {/* Right Side: Image Grid Collage */}
-                    <div className="lg:w-2/3 grid grid-cols-1 md:grid-cols-2 bg-gray-100">
-                        {images.slice(0, 4).map((image, index) => (
+                    <div className="lg:w-2/3 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 bg-gray-100">
+                        {images.slice(0, 6).map((image, index) => (
                             <div key={index} className="relative group overflow-hidden aspect-video md:aspect-square lg:aspect-auto h-full min-h-[300px]">
                                 <Image
                                     src={image.url}
