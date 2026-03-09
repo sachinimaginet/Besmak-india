@@ -83,7 +83,7 @@ export default function NewsSection({ content }: NewsSectionProps) {
             <div className="container mx-auto px-4 max-w-7xl">
                 <div className="flex flex-col lg:flex-row min-h-[600px] shadow-xl rounded-2xl overflow-hidden">
                     {/* Left Side: News List */}
-                    <div className="lg:w-1/3 bg-primary p-8 md:p-12 flex flex-col justify-between text-white">
+                    <div className="lg:w-1/3 bg-primary p-8 flex flex-col justify-between text-white">
                         <div>
                             <h2 className="text-2xl md:text-3xl font-bold mb-8 tracking-tight">
                                 {title}

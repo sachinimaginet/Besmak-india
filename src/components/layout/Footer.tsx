@@ -96,9 +96,9 @@ export function Footer({ settings }: FooterProps) {
     >
       <div className="px-4 max-w-7xl mx-auto">
         {/* Main Footer Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-6 mb-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 lg:gap-12 gap-6 mb-12">
           {/* Column 1: Verticals */}
-          <div>
+          <div className="lg:col-span-1">
             <h4
               style={{
                 fontSize: headingSize,
@@ -166,7 +166,7 @@ export function Footer({ settings }: FooterProps) {
           </div>
 
           {/* Column 4: Legal Information */}
-          <div>
+          <div className="lg:col-span-1">
             <h4
               style={{
                 fontSize: headingSize,

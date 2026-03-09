@@ -1,3 +1,5 @@
+"use client";
+
 import NewsSection from "./home/NewsSection";
 import Hero from "./home/Hero";
 import About from "./home/About";
