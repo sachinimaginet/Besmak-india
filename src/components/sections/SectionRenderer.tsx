@@ -15,6 +15,7 @@ import TwoCardsSection from "./home/TwoCardsSection";
 import AboutHero from "./about/AboutHero";
 import AboutContent from "./about/AboutContent";
 import ContactBanner from "./contact/ContactBanner";
+import ContactHero from "./contact/ContactHero";
 import ProductSearchSection from "./home/ProductSearchSection";
 import EditableWrapper from "../cms/EditableWrapper";
 
@@ -42,6 +43,8 @@ export default function SectionRenderer({
         return <AboutHero content={section.content} />;
       case "about-content":
         return <AboutContent content={section.content} />;
+      case "contact-hero":
+        return <ContactHero content={section.content} />;
       case "contact-banner":
         return <ContactBanner content={section.content} />;
       case "featured-products":

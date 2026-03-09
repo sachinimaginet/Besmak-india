@@ -12,8 +12,7 @@ export default function ContactBanner({ content }: ContactBannerProps) {
     imageUrl = "",
     altText = "Contact Banner",
   } = content || {};
-  console.log(imageUrl);
-  debugger;
+
   if (!imageUrl) {
     return (
       <section className="w-full min-h-[200px] bg-gray-100 flex items-center justify-center">

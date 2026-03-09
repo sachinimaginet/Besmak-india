@@ -33,7 +33,7 @@ const defaultCards: CardData[] = [
     categoryColor: "rgba(255,255,255,0.75)",
     title: "Connection Systems",
     image:
-      "https://cvnvhpmvk12hdosq.public.blob.vercel-storage.com/167574675e2d8b125fbaaaf1b9a7dd028a95e6f5.png",
+      "https://cvnvhpmvk12hdosq.public.blob.vercel-storage.com/Stamping-Tools.png",
     href: "/products/connectors",
     bg: "#1a4fa0",
     isDark: true,
@@ -45,7 +45,7 @@ const defaultCards: CardData[] = [
     categoryColor: "#4a90d9",
     title: "Engineering Products Division",
     image:
-      "https://cvnvhpmvk12hdosq.public.blob.vercel-storage.com/Stamping-Tools.png",
+      "https://cvnvhpmvk12hdosq.public.blob.vercel-storage.com/167574675e2d8b125fbaaaf1b9a7dd028a95e6f5.png",
     href: "/products/fuse-box",
     bg: "#dce9f7",
     isDark: false,
