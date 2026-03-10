@@ -19,7 +19,7 @@ interface VideoSectionProps {
 
 const defaultVideos: VideoData[] = [
     {
-        url: "https://cvnvhpmvk12hdosq.public.blob.vercel-storage.com/Besmak%20Ai%20video.mp4",
+        url: "https://cvnvhpmvk12hdosq.public.blob.vercel-storage.com/Besmak%20Ai%20video%20%281%29.mp4",
         title: "Engineering the Future of Automotive Connectivity",
     },
     {
@@ -99,7 +99,7 @@ export default function VideoSection({ content }: VideoSectionProps) {
                         <div className="absolute inset-0 bg-black/30 z-10 pointer-events-none" />
                     )}
 
-                    <video
+                    {/* <video
                         ref={videoRef}
                         autoPlay
                         muted
@@ -111,7 +111,7 @@ export default function VideoSection({ content }: VideoSectionProps) {
                     >
                         <source src={currentVideo.url} type="video/mp4" />
                         Your browser does not support the video tag.
-                    </video>
+                    </video> */}
                 </motion.div>
             </AnimatePresence>
 
