@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
+import { ArrowRight } from "lucide-react";
 
 interface CardData {
   id: string;
@@ -32,7 +33,7 @@ const defaultCards: CardData[] = [
     categoryColor: "rgba(255,255,255,0.75)",
     title: "Connection Systems",
     image:
-      "https://cvnvhpmvk12hdosq.public.blob.vercel-storage.com/167574675e2d8b125fbaaaf1b9a7dd028a95e6f5.png",
+      "https://cvnvhpmvk12hdosq.public.blob.vercel-storage.com/Stamping-Tools.png",
     href: "/products/connectors",
     bg: "#1a4fa0",
     isDark: true,
@@ -44,7 +45,7 @@ const defaultCards: CardData[] = [
     categoryColor: "#4a90d9",
     title: "Engineering Products Division",
     image:
-      "https://cvnvhpmvk12hdosq.public.blob.vercel-storage.com/Stamping-Tools.png",
+      "https://cvnvhpmvk12hdosq.public.blob.vercel-storage.com/167574675e2d8b125fbaaaf1b9a7dd028a95e6f5.png",
     href: "/products/fuse-box",
     bg: "#dce9f7",
     isDark: false,
@@ -149,28 +150,34 @@ export default function CardGrid({ content }: CardGridProps) {
                     >
                       <Link
                         href={card.href}
-                        className={`cg-card__link${isExpanded ? " cg-card__link--vis" : ""}`}
+                        className="cg-card__link"
                         style={{ color: linkColor }}
-                        tabIndex={isExpanded ? 0 : -1}
                       >
-                        {/* Text block — top-left */}
+                        {/* Text block */}
                         <div className="cg-card__text">
-                          <span
-                            className="cg-card__cat"
-                            style={{ color: catColor }}
-                          >
-                            {card.category}
-                          </span>
+                          {card.category && (
+                            <span
+                              className="cg-card__cat"
+                              style={{ color: catColor }}
+                            >
+                              {card.category}
+                            </span>
+                          )}
                           <h3
                             className={`cg-card__title${isExpanded ? " cg-card__title--big" : ""}`}
-                            style={{ color: titleColor }}
+                            style={{ color: titleColor, padding: 10 }}
                           >
                             {card.title}
                           </h3>
+
+                          <div className="cg-card__explore pl-5">
+                            <span>Explore</span>
+                            <ArrowRight className="w-4 h-4" />
+                          </div>
                         </div>
 
 
-                        {/* Product image — bottom-right area */}
+                        {/* Product image area */}
                         <div className="cg-card__img-wrap">
                           <Image
                             src={card.image}
@@ -223,133 +230,172 @@ export default function CardGrid({ content }: CardGridProps) {
         .cg-rows {
           display: flex;
           flex-direction: column;
-          gap: 1rem;
+          gap: 1.5rem;
         }
         .cg-row {
           display: flex;
-          gap: 1rem;
-          height: 19rem;
+          gap: 1.5rem;
+          height: 22rem;
         }
 
         /* ── Card ──────────────────────────────────────────────── */
         .cg-card {
           flex: 1;
-          border-radius: 1.1rem;
+          border-radius: 1.5rem;
           overflow: hidden;
           cursor: pointer;
           position: relative;
-          /* Smooth expand / shrink */
-          transition: flex 0.42s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        .cg-card--exp {
-          flex: 2.5;
+          background: rgba(255, 255, 255, 0.05);
+          backdrop-filter: blur(10px);
+          border: 1px solid rgba(255, 255, 255, 0.1);
+          box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+          transition: flex 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.3s ease, box-shadow 0.3s ease;
         }
 
-        /* ── Text block (always top-left) ──────────────────────── */
-        .cg-card__text {
-          position: absolute;
-          top: 1.4rem;
-          left: 1.4rem;
-          z-index: 4;
+        .cg-card:hover {
+          box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .cg-card--exp {
+          flex: 2.8;
+          border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .cg-card__link {
           display: flex;
           flex-direction: column;
+          height: 100%;
+          text-decoration: none;
+          padding: 3rem;
+          position: relative;
+          z-index: 2;
+          overflow: hidden;
+        }
+
+        /* ── Text block ──────────────────────── */
+        .cg-card__text {
+          position: relative;
+          z-index: 10;
+          display: flex;
+          flex-direction: column;
+          transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+          width: 55%; /* Slightly wider to accommodate larger padding */
         }
 
         .cg-card__cat {
-          font-size: 0.7rem;
-          font-weight: 500;
-          letter-spacing: 0.01em;
-          margin-bottom: 0.2rem;
-          white-space: nowrap;
-          line-height: 1.4;
+          font-size: 0.8rem;
+          font-weight: 700;
+          letter-spacing: 0.1em;
+          margin-bottom: 1rem;
+          text-transform: uppercase;
+          opacity: 0.8;
         }
 
         .cg-card__title {
-          font-size: 1.45rem;
-          font-weight: 400;
-          line-height: 1.15;
+          font-size: 1.6rem;
+          font-weight: 500;
+          line-height: 1.1;
           margin: 0;
           white-space: pre-wrap;
-          /* Title grows smoothly */
-          transition:
-            font-size 0.42s cubic-bezier(0.4, 0, 0.2, 1),
-            font-weight 0.2s ease;
-        }
-        .cg-card__title--big {
-          font-size: 2.35rem;
-          font-weight: 700;
+          transition: font-size 0.6s cubic-bezier(0.16, 1, 0.3, 1), font-weight 0.4s ease;
+          letter-spacing: -0.02em;
         }
 
-        /* View More — zero-height hidden unless expanded */
-        .cg-card__link {
-          display: inline-flex;
-          align-items: center;
-          gap: 0.3rem;
-          font-size: 0.82rem;
-          font-weight: 500;
-          text-decoration: none;
-          margin-top: 0.75rem;
-          max-height: 0;
-          opacity: 0;
-          overflow: hidden;
-          white-space: nowrap;
-          pointer-events: none;
-          transition:
-            max-height 0.38s ease,
-            opacity 0.35s ease;
+        .cg-card--exp .cg-card__title {
+          font-size: 2.75rem;
+          font-weight: 700;
+          max-width: 95%;
         }
-        .cg-card__link--vis {
-          max-height: 2rem;
+
+        /* Explore / Learn More indicator */
+        .cg-card__explore {
+          display: flex;
+          align-items: center;
+          gap: 0.75rem;
+          font-size: 1rem;
+          font-weight: 700;
+          margin-top: 2rem;
+          opacity: 0;
+          transform: translateX(-15px);
+          transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .cg-card--exp .cg-card__explore {
           opacity: 1;
-          pointer-events: auto;
+          transform: translateX(0);
         }
 
         /* ── Product image ─────────────────────────────────────── */
         .cg-card__img-wrap {
           position: absolute;
-          /* sits bottom-right, takes right 55% of card */
-          bottom: 0;
+          top: 0;
           right: 0;
-          width: 70%;
+          width: 65%;
           height: 100%;
           z-index: 1;
-          transition: all 0.42s ease;
+          display: flex;
+          align-items: center;
+          justify-content: flex-end;
+          transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+          padding-right: 2rem;
+          pointer-events: none;
         }
+        
         .cg-card__img {
-          object-position: right bottom;
-          transition: transform 0.42s ease;
+          object-position: right center !important;
+          transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1) !important;
+          filter: drop-shadow(0 15px 25px rgba(0,0,0,0.1));
+          transform: scale(0.9);
         }
 
-        /* Expanded State Layout Adjustments */
         .cg-card--exp .cg-card__img-wrap {
-          width: 100%;
-          height: 55%;
-          top: auto;
-          bottom: 0;
-          padding-top: 1rem;
+          width: 60%;
         }
+
         .cg-card--exp .cg-card__img {
-          object-position: center bottom;
-          transform: scale(1.1);
-          transform-origin: center bottom;
+          transform: scale(1.15) translateX(-5%);
+          filter: drop-shadow(0 25px 45px rgba(0,0,0,0.2));
+        }
+
+        /* Ambient Glow */
+        .cg-card::after {
+          content: '';
+          position: absolute;
+          top: -20%;
+          right: -20%;
+          width: 60%;
+          height: 60%;
+          background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, transparent 70%);
+          z-index: 0;
+          pointer-events: none;
+          transition: opacity 0.5s ease;
         }
 
         /* ── Responsive ────────────────────────────────────────── */
         @media (max-width: 1024px) {
-          .cg-card__title--big {
-            font-size: 1.85rem;
+          .cg-card--exp .cg-card__title {
+            font-size: 2.25rem;
+          }
+          .cg-card__link {
+            padding: 2.5rem;
           }
         }
 
         @media (max-width: 768px) {
-          .cg-card__img-wrap {
-            width: 60%;
+          .cg-row {
+            height: 18rem;
           }
           .cg-card__title {
-            font-size: 1.25rem;
+            font-size: 1.35rem;
           }
-          .cg-card__title--big {
-            font-size: 1.6rem;
+          .cg-card--exp .cg-card__title {
+            font-size: 1.85rem;
+          }
+          .cg-card__text {
+            width: 60%;
+          }
+          .cg-card__link {
+            padding: 2rem;
           }
         }
 
@@ -357,23 +403,20 @@ export default function CardGrid({ content }: CardGridProps) {
           .cg-row {
             flex-direction: column;
             height: auto;
+            gap: 1.5rem;
           }
           .cg-card {
             flex: none !important;
-            height: 14rem;
-          }
-          .cg-card__img-wrap {
-            width: 50%;
-          }
-          .cg-card__title {
-            font-size: 1.15rem;
-          }
-          .cg-card__title--big {
-            font-size: 1.45rem;
+            height: 20rem;
           }
           .cg-card__text {
-            top: 1rem;
-            left: 1rem;
+            width: 80%;
+          }
+          .cg-card__img-wrap {
+            width: 75%;
+          }
+          .cg-card__link {
+            padding: 1.75rem;
           }
         }
       `}</style>

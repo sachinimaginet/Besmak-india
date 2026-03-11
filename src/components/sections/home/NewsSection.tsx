@@ -58,7 +58,15 @@ const defaultImages: NewsImage[] = [
     },
     {
         url: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&q=80&w=2070",
-        title: "Why are enterprises moving their applications to the cloud? – An Infosys research",
+        title: "Why are enterprises moving their applications to the cloud?",
+    },
+    {
+        url: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&q=80&w=2070",
+        title: "Digital Transformation in Manufacturing",
+    },
+    {
+        url: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=2070",
+        title: "Next-Gen Engineering Solutions",
     },
 ];
 
@@ -75,7 +83,7 @@ export default function NewsSection({ content }: NewsSectionProps) {
             <div className="container mx-auto px-4 max-w-7xl">
                 <div className="flex flex-col lg:flex-row min-h-[600px] shadow-xl rounded-2xl overflow-hidden">
                     {/* Left Side: News List */}
-                    <div className="lg:w-1/3 bg-primary p-8 md:p-12 flex flex-col justify-between text-white">
+                    <div className="lg:w-1/3 bg-primary p-8 flex flex-col justify-between text-white">
                         <div>
                             <h2 className="text-2xl md:text-3xl font-bold mb-8 tracking-tight">
                                 {title}
@@ -112,30 +120,49 @@ export default function NewsSection({ content }: NewsSectionProps) {
                     </div>
 
                     {/* Right Side: Image Grid Collage */}
-                    <div className="lg:w-2/3 grid grid-cols-1 md:grid-cols-2 bg-gray-100">
-                        {images.slice(0, 4).map((image, index) => (
-                            <div key={index} className="relative group overflow-hidden aspect-video md:aspect-square lg:aspect-auto h-full min-h-[300px]">
-                                <Image
-                                    src={image.url}
-                                    alt={image.title}
-                                    fill
-                                    className="object-fit"
-                                />
-                                {/* Overlay */}
-                                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent flex flex-col justify-end p-6 md:p-8">
-                                    <div className="space-y-2">
-                                        <h3 className="text-lg md:text-xl font-bold text-white leading-tight group-hover:text-blue-200 transition-colors">
-                                            {image.title}
-                                        </h3>
-                                        {image.date && (
-                                            <p className="text-xs font-semibold text-white/60 tracking-wider">
-                                                {image.date.toUpperCase()}
-                                            </p>
-                                        )}
+                    <div className="lg:w-2/3 flex flex-wrap bg-gray-100">
+                        {images.slice(0, 6).map((image, index) => {
+                            // Determine width based on row structure: 1st row (1 full), 2nd row (2 half), 3rd row (3 third)
+                            let widthClass = "w-full"; // Default for 1st image
+                            let heightClass = "h-[400px]";
+
+                            if (index === 1 || index === 2) {
+                                widthClass = "w-full md:w-1/2";
+                                heightClass = "h-[300px]";
+                            } else if (index >= 3) {
+                                widthClass = "w-full sm:w-1/2 md:w-1/3";
+                                heightClass = "h-[250px]";
+                            }
+
+                            return (
+                                <div
+                                    key={index}
+                                    className={`relative group overflow-hidden ${widthClass} ${heightClass} border-l border-b border-white/10`}
+                                >
+                                    <Image
+                                        src={image.url}
+                                        alt={image.title}
+                                        fill
+                                        className="object-cover transition-transform duration-700 group-hover:scale-110"
+                                    />
+                                    {/* Overlay */}
+                                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent flex flex-col justify-end p-6">
+                                        <div className="space-y-2 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
+                                            <h3 className="text-base md:text-lg font-bold text-white leading-tight group-hover:text-blue-300 transition-colors">
+                                                {image.title}
+                                            </h3>
+                                            {image.date && (
+                                                <p className="text-[10px] font-bold text-white/60 tracking-widest uppercase">
+                                                    {image.date}
+                                                </p>
+                                            )}
+                                        </div>
                                     </div>
+                                    {/* Subtle border overlay for separation */}
+                                    <div className="absolute inset-0 border border-white/5 pointer-events-none" />
                                 </div>
-                            </div>
-                        ))}
+                            );
+                        })}
                     </div>
                 </div>
             </div>

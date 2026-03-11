@@ -103,26 +103,18 @@ export default function EventsAchievements({ content }: EventsAchievementsProps)
                 </div>
 
                 {/* ── Marquee Gallery ── */}
-                <div className="relative overflow-hidden w-full">
-                    <motion.div
-                        className="flex gap-4 md:gap-8"
-                        animate={{
-                            x: [0, -100 * events.length],
+                <div className="relative overflow-hidden w-full h-[300px] md:h-[450px]">
+                    <div
+                        className="ea-marquee-track flex gap-4 md:gap-8 absolute left-0"
+                        style={{
+                            width: "fit-content",
+                            animation: `marquee ${events.length * 5}s linear infinite`,
                         }}
-                        transition={{
-                            x: {
-                                repeat: Infinity,
-                                repeatType: "loop",
-                                duration: events.length * 5,
-                                ease: "linear",
-                            },
-                        }}
-                        style={{ width: "fit-content" }}
                     >
                         {displayEvents.map((event, index) => (
                             <div
                                 key={`${event.id}-${index}`}
-                                className="relative flex-shrink-0 w-[280px] md:w-[400px]"
+                                className="relative flex-shrink-0 w-[240px] md:w-[400px]"
                             >
                                 <div className="ea-card aspect-square relative rounded-2xl overflow-hidden shadow-sm border border-gray-100 bg-gray-50">
                                     <Image
@@ -130,7 +122,7 @@ export default function EventsAchievements({ content }: EventsAchievementsProps)
                                         alt={event.alt}
                                         fill
                                         className="object-contain p-4 transition-transform duration-700 hover:scale-105"
-                                        sizes="(max-width: 640px) 280px, 400px"
+                                        sizes="(max-width: 640px) 240px, 400px"
                                     />
 
                                     {event.href && (
@@ -143,11 +135,28 @@ export default function EventsAchievements({ content }: EventsAchievementsProps)
                                 </div>
                             </div>
                         ))}
-                    </motion.div>
+                    </div>
                 </div>
             </div>
 
             <style jsx>{`
+        .ea-marquee-track {
+            display: flex;
+            will-change: transform;
+        }
+
+        .ea-marquee-track:hover {
+            animation-play-state: paused !important;
+        }
+
+        @keyframes marquee {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-33.333%);
+            }
+        }
         .ea-caption {
           display: block;
           font-size: 0.9rem;
