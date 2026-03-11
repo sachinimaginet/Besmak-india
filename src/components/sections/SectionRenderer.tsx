@@ -12,6 +12,10 @@ import EventsAchievements from "./home/EventsAchievements";
 import TwoCardsSection from "./home/TwoCardsSection";
 import AboutHero from "./about/AboutHero";
 import AboutContent from "./about/AboutContent";
+import BannerImage from "./about/BannerImage";
+import IconBoxes from "./about/IconBoxes";
+import AboutCapabilities from "./about/AboutCapabilities";
+import AboutFeatureCards from "./about/AboutFeatureCards";
 import ProductSearchSection from "./home/ProductSearchSection";
 import EditableWrapper from "../cms/EditableWrapper";
 
@@ -38,6 +42,14 @@ export default function SectionRenderer({
         return <AboutHero content={section.content} />;
       case "about-content":
         return <AboutContent content={section.content} />;
+      case "about-banner-image":
+        return <BannerImage content={section.content} />;
+      case "about-icon-boxes":
+        return <IconBoxes content={section.content} />;
+      case "about-capabilities":
+        return <AboutCapabilities content={section.content} />;
+      case "about-feature-cards":
+        return <AboutFeatureCards content={section.content} />;
       case "featured-products":
         return <FeaturedProducts content={section.content} />;
       case "card-grid":
