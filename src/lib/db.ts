@@ -1,9 +1,11 @@
-import { createPool } from 'mysql2/promise';
+import { createPool, Pool } from 'mysql2/promise';
 
-let pool: any;
+declare global {
+  var mysqlPool: Pool | undefined;
+}
 
 const getPool = () => {
-  if (pool) return pool;
+  if (global.mysqlPool) return global.mysqlPool;
 
   const url = process.env.DATABASE_URL || '';
   
@@ -11,7 +13,7 @@ const getPool = () => {
   const forcedSSL = url.includes('sslmode=require') || url.includes('ssl=true');
   const disabledSSL = url.includes('sslmode=disable') || url.includes('ssl=false');
   
-  pool = createPool({
+  const pool = createPool({
     uri: url,
     waitForConnections: true,
     connectionLimit: 5, // Reduced from 10 to 5 to avoid "Too many connections" on the server
@@ -23,6 +25,10 @@ const getPool = () => {
     // Use SSL if explicitly requested OR (if remote and not explicitly disabled)
     ssl: forcedSSL || (!isLocal && !disabledSSL) ? { rejectUnauthorized: false } : undefined
   });
+
+  if (process.env.NODE_ENV !== 'production') {
+    global.mysqlPool = pool;
+  }
 
   return pool;
 };
