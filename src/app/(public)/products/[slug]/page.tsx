@@ -34,7 +34,7 @@ export default async function ProductDetailPage({
     notFound();
   }
 
-  // Fetch related products
+  // Fetch related products -comment
   const relatedSql = `
     SELECT p.id, p.name, p.slug, p.images, c.name as categoryName
     FROM product p
