@@ -47,8 +47,8 @@ export function Footer({ settings }: FooterProps) {
     ? JSON.parse(settings.footer_socials)
     : [
       { platform: "linkedin", url: "https://linkedin.com" },
-      { platform: "facebook", url: "https://facebook.com" },
-      { platform: "twitter", url: "https://twitter.com" },
+      // { platform: "facebook", url: "https://facebook.com" },
+      // { platform: "twitter", url: "https://twitter.com" },
       { platform: "youtube", url: "https://youtube.com" },
     ];
 
@@ -96,9 +96,9 @@ export function Footer({ settings }: FooterProps) {
     >
       <div className="px-4 max-w-7xl mx-auto">
         {/* Main Footer Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-12 mb-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 lg:gap-12 gap-6 mb-12">
           {/* Column 1: Verticals */}
-          <div>
+          <div className="lg:col-span-1">
             <h4
               style={{
                 fontSize: headingSize,
@@ -166,7 +166,7 @@ export function Footer({ settings }: FooterProps) {
           </div>
 
           {/* Column 4: Legal Information */}
-          <div>
+          <div className="lg:col-span-1">
             <h4
               style={{
                 fontSize: headingSize,
@@ -191,7 +191,7 @@ export function Footer({ settings }: FooterProps) {
           </div>
 
           {/* Column 5: Contact Section */}
-          <div className="lg:text-right">
+          <div className="lg:col-span-2">
             <h4
               style={{
                 fontSize: headingSize,
@@ -201,18 +201,18 @@ export function Footer({ settings }: FooterProps) {
             >
               Contact
             </h4>
-            <div className="flex flex-col lg:items-end space-y-6 text-[18px] font-medium opacity-80 leading-relaxed">
-              <p className="max-w-[280px]">
+            <div className="flex flex-col space-y-6 text-[18px] font-medium opacity-80 leading-relaxed">
+              <p>
                 {contactAddress}
               </p>
 
-              <div className="flex flex-col gap-0">
-                <a href={`tel:${contactPhone.replace(/\s+/g, "")}`} className="flex items-center lg:justify-end gap-3 hover:opacity-100 transition-opacity">
-                  <Phone className="w-5 h-5" />
+              <div className="flex flex-col gap-4">
+                <a href={`tel:${contactPhone.replace(/\s+/g, "")}`} className="flex items-center gap-3 hover:opacity-100 transition-opacity">
+                  <Phone className="w-5 h-5 shrink-0" />
                   <span>{contactPhone}</span>
                 </a>
-                <a href={`mailto:${contactEmail}`} className="flex items-center lg:justify-end gap-3 hover:opacity-100 transition-opacity">
-                  <Mail className="w-5 h-5" />
+                <a href={`mailto:${contactEmail}`} className="flex items-center gap-3 hover:opacity-100 transition-opacity">
+                  <Mail className="w-5 h-5 shrink-0" />
                   <span>{contactEmail}</span>
                 </a>
               </div>
@@ -227,14 +227,20 @@ export function Footer({ settings }: FooterProps) {
           </p>
           <div className="flex items-center gap-6">
             {socials.map((social: any, idx: number) => (
-              <Link
-                key={idx}
-                href={social.url}
-                target="_blank"
-                className="hover:scale-110 transition-transform"
-              >
-                {getSocialIcon(social.platform)}
-              </Link>
+              <>
+                {social.url ? (
+                  <Link
+                    key={idx}
+                    href={social.url}
+                    target="_blank"
+                    className="hover:scale-110 transition-transform"
+                  >
+                    {getSocialIcon(social.platform)}
+                  </Link>
+                ) : (
+                  <></>
+                )}
+              </>
             ))}
           </div>
         </div>

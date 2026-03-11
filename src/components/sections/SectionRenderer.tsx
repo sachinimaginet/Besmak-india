@@ -1,3 +1,5 @@
+"use client";
+
 import NewsSection from "./home/NewsSection";
 import Hero from "./home/Hero";
 import About from "./home/About";
@@ -16,6 +18,8 @@ import BannerImage from "./about/BannerImage";
 import IconBoxes from "./about/IconBoxes";
 import AboutCapabilities from "./about/AboutCapabilities";
 import AboutFeatureCards from "./about/AboutFeatureCards";
+import ContactBanner from "./contact/ContactBanner";
+import ContactHero from "./contact/ContactHero";
 import ProductSearchSection from "./home/ProductSearchSection";
 import EditableWrapper from "../cms/EditableWrapper";
 
@@ -32,6 +36,7 @@ export default function SectionRenderer({
   section,
   onUpdate,
 }: SectionRendererProps) {
+  console.log(section);
   const renderContent = () => {
     switch (section.type) {
       case "hero":
@@ -50,6 +55,10 @@ export default function SectionRenderer({
         return <AboutCapabilities content={section.content} />;
       case "about-feature-cards":
         return <AboutFeatureCards content={section.content} />;
+      case "contact-hero":
+        return <ContactHero content={section.content} />;
+      case "contact-banner":
+        return <ContactBanner content={section.content} />;
       case "featured-products":
         return <FeaturedProducts content={section.content} />;
       case "card-grid":

@@ -3,16 +3,14 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import {
   ChevronRight,
-  ChevronDown,
   ArrowRight,
-  Inbox,
   ShieldCheck,
   Zap,
   Factory,
   Sparkles,
 } from "lucide-react";
 import ProductImageGallery from "@/components/products/ProductImageGallery";
-import ProductEnquiryForm from "@/components/products/ProductEnquiryForm";
+import AddToQueryButton from "@/components/products/AddToQueryButton";
 
 export const dynamic = "force-dynamic";
 
@@ -160,7 +158,7 @@ export default async function ProductDetailPage({
                 {product.category.name}
               </div>
 
-              <h1 className="text-[10px] md:text-xs lg:text-sm font-black text-primary mb-1 leading-tight tracking-tight">
+              <h1 className="text-[20px] md:text-2xl lg:text-3xl font-black text-primary mb-1 leading-tight tracking-tight">
                 {product.name}
               </h1>
 
@@ -197,11 +195,21 @@ export default async function ProductDetailPage({
                 </div>
               </div>
 
-              {/* Premium Enquiry UI */}
-              <ProductEnquiryForm
-                productId={product.id}
-                productName={product.name}
-              />
+              {/* Add to Query Button */}
+              <div className="pt-8 border-t border-gray-100/80">
+                <AddToQueryButton
+                  product={{
+                    id: product.id,
+                    name: product.name,
+                    slug: product.slug,
+                    image: product.images?.[0],
+                    categoryName: product.category.name,
+                  }}
+                />
+                <p className="text-[8px] text-center text-primary/30 font-black uppercase tracking-widest mt-6 opacity-60">
+                  Multiple products? Add them all to your query basket.
+                </p>
+              </div>
             </div>
           </div>
         </div>
